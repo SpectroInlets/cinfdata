@@ -43,16 +43,25 @@
       <color>4</color>
       <query>SELECT unix_timestamp(time), value FROM dateplots_tof where type = 222 and time between "{from}" and "{to}" order by time</query>
     </dateplot4>
-    <!-- MORNING PRESSURE -->
+    <!-- ROUGHING PRESSURE -->
     <dateplot5>
+      <title>Roughing pressure</title>
+      <ylabel>Pressure / mbar</ylabel>
+      <legend>P small ion pump / mbar</legend>
+      <color>4</color>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_tof where type = (SELECT id FROM dateplots_descriptions where codename="tof_pirani_roughing") and time between "{from}" and "{to}" order by time</query>
+    </dateplot5>
+    <!-- MORNING PRESSURE -->
+    <dateplot6>
       <title>Pressure at 1 am in the TOF</title>
       <ylabel>Pressure / mbar</ylabel>
       <legend>P morning, main</legend>
       <color>5</color>
       <query>SELECT unix_timestamp(time), avg(value) FROM dateplots_tof where type = 220 and hour(time) = 1 and minute(time) between 00 and 20 and time between "{from}" and "{to}" group by date(time) order by time desc limit 30</query>      
-    </dateplot5>
+    </dateplot6>
   </graph>
 
+type=
 
   <graph type="live_values">
     <page_width>1280</page_width>

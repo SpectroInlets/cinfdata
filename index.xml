@@ -326,7 +326,7 @@
     <setup_title>TOF</setup_title>
     <link>
       <title>Dateplots</title>
-      <ref>tof/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist%5B%5D=2</ref>
+      <ref>tof/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist%5B%5D=1</ref>
     </link>
     <link>
       <title>TOF spectra, small</title>
@@ -637,10 +637,6 @@
       <ref>https://cinfdata.fysik.dtu.dk/gasmonitor312/system_status.php</ref>
     </link>
     <link>
-      <title>Live Values</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor312/websockets_simple.php?type=websocket_simple1</ref>
-    </link>
-    <link>
       <title>Live Plots</title>
       <ref>https://cinfdata.fysik.dtu.dk/gasmonitor312/live_old.php?type=live_values</ref>
     </link>
@@ -709,19 +705,19 @@
     </link>
     <link>
       <title>Mass spectrums</title>
-      <ref>vhp_setup/xyplot.php?type=massspectra</ref>
+      <ref>vhp_setup2/xyplot.php?type=massspectra</ref>
     </link>
     <link>
       <title>Mass-time</title>
-      <ref>vhp_setup/xyplot.php?type=masstime</ref>
+      <ref>vhp_setup2/xyplot.php?type=masstime</ref>
     </link>
     <link>
       <title>GC</title>
-      <ref>vhp_setup/xyplot.php?type=gc&amp;matplotlib=checked</ref>
+      <ref>vhp_setup2/xyplot.php?type=gc&amp;matplotlib=checked</ref>
     </link>
     <link>
       <title>GC Raw</title>
-      <ref>vhp_setup/xyplot.php?type=gc_raw&amp;matplotlib=checked&amp;plugin_settings[ShiftGraphs][input]=auto</ref>
+      <ref>vhp_setup2/xyplot.php?type=gc_raw&amp;matplotlib=checked&amp;plugin_settings[ShiftGraphs][input]=auto</ref>
     </link>
   </setup>
 
@@ -742,12 +738,8 @@
       <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/system_status.php</ref>
     </link>
     <link>
-      <title>Live Values</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/websockets_simple.php?type=websocket_simple1</ref>
-    </link>
-    <link>
       <title>Live Plots</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/live_old.php?type=live_values</ref>
+      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/live.php?type=live_values</ref>
     </link>
     <link>
       <title>All detectors</title>

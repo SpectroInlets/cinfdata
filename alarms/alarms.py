@@ -106,10 +106,10 @@ class CheckAlarms(object):
 
     def __init__(self, dbmodule=MySQLdb):
         _LOG.debug('__init__(dbmodule={0})'.format(dbmodule))
-        _db = dbmodule.connect(host='servcinf', user='alarm',
+        _db = dbmodule.connect(host='servcinf-sql', user='alarm',
                                passwd='alarm', db='cinfdata')
         self._alarm_cursor = _db.cursor()
-        _db = dbmodule.connect(host='servcinf', user='cinf_reader',
+        _db = dbmodule.connect(host='servcinf-sql', user='cinf_reader',
                                passwd='cinf_reader', db='cinfdata')
         self._reader_cursor = _db.cursor()
         self._smtp_server_address = '127.0.0.1'

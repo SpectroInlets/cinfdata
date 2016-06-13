@@ -324,9 +324,8 @@
     <containers>
       <!-- Container 0, plot of all values CO values -->
       <container0>
-	<type>figure</type>
+	<type>date_figure</type>
 	<title>CO Detectors</title>
-	<update_interval>2</update_interval>
 	<!-- <bgcolor>#E7E7E7</bgcolor>-->
 	<width>600</width>
 	<height>400</height>
@@ -342,43 +341,37 @@
 	</data_reduction>
 	<figure>
 	  <plot0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_pumproom</data_channel>
 	    <label>CO pump room</label>
 	    <color>#77583A</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_pumproom") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	  <plot1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_west</data_channel>
 	    <label>CO hall west</label>
 	    <color>#FF0000</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_hall_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot1>
 	  <plot2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_east</data_channel>
 	    <label>CO hall east</label>
 	    <color>#009933</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_hall_east") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot2>
 	  <plot3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_chemlab</data_channel>
 	    <label>CO chem lab</label>
 	    <color>#0000FF</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_chemlab") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
 	  <plot4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_west</data_channel>
 	    <label>CO microscopy west</label>
 	    <color>#CCCC00</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_microscopy_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot4>
 	  <plot5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_east</data_channel>
 	    <label>CO microscopy east</label>
 	    <color>#990099</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_microscopy_east") and unix_timestamp(time) > {from}</old_data_query>
@@ -388,7 +381,7 @@
 
       <!-- Container 1, table with all CO values -->
       <container1>
-	<type>data</type>
+	<type>table</type>
 	<!--<bgcolor>#00FF00</bgcolor>-->
 	<width>600</width>
 	<height>364</height>
@@ -399,48 +392,42 @@
 	<show_diff>true</show_diff>
 	<data>
 	  <item0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_pumproom</data_channel>
 	    <label>CO pump room</label>
 	    <color>#77583A</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item0>
 	  <item1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_west</data_channel>
 	    <label>CO hall west</label>
 	    <color>#FF0000</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item1>
 	  <item2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_east</data_channel>
 	    <label>CO hall east</label>
 	    <color>#009933</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item2>
 	  <item3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_chemlab</data_channel>
 	    <label>CO chem lab</label>
 	    <color>#0000FF</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item3>
 	  <item4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_west</data_channel>
 	    <label>CO microscopy west</label>
 	    <color>#CCCC00</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item4>
 	  <item5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_east</data_channel>
 	    <label>CO microscopy east</label>
 	    <color>#990099</color>
 	    <format>.1f</format>
@@ -452,9 +439,8 @@
 
       <!-- Container 2, plot of all values H2 values -->
       <container2>
-	<type>figure</type>
+	<type>date_figure</type>
 	<title>H&#60;sub&#62;2&#60;&#47;sub&#62; Detectors</title>
-	<update_interval>2</update_interval>
 	<!-- <bgcolor>#E7E7E7</bgcolor>-->
 	<width>600</width>
 	<height>400</height>
@@ -466,43 +452,37 @@
 	<line_width>3</line_width>
 	<figure>
 	  <plot0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_pumproom</data_channel>
 	    <label>H2 pump room</label>
 	    <color>#77583A</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_pumproom") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	  <plot1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_west</data_channel>
 	    <label>H2 hall west</label>
 	    <color>#FF0000</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_hall_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot1>
 	  <plot2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_east</data_channel>
 	    <label>H2 hall east</label>
 	    <color>#009933</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_hall_east") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot2>
 	  <plot3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_chemlab</data_channel>
 	    <label>H2 chem lab</label>
 	    <color>#0000FF</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_chemlab") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
 	  <plot4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_microscopy_west</data_channel>
 	    <label>H2 microscopy west</label>
 	    <color>#CCCC00</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_microscopy_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot4>
 	  <plot5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_vent</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_vent</data_channel>
 	    <label>H2 vent</label>
 	    <color>#990099</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_vent") and unix_timestamp(time) > {from}</old_data_query>
@@ -512,7 +492,7 @@
 
       <!-- Container 3, table with all H2 values -->
       <container3>
-	<type>data</type>
+	<type>table</type>
 	<!--<bgcolor>#FF0000</bgcolor>-->
 	<width>640</width>
 	<height>364</height>
@@ -523,48 +503,42 @@
 	<show_diff>true</show_diff>
 	<data>
 	  <item0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_pumproom</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; pump room</label>
 	    <color>#77583A</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item0>
 	  <item1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_west</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; hall west</label>
 	    <color>#FF0000</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item1>
 	  <item2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_east</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; hall east</label>
 	    <color>#009933</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item2>
 	  <item3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_chemlab</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; chem lab</label>
 	    <color>#0000FF</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item3>
 	  <item4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_microscopy_west</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; microscopy west</label>
 	    <color>#CCCC00</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item4>
 	  <item5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_vent</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_vent</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; vent</label>
 	    <color>#990099</color>
 	    <format>.1f</format>
@@ -583,9 +557,8 @@
     <containers>
       <!-- Container 0, plot of all values CO values -->
       <container0>
-	<type>figure</type>
+	<type>date_figure</type>
 	<title>CO Detectors</title>
-	<update_interval>2</update_interval>
 	<!-- <bgcolor>#E7E7E7</bgcolor>-->
 	<width>600</width>
 	<height>400</height>
@@ -601,43 +574,37 @@
 	</data_reduction>
 	<figure>
 	  <plot0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_pumproom</data_channel>
 	    <label>CO pump room</label>
 	    <color>#77583A</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_pumproom") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	  <plot1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_west</data_channel>
 	    <label>CO hall west</label>
 	    <color>#FF0000</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_hall_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot1>
 	  <plot2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_east</data_channel>
 	    <label>CO hall east</label>
 	    <color>#009933</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_hall_east") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot2>
 	  <plot3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_chemlab</data_channel>
 	    <label>CO chem lab</label>
 	    <color>#0000FF</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_chemlab") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
 	  <plot4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_west</data_channel>
 	    <label>CO microscopy west</label>
 	    <color>#CCCC00</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_microscopy_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot4>
 	  <plot5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_east</data_channel>
 	    <label>CO microscopy east</label>
 	    <color>#990099</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_CO_microscopy_east") and unix_timestamp(time) > {from}</old_data_query>
@@ -647,7 +614,7 @@
 
       <!-- Container 1, table with all CO values -->
       <container1>
-	<type>data</type>
+	<type>table</type>
 	<!--<bgcolor>#00FF00</bgcolor>-->
 	<width>800</width>
 	<height>364</height>
@@ -658,48 +625,42 @@
 	<show_diff>true</show_diff>
 	<data>
 	  <item0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_pumproom</data_channel>
 	    <label>CO pump room</label>
 	    <color>#77583A</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item0>
 	  <item1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_west</data_channel>
 	    <label>CO hall west</label>
 	    <color>#FF0000</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item1>
 	  <item2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_hall_east</data_channel>
 	    <label>CO hall east</label>
 	    <color>#009933</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item2>
 	  <item3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_chemlab</data_channel>
 	    <label>CO chem lab</label>
 	    <color>#0000FF</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item3>
 	  <item4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_west</data_channel>
 	    <label>CO microscopy W</label>
 	    <color>#CCCC00</color>
 	    <format>.1f</format>
 	    <unit>ppm</unit>
 	  </item4>
 	  <item5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_CO_microscopy_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_CO_microscopy_east</data_channel>
 	    <label>CO microscopy E</label>
 	    <color>#990099</color>
 	    <format>.1f</format>
@@ -710,9 +671,8 @@
 
       <!-- Container 2, plot of all values H2 values -->
       <container2>
-	<type>figure</type>
+	<type>date_figure</type>
 	<title>H&#60;sub&#62;2&#60;&#47;sub&#62; Detectors</title>
-	<update_interval>2</update_interval>
 	<!-- <bgcolor>#E7E7E7</bgcolor>-->
 	<width>600</width>
 	<height>400</height>
@@ -724,43 +684,37 @@
 	<line_width>3</line_width>
 	<figure>
 	  <plot0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_pumproom</data_channel>
 	    <label>H2 pump room</label>
 	    <color>#77583A</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_pumproom") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	  <plot1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_west</data_channel>
 	    <label>H2 hall west</label>
 	    <color>#FF0000</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_hall_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot1>
 	  <plot2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_east</data_channel>
 	    <label>H2 hall east</label>
 	    <color>#009933</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_hall_east") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot2>
 	  <plot3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_chemlab</data_channel>
 	    <label>H2 chem lab</label>
 	    <color>#0000FF</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_chemlab") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
 	  <plot4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_microscopy_west</data_channel>
 	    <label>H2 microscopy west</label>
 	    <color>#CCCC00</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_microscopy_west") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot4>
 	  <plot5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_vent</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_vent</data_channel>
 	    <label>H2 vent</label>
 	    <color>#990099</color>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2_vent") and unix_timestamp(time) > {from}</old_data_query>
@@ -770,7 +724,7 @@
 
       <!-- Container 3, table with all H2 values -->
       <container3>
-	<type>data</type>
+	<type>table</type>
 	<!--<bgcolor>#FF0000</bgcolor>-->
 	<width>840</width>
 	<height>364</height>
@@ -781,48 +735,42 @@
 	<show_diff>true</show_diff>
 	<data>
 	  <item0>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_pumproom</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_pumproom</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; pump room</label>
 	    <color>#77583A</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item0>
 	  <item1>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_west</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; hall west</label>
 	    <color>#FF0000</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item1>
 	  <item2>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_hall_east</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_hall_east</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; hall east</label>
 	    <color>#009933</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item2>
 	  <item3>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_chemlab</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_chemlab</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; chem lab</label>
 	    <color>#0000FF</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item3>
 	  <item4>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_microscopy_west</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_microscopy_west</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; microscopy W</label>
 	    <color>#CCCC00</color>
 	    <format>.1f</format>
 	    <unit>%LEL</unit>
 	  </item4>
 	  <item5>
-	    <socket>0</socket>
-	    <id>B312_gasalarm_H2_vent</id>
+	    <data_channel>rasppi15:B312_gasalarm_H2_vent</data_channel>
 	    <label>H&#60;sub&#62;2&#60;&#47;sub&#62; vent</label>
 	    <color>#990099</color>
 	    <format>.1f</format>
@@ -870,8 +818,5 @@
       <legend_fontsize>10</legend_fontsize>
       <label_fontsize>16</label_fontsize>
     </matplotlib_settings>
-    <sockets>
-      <socket0>rasppi15:8000</socket0>
-    </sockets>
   </global_settings>
 </graphs>

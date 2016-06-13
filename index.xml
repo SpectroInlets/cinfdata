@@ -638,7 +638,7 @@
     </link>
     <link>
       <title>Live Plots</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor312/live_old.php?type=live_values</ref>
+      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor312/live.php?type=live_values</ref>
     </link>
     <link>
       <title>All detectors</title>

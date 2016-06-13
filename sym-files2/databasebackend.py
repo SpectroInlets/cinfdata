@@ -58,7 +58,8 @@ class dataBaseBackend():
         self.plotlist = self.o['left_plotlist'] + self.o['right_plotlist']
 
         # Create MySQL session and cursor
-        self.conn = MySQLdb.connect(user="cinf_reader",
+        self.conn = MySQLdb.connect(host='servcinf-sql',
+                                    user="cinf_reader",
                                     passwd="cinf_reader",
                                     db="cinfdata")
         self.cursor = self.conn.cursor()

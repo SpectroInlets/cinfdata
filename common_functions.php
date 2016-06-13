@@ -14,13 +14,13 @@ include ("../jpgraph/src/jpgraph_bar.php");
 function std_db($user = "cinf_reader"){
     //$db = mysql_connect("localhost", "root", "CINF123");  
     //$db = mysql_connect("localhost", "cinf_reader", "cinf_reader");
-    $db = mysql_connect("localhost", $user, $user);    
+    $db = mysql_connect("servcinf-sql", $user, $user);
     mysql_select_db("cinfdata",$db);
     return($db);
 }
 
 function std_dbi($user = "cinf_reader"){
-  $mysqli = new mysqli("localhost", $user, $user, "cinfdata");
+  $mysqli = new mysqli("servcinf-sql", $user, $user, "cinfdata");
   return $mysqli;
 }
 

@@ -146,8 +146,7 @@
     <page_title>PVD309</page_title>
     <containers> 
       <container0>
-	<type>figure</type>
-	<update_interval>2.5</update_interval> <!-- seconds -->
+	<type>date_figure</type>
 	<x_window>3600</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
@@ -168,9 +167,8 @@
 	<format>.2f</format>
 	<figure>
 	  <plot0>
-            <socket>0</socket> 
             <color>#FF0000</color>
-            <id>pvd309_qcm1_rate</id>
+            <data_channel>rasppi51:pvd309_qcm1_rate</data_channel>
             <label>QCM1 Rate</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_qcm1_rate") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
@@ -178,8 +176,7 @@
       </container0>
       
       <container1>
-	<type>figure</type>
-	<update_interval>2</update_interval> <!-- seconds -->
+	<type>date_figure</type>
 	<x_window>3600</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
@@ -201,9 +198,8 @@
 	<format>.1f</format>
 	<figure>
 	  <plot0>
-            <socket>0</socket>
             <color>#0000FF</color>
-            <id>pvd309_qcm1_thickness</id>
+            <data_channel>rasppi51:pvd309_qcm1_thickness</data_channel>
             <label>Main / mbar</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_qcm1_thickness") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
@@ -211,8 +207,7 @@
       </container1>
 
       <container2>
-	<type>figure</type>
-	<update_interval>2</update_interval> <!-- seconds -->
+	<type>date_figure</type>
 	<x_window>3600</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
@@ -234,9 +229,8 @@
 	<format>.2e</format>
 	<figure>
 	  <plot0>
-            <socket>0</socket>
             <color>#990099</color>
-            <id>pvd309_qcm1_frequency</id>
+            <data_channel>rasppi51:pvd309_qcm1_frequency</data_channel>
             <label>Frequency, QCM1</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_qcm1_frequency") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
@@ -244,31 +238,28 @@
       </container2>
 
      <container3>
-        <type>data</type>
+        <type>table</type>
         <width>600</width>
         <height>400</height>
         <fontsize>22</fontsize>
         <padding>40px 0px 0px 0px</padding>
         <data>
           <item0>
-            <socket>0</socket>
-            <id>pvd309_qcm1_rate</id>
+            <data_channel>rasppi51:pvd309_qcm1_rate</data_channel>
             <label>QCM1 Rate</label>
             <color>#FF0000</color>
             <format>.4f</format>
             <unit>nm/s</unit>
           </item0>
           <item1>
-            <socket>0</socket>
-            <id>pvd309_qcm1_thickness</id>
+            <data_channel>rasppi51:pvd309_qcm1_thickness</data_channel>
             <label>QCM1 Thickness</label>
             <color>#0000FF</color>
             <format>.4f</format>
             <unit>nm</unit>
           </item1>
           <item2>
-            <socket>0</socket>
-            <id>pvd309_qcm1_frequency</id>
+            <data_channel>rasppi51:pvd309_qcm1_frequency</data_channel>
             <label>QCM1 Frequency</label>
             <color>#990099</color>
             <format>.1f</format>
@@ -286,8 +277,7 @@
     <page_title>PVD309</page_title>
     <containers> 
       <container0>
-	<type>figure</type>
-	<update_interval>2.5</update_interval> <!-- seconds -->
+	<type>date_figure</type>
 	<x_window>3600</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
@@ -308,16 +298,14 @@
 	<format>.1f</format>
 	<figure>
 	  <plot0>
-            <socket>1</socket> 
             <color>#0000FF</color>
-            <id>pvd309_temp_dca_cell</id>
+            <data_channel>rasppi112:pvd309_temp_dca_cell</data_channel>
             <label>Temp DCA</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_temp_dca_cell") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	  <plot1>
-            <socket>1</socket> 
             <color>#FF0000</color>
-            <id>pvd309_temp_mai_cell</id>
+            <data_channel>rasppi112:pvd309_temp_mai_cell</data_channel>
             <label>Temp MAI</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_temp_mai_cell") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot1>
@@ -325,8 +313,7 @@
       </container0>
       
       <container1>
-	<type>figure</type>
-	<update_interval>2</update_interval> <!-- seconds -->
+	<type>date_figure</type>
 	<x_window>3600</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
@@ -348,16 +335,14 @@
 	<format>.1e</format>
 	<figure>
 	  <plot0>
-            <socket>0</socket>
             <color>#990099</color>
-            <id>pvd309_main_chamber_ig</id>
+            <data_channel>rasppi51:pvd309_main_chamber_ig</data_channel>
             <label>Main / mbar</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_main_chamber_ig") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	  <plot1>
-            <socket>0</socket>
             <color>#009900</color>
-            <id>pvd309_load_lock_ig</id>
+            <data_channel>rasppi51:pvd309_load_lock_ig</data_channel>
             <label>LL / mbar</label>
 	    <old_data_query>select unix_timestamp(time), value from dateplots_pvd309 where type=(SELECT id FROM dateplots_descriptions where codename="pvd309_load_lock_ig") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot1>
@@ -365,7 +350,7 @@
       </container1>
 
       <container2>
-	<type>data</type>
+	<type>table</type>
 	<!--<bgcolor>#FF0000</bgcolor>-->
 	<width>600</width>
 	<height>400</height>
@@ -375,56 +360,49 @@
 	<padding>40px 0px 0px 0px</padding>
 	<data>
 	  <item0>
-	    <socket>1</socket>
-	    <id>pvd309_temp_mai_cell</id>
+	    <data_channel>rasppi112:pvd309_temp_mai_cell</data_channel>
 	    <label>Temp MAI</label>
 	    <color>#FF0000</color>
 	    <format>.1f</format>
 	    <unit>C</unit>
 	  </item0>
 	  <item1>
-	    <socket>1</socket>
-	    <id>pvd309_temp_dca_cell</id>
+	    <data_channel>rasppi112:pvd309_temp_dca_cell</data_channel>
 	    <label>Temp DCA</label>
 	    <color>#0000FF</color>
 	    <format>.1f</format>
 	    <unit>C</unit>
 	  </item1>
 	  <item2>
-	    <socket>0</socket>
-	    <id>pvd309_main_chamber_ig</id>
+	    <data_channel>rasppi51:pvd309_main_chamber_ig</data_channel>
 	    <label>Main chamber</label>
 	    <color>#990099</color>
 	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item2>
 	  <item3>
-	    <socket>0</socket>
-	    <id>pvd309_load_lock_ig</id>
+	    <data_channel>rasppi51:pvd309_load_lock_ig</data_channel>
 	    <label>Load Lock</label>
 	    <color>#009900</color>
 	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item3>
 	  <item4>
-	    <socket>0</socket>
-	    <id>pvd309_load_lock_pirani</id>
+	    <data_channel>rasppi51:pvd309_load_lock_pirani</data_channel>
 	    <label>Load Lock, Pirani</label>
 	    <color>#000000</color>
 	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item4>
 	  <item5>
-	    <socket>2</socket>
-	    <id>pvd309_qcm1_rate</id>
+	    <data_channel>rasppi106:pvd309_qcm1_rate</data_channel>
 	    <label>Rate (Old controller)</label>
 	    <color>#CCCCCC</color>
 	    <format>.3f</format>
 	    <unit>nm/s</unit>
 	  </item5>
 	  <item6>
-	    <socket>2</socket>
-	    <id>pvd309_qcm2_rate</id>
+	    <data_channel>rasppi106:pvd309_qcm2_rate</data_channel>
 	    <label>Rate (Inficon)</label>
 	    <color>#CCCCCC</color>
 	    <format>.3f</format>
@@ -470,10 +448,5 @@
       <legend_fontsize>10</legend_fontsize>
       <label_fontsize>16</label_fontsize>
     </matplotlib_settings>
-    <sockets>
-      <socket0>rasppi51:8000</socket0> <!-- Pressure Measurements -->
-      <socket1>rasppi112:8000</socket1> <!-- Effusion Cells -->
-      <socket2>rasppi106:8000</socket2> <!-- QCMs -->
-    </sockets>
   </global_settings>
 </graphs>

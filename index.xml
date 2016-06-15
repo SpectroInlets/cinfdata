@@ -792,7 +792,7 @@
     </link>
     <link>
       <title>Live Values</title>
-      <ref>pvd_309/live_old.php?type=live_values</ref>
+      <ref>pvd_309/live.php?type=live_values</ref>
     </link>
 
   </setup>

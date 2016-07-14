@@ -2,7 +2,7 @@
 
   /* This file is used to document the code on the webpage */
 
-include("../common_functions.php");
+include("../common_functions_v2.php");
 
 if (!(array_key_exists('file', $_GET) and array_key_exists('type', $_GET))){
   exit('Both parameters "file" and "type" are mandatory, "dir" is optional');
@@ -20,11 +20,11 @@ if (!file_exists($path)){
 
 # For php file we use the builtin highlight_string command
 if ($type == 'php'){
-  echo(html_code_header($dir.'/'.$_GET['file']));
+  echo(html_header($root="../", $title=$dir.'/'.$_GET['file']));
   $lines = file($path);
   $code = implode('', $lines);
   highlight_string($code);
-  echo(new_html_footer());
+  echo(html_footer());
     }
 # For python or xml we use the pygmentize command
 elseif ($type == 'python' || $type == 'xml') {

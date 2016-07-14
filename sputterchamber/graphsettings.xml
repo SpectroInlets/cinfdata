@@ -17,7 +17,7 @@
     <dateplot1>
       <title>Chamber pressure</title>
       <legend>Chamber pressure</legend>
-      <query>SELECT unix_timestamp(time), pressure FROM dateplots_sputterchamber where type = 208 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 208 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>1</color>
     </dateplot1>

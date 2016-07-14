@@ -1,5 +1,5 @@
 <?php
-include("common_functions.php");
+include("../common_functions_cinfsql.php");
 include("graphsettings.php");
 
 error_reporting (E_ALL ^ E_NOTICE);
@@ -52,7 +52,7 @@ $mysqli->query($query);
 $input_id = $mysqli->insert_id;
 
 # Call python plot backend
-$command = './plot.py --type ' . $_GET['type'] .
+$command = './plot_cinfsql.py --type ' . $_GET['type'] .
   ' --boolean_options "' . $boolean_options . '"' .
   ' --left_plotlist "' . $left_plotlist . '"' .
   ' --right_plotlist "' . $right_plotlist . '"' .

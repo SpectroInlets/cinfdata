@@ -5,7 +5,7 @@ sys.path.append('flighttime')
 import tof_model as tm
 import tof_helpers 
 import time
-
+import numpy as np
 class Normalize(object):
     def __init__(self, settings, plot_options, ggs=None):
         self.settings = settings
@@ -42,11 +42,9 @@ class Smooth(object):
             n = 5
         for dat in left + right:
             temp_data = numpy.array(dat['data'][:, 1])
-            for i in range(n, len(temp_data)-n):
-                dat['data'][i, 1] = sum(temp_data[i-n:i+n]) / len(temp_data[i-n:i+n])
+            dat['data'][:, 1] = np.convolve(numpy.array(dat['data'][:, 1]), np.ones(n)/n, mode='same')
             print('smoothed')
-        self.label_additions['ylabel_addition'] = \
-            'Smoothed'
+        self.label_additions['ylabel_addition'] = 'Smoothed'
         return self.label_additions
 
 

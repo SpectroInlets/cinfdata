@@ -445,12 +445,12 @@ type=
 	<name>Deflection Voltage / V</name>
       </param13>
       <param14>
-	<field>sample_temperature</field>
-	<name>Sample temperature</name>
-      </param14>
-      <param15>
 	<field>tof_emission_current</field>
 	<name>Emission Current / mA</name>
+      </param14>
+      <param15>
+	<field>sample_temperature</field>
+	<name>Sample temperature</name>
       </param15>
     </parameters>
   </graph>
@@ -587,13 +587,18 @@ type=
 	<name>Deflection Voltage / V</name>
       </param13>
       <param14>
+	<field>tof_emission_current</field>
+	<name>Emission Current / mA</name>
+      </param14>
+      <param15>
 	<field>sample_temperature</field>
 	<name>Sample temperature</name>
-      </param14>
+      </param15>
     </parameters>
   </graph>
 
-  <graph type='tofspectrum_ultrawide'>
+  <!-- TOF Spectrum -->
+  <graph type='tofspectrum_ultra_wide'>
     <default_xscale>lin</default_xscale>
     <type>11</type>
     <grouping_column>comment</grouping_column>
@@ -603,7 +608,7 @@ type=
     <image_format>png</image_format>
     <charset>ISO-8859-1</charset>
     <matplotlib_settings>
-      <width>32000</width>
+      <width>2700</width>
       <height>1000</height>
     </matplotlib_settings>
     <flight_time_estimate>true</flight_time_estimate>
@@ -630,10 +635,10 @@ type=
 	<title>Convert to approximate mass units</title>
 	<output>raw</output>
       </Massscale>
-      <Intensitymap_ultrawide>
+      <Intensitymap_wide>
 	<title>Intensity map</title>
 	<output>raw</output>
-      </Intensitymap_ultrawide>
+      </Intensitymap_wide>
     </plugins>
 
     <parameters>
@@ -699,6 +704,7 @@ type=
       </param14>
     </parameters>
   </graph>
+
 
 
   <!-- MASSSPECTRUM -->

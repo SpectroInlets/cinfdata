@@ -45,9 +45,12 @@ foreach($chosen_group as $group){
     $sql_groups .= "\"" . $group . "\",";
 }
 $sql_groups = trim($sql_groups, ",");  // Remove the trailing comma
+#$sql_groups = utf8_encode($sql_groups);
 
-// Create the list of individual components of the chosen measurements
-$query = "SELECT id, time," . $settings["label_column"] .  " FROM " .  $settings["measurements_table"] . " where " . $settings["grouping_column"] . " in (" . $sql_groups . ") and type = " . $settings["type"] . " order by " . $settings["sort_dataset_by_column"] . " desc, id limit 800";
+$query = "SELECT id, time," . $settings["label_column"] .  " FROM " .  $settings["measurements_table"] . " where " . $settings["grouping_column"] . " in (" . $sql_groups . ") and type = " . $settings["type"] . " order by " . $settings["sort_dataset_by_column"] . " desc, id limit 8000";
+
+$dbi->set_charset("utf8");
+
 $result  = $dbi->query($query);
 while ($row = $result->fetch_array()) {
   # Unpack $row and append its elements to the id, date and label lists
@@ -58,7 +61,7 @@ while ($row = $result->fetch_array()) {
 print("<div id=\"left_y\">\n");
 print("<!--LEFT Y COMPONENTS-->\n");
 print("<b>Select component (left y-axis):</b><br>\n");
-print("<select multiple size=\"8\" name=\"left_plotlist[]\">\n");
+print("<select multiple size=\"10\" name=\"left_plotlist[]\">\n");
 // Creation of plotlist for left axis
 for($i=0; $i < count($individ_idlist); $i++){
   $selected = (in_array($individ_idlist[$i],$left_plotlist)) ? "selected" : "";

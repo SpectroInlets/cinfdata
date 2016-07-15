@@ -1,5 +1,5 @@
 <?php
-include("../common_functions.php");
+include("../common_functions_v2.php");
 $db = std_db();
 
 // Get current pressure
@@ -25,10 +25,10 @@ $current_pressure_wrgms = $row[1];
 
 
 ?>
-<?php echo(new_html_header())?>
+<?php echo(html_header())?>
   <div class="graph">
   <h2>Pressure history asg</h2>
-  <a href="dateplot.php?type=multidateplot&matplotlib=checked&left_plotlist[]=1"><img src="plot.php?type=multidateplot&left_logscale=checked&matplotlib=checked&left_plotlist[]=1&image_format=png"></a>y
+  <a href="dateplot.php?type=multidateplot&matplotlib=checked&left_plotlist[]=1"><img src="plot.php?type=multidateplot&left_logscale=checked&matplotlib=checked&left_plotlist[]=1&image_format=png"></a>
   </div>
 
   <div class="graph">
@@ -56,7 +56,7 @@ $current_pressure_wrgms = $row[1];
   <?php echo(science_number($current_pressure_wrgms))?> Torr recorded @ <?php echo(date("D M j H:i Y",$pressure_wrgms_time))?>
   </div>
 
-  <?php echo(new_html_footer())?>
+  <?php echo(html_footer())?>
 
 </body>
 </html>

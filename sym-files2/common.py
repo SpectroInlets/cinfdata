@@ -22,6 +22,7 @@ along with The CINF Data Presentation Website.  If not, see
 """
 
 ### color
+import re
 import random
 import matplotlib
 
@@ -33,24 +34,64 @@ class Color:
     2) Second, it is the wrapper for a bit of figure code that colors the axis.
        This includes the graph line, the graph ticks and graph labels.
     """
-    def __init__(self):
+    def __init__(self, data, ggs):
         """The init method. Initilalises the color list and the plot counter."""
+        colors = ggs.graph_xml.find('colors')
+        if colors is not None:
+            self.color_map = self._get_colormap(data, colors)
+            if colors.attrib['type'] == 'abort_on_collision':
+                # Check for duplicate colors
+                if len(list(self.color_map.values())) !=\
+                        len(set(self.color_map.values())):
+                    self.color_map = None
+        else:
+            self.color_map = None
+
         self.n_plots = -1
         self.colors = ['b', 'r', '#777777', 'm', 'g', '#00B0B0', 'y']
         self.c = matplotlib.colors.ColorConverter()
 
-    def get_color(self):
-        """Return the next color for the graph line."""
-        self.n_plots += 1
-        if self.n_plots < len(self.colors):
-            return self.colors[self.n_plots]
-        else:
-            # If we run out of predefined color use a randomly generated one
-            return (random.random(), random.random(), random.random())
+    def _get_colormap(self, data, colors):
+        """Get the colors from a color map"""
+        color_map = {}  # id -> color_code
+        match_column = colors.find('column').text
 
-    def get_color_hex(self):
+        # Loop over all data sets
+        for dat in data['left'] + data['right']:
+            plot_id = dat['lgs']['id']
+            match_string = dat['meta'][match_column]
+
+            # Don't look up the color again
+            if plot_id in color_map:
+                continue
+
+            # Regular expression match the match_column and stop on first match
+            for color in colors.findall('color'):
+                reg_exp = color.find('reg_match').text
+                if re.search(reg_exp, match_string):
+                    color_map[plot_id] = color.find('code').text
+                    break
+        return color_map
+
+    def get_color(self, key=None):
+        """Return the next color for the graph line."""
+        if self.color_map is None:
+            self.n_plots += 1
+            if self.n_plots < len(self.colors):
+                return self.colors[self.n_plots]
+            else:
+                # If we run out of predefined color use a randomly generated one
+                return (random.random(), random.random(), random.random())
+        else:
+            if key in self.color_map:
+                return self.color_map[key]
+            else:
+                return (random.random(), random.random(), random.random())
+
+
+    def get_color_hex(self, key=None):
         """Get color in hex"""
-        color = self.get_color()
+        color = self.get_color(key=key)
         return matplotlib.colors.rgb2hex(self.c.to_rgb(color))
         
     def color_axis(self, left_axis, right_axis, left_color, right_color):

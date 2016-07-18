@@ -98,11 +98,13 @@ class Plot():
         self.right_yaxis = None
         self.measurement_count = None
  
-        # object to give first good color, and then random colors
-        self.c = Color()
+        # Colors object, will be filled in at new_plot
+        self.c = None
 
     def new_plot(self, data, plot_info, measurement_count):
         """ Form a new plot with the given data and info """
+        self.c = Color(data, self.ggs)
+
         self.measurement_count = sum(measurement_count)
         self._init_plot(data)
         # _plot returns True or False to indicate whether the plot is good
@@ -228,7 +230,7 @@ class Plot():
                               dat['data'][:,1],
                               '-',
                               label=legend,
-                              color=self.c.get_color(),
+                              color=self.c.get_color(dat['lgs']['id']),
                               )
         # Right axis
         for dat in data['right']:
@@ -243,7 +245,7 @@ class Plot():
                               dat['data'][:,1],
                               '-',
                               label=legend,
-                              color=self.c.get_color()
+                              color=self.c.get_color(dat['lgs']['id'])
                               )
         # No data
         if self.measurement_count == 0:

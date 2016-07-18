@@ -44,14 +44,15 @@ class Plot():
         self.right_yaxis = len(self.o['right_plotlist']) > 0
         self.out = sys.stdout
         self.tab = '    '
-        # object to give first good color, and then random colors
-        self.c = Color()
+        # Colors object, will be filled in at new_plot
+        self.c = None
         self.reduction = 1
 
     def new_plot(self, data, plot_info, measurement_count):
         """ Produce all the plot output by calls to the different
         subsection methods
         """
+        self.c = Color(data, self.ggs)
         self.measurement_count = sum(measurement_count)
         self._header(self.out, data, plot_info)
         self._data(self.out, data, plot_info)

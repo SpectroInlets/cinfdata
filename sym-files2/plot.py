@@ -114,7 +114,7 @@ class Plot():
 
         # Get a (g)eneral (g)raph (s)ettings object
         # (Are not polulated with data set specific values) 
-        self.ggs = graphSettings(self.o['type']).settings
+        self.ggs = graphSettings(self.o['type'])
 
         # If a dateplot and called without (valid) datetimes fill them in
         try:

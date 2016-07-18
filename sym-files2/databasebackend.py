@@ -81,7 +81,7 @@ class dataBaseBackend():
 
     def _get_data_dateplot(self):
         """ Get data for date plots """
-        gs = graphSettings(self.type_, params=self.from_to_dict).settings
+        gs = graphSettings(self.type_, params=self.from_to_dict)
         for side in ['left', 'right']:
             for plot_n in self.o[side + '_plotlist']:
                 lgs = gs['dateplot' + str(plot_n)]
@@ -106,9 +106,9 @@ class dataBaseBackend():
         because it is called manually
         """
         # lgs is the local (specific) graphsettings
-        gs = graphSettings(self.type_).settings
+        gs = graphSettings(self.type_)
         meta_info = self._get_meta_info(gs, id_=plot_n)
-        lgs = graphSettings(self.type_, params=meta_info).settings
+        lgs = graphSettings(self.type_, params=meta_info)
 
         # Get the right query: Look if the value of the column defined
         # in graphsettings have the right value to use a special query,

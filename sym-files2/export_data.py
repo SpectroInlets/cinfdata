@@ -98,7 +98,7 @@ class ExportData:
 
         # Get a (g)eneral (g)raph (s)ettings object
         # (Is not polulated with data set specific values) 
-        self.ggs = graphSettings(self.o['type']).settings
+        self.ggs = graphSettings(self.o['type'])
 
         ### Create database backend object
         self.db = dataBaseBackend(options=self.o, ggs=self.ggs)

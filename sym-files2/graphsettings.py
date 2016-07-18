@@ -23,7 +23,7 @@ along with The CINF Data Presentation Website.  If not, see
 
 import xml.etree.ElementTree
 
-class graphSettings(object):
+class graphSettings(dict):
     """ This class parses the graphsettings from the graphsettings.xml file and
     returns them as the internal settings variables.
     """
@@ -38,13 +38,14 @@ class graphSettings(object):
 
         self.params = params
         # Create settings dictionary and input type and maybe id
-        self.settings = {'typed':typed}
+        self['typed'] = typed
         if params.has_key('id') and params['id'] != '':
-            self.settings['id'] = str(params['id'])
+            self['id'] = str(params['id'])
 
 
         gs = xml.etree.ElementTree.ElementTree()
         gs.parse('graphsettings.xml')
+        self.graphsettings_xml = gs
 
         # Update with global settings
         system_global = xml.etree.ElementTree.ElementTree()
@@ -57,14 +58,14 @@ class graphSettings(object):
         self._update_settings_with_xml(global_settings)
 
         # Update with graph settings
-        graph = [e for e in gs.findall('graph') if e.attrib['type'] == typed][0]
-        self._update_settings_with_xml(graph)
+        self.graph_xml = [e for e in gs.findall('graph') if e.attrib['type'] == typed][0]
+        self._update_settings_with_xml(self.graph_xml)
 
     def _update_settings_with_xml(self, xml):
         """ Update the settings dictionary with the dictionary returned from
         xml_tree_to_associative_array
         """
-        self.settings.update(self._xml_tree_to_assiciative_dictionary(xml))
+        self.update(self._xml_tree_to_assiciative_dictionary(xml))
 
     def _xml_tree_to_assiciative_dictionary(self, xml):
         """ Recursively turn xml tree into a \"dictionary tree\" """
@@ -87,7 +88,7 @@ class graphSettings(object):
     
     def get_settings(self):
         """ Return the settings dictionary """
-        return self.settings
+        return self
 
 if __name__ == '__main__':
     import json

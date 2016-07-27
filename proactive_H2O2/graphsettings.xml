@@ -1,0 +1,233 @@
+<?xml version='1.0' standalone='yes'?>
+<graphs>
+
+  <!-- MASSTIME -->
+  <graph type='iv'>
+    <default_xscale>lin</default_xscale>
+    <type>1</type>
+    <xlabel>Time / s</xlabel>
+    <title>Mass vs. time</title>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+
+    <!-- queries -->
+    <queries>
+      <default>SELECT x, y  FROM xy_values_proactive WHERE measurement = {id} ORDER BY id</default>
+    </queries>
+
+    <!-- ylabel -->
+    <ylabel>
+      <default>Mixed units</default>
+      <column>label</column>
+      <pattern0>
+	<reg_match>^voltage.*$</reg_match>
+	<ylabel>Voltage / V</ylabel>
+      </pattern0>
+      <pattern1>
+	<reg_match>^current$</reg_match>
+	<ylabel>Current / A</ylabel>
+      </pattern1>
+    </ylabel>
+
+    <!-- legend -->
+    <legend>
+      <default>{label}</default>
+    </legend>
+
+    <!-- parameters -->
+    <parameters>
+      <param0>
+	<field>power_supply_channel</field>
+	<name>Power Supply Channel</name>
+      </param0>
+    </parameters>
+  </graph>
+
+  <graph type="iv_live">
+    <page_width>1240</page_width>
+    <page_title>proactive setup</page_title>
+    <containers> 
+      <container0>
+	<type>xy_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>3</min_update_time>
+	<width>600</width>
+	<height>300</height>
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Voltage and Current Channel A1</title>
+	<xlabel>Time</xlabel>
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<!--<format>.1e</format>-->
+	<figure>
+	  <plot0>
+            <color>#00FF00</color>
+            <data_channel>CINF-H2O2-PROA1:A1_voltage_setpoint</data_channel>
+            <label>Voltage Setpoint / V</label>
+	  </plot0>
+	  <plot1>
+            <color>#0000FF</color>
+            <data_channel>CINF-H2O2-PROA1:A1_voltage</data_channel>
+            <label>Voltage / V</label>
+	  </plot1>
+	  <plot2>
+            <color>#FF0000</color>
+            <data_channel>CINF-H2O2-PROA1:A1_current</data_channel>
+            <label>Current / A</label>
+	  </plot2>
+	</figure>
+      </container0>
+
+      <container1>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>600</width>
+	<height>300</height>
+	<fontsize>14</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>20px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>CINF-H2O2-PROA1:A1_voltage_setpoint</data_channel>
+	    <label>Voltage Setpoint</label>
+	    <color>#00FF00</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item0>
+	  <item1>
+	    <data_channel>CINF-H2O2-PROA1:A1_voltage</data_channel>
+	    <label>Voltage</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item1>
+	  <item2>
+	    <data_channel>CINF-H2O2-PROA1:A1_current</data_channel>
+	    <label>Current</label>
+	    <color>#FF0000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item2>
+	</data>
+      </container1>
+
+      <container2>
+	<type>xy_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>3</min_update_time>
+	<width>600</width>
+	<height>300</height>
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Voltage and Current Channel A2</title>
+	<xlabel>Time</xlabel>
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<!--<format>.1e</format>-->
+	<figure>
+	  <plot0>
+            <color>#00FF00</color>
+            <data_channel>CINF-H2O2-PROA1:A2_voltage_setpoint</data_channel>
+            <label>Voltage Setpoint/ V</label>
+	  </plot0>
+	  <plot1>
+            <color>#0000FF</color>
+            <data_channel>CINF-H2O2-PROA1:A2_voltage</data_channel>
+            <label>Voltage / V</label>
+	  </plot1>
+	  <plot2>
+            <color>#FF0000</color>
+            <data_channel>CINF-H2O2-PROA1:A2_current</data_channel>
+            <label>Current / A</label>
+	  </plot2>
+	</figure>
+      </container2>
+
+      <container3>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>600</width>
+	<height>300</height>
+	<fontsize>14</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>20px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>CINF-H2O2-PROA1:A2_voltage_setpoint</data_channel>
+	    <label>Voltage Setpoint</label>
+	    <color>#00FF00</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item0>
+	  <item1>
+	    <data_channel>CINF-H2O2-PROA1:A2_voltage</data_channel>
+	    <label>Voltage</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item1>
+	  <item2>
+	    <data_channel>CINF-H2O2-PROA1:A2_current</data_channel>
+	    <label>Current</label>
+	    <color>#FF0000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item2>
+	</data>
+      </container3>
+
+    </containers>
+  </graph>
+
+  <!-- GLOBAL SETTINGS -->
+  <global_settings>
+    <folder_name>proactive</folder_name>
+    <measurements_table>measurements_proactive</measurements_table>
+    <xyvalues_table>xy_values_proactive</xyvalues_table>
+    <sql_username>proactive</sql_username>
+    <image_format>png</image_format>
+    <label_column>label</label_column>
+    <mandatory_export_fields>
+      <field0>
+	<field>id</field>
+	<name>Id</name>
+      </field0>
+      <field1>
+	<field>type</field>
+	<name>Type</name>
+      </field1>
+      <field2>
+	<field>time</field>
+	<name>Recorded at</name>
+      </field2>
+      <field3>
+	<field>comment</field>
+	<name>Comment</name>
+      </field3>
+    </mandatory_export_fields>
+    <matplotlib_settings>
+      <width>900</width>
+      <height>600</height>
+      <title_size>24</title_size>
+      <xtick_labelsize>12</xtick_labelsize>
+      <ytick_labelsize>12</ytick_labelsize>
+      <legend_fontsize>10</legend_fontsize>
+      <label_fontsize>16</label_fontsize>
+    </matplotlib_settings>
+  </global_settings>
+</graphs>

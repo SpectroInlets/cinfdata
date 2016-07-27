@@ -844,11 +844,11 @@
     <setup_title>Proactive H&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;2&lt;/sub&gt;</setup_title>
     <link>
       <title>IV</title>
-      <ref>proactive/xyplot.php?type=iv</ref>
+      <ref>proactive_H2O2/xyplot.php?type=iv</ref>
     </link>
     <link>
       <title>IV live</title>
-      <ref>proactive/live.php?type=iv_live</ref>
+      <ref>proactive_H2O2/live.php?type=iv_live</ref>
     </link>
   </setup>
 

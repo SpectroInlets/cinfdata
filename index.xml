@@ -701,23 +701,23 @@
     <setup_title>VHP Setup</setup_title>
     <link>
       <title>Chamber Pressure</title>
-      <ref>vhp_setup/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
+      <ref>vhp_setup3/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
     </link>
     <link>
       <title>Mass spectrums</title>
-      <ref>vhp_setup2/xyplot.php?type=massspectra</ref>
+      <ref>vhp_setup3/xyplot.php?type=massspectra</ref>
     </link>
     <link>
       <title>Mass-time</title>
-      <ref>vhp_setup2/xyplot.php?type=masstime</ref>
+      <ref>vhp_setup3/xyplot.php?type=masstime</ref>
     </link>
     <link>
       <title>GC</title>
-      <ref>vhp_setup2/xyplot.php?type=gc&amp;matplotlib=checked</ref>
+      <ref>vhp_setup3/xyplot.php?type=gc&amp;matplotlib=checked</ref>
     </link>
     <link>
       <title>GC Raw</title>
-      <ref>vhp_setup2/xyplot.php?type=gc_raw&amp;matplotlib=checked&amp;plugin_settings[ShiftGraphs][input]=auto</ref>
+      <ref>vhp_setup3/xyplot.php?type=gc_raw&amp;matplotlib=checked&amp;plugin_settings[ShiftGraphs][input]=auto</ref>
     </link>
   </setup>
 
@@ -836,6 +836,19 @@
     <link>
       <title>Mass spectra</title>
       <ref>sniffer/xyplot.php?type=massspectrum&amp;matplotlib=checked</ref>
+    </link>
+  </setup>
+
+  <!-- Proactive -->
+  <setup codename="proactive">
+    <setup_title>Proactive H&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;2&lt;/sub&gt;</setup_title>
+    <link>
+      <title>IV</title>
+      <ref>proactive/xyplot.php?type=iv</ref>
+    </link>
+    <link>
+      <title>IV live</title>
+      <ref>proactive/live.php?type=iv_live</ref>
     </link>
   </setup>
 

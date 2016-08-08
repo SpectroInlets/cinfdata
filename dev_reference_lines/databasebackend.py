@@ -76,6 +76,7 @@ class dataBaseBackend():
             self._get_data_dateplot()
         else:
             self._get_data_xyplot()
+            self._get_reference_lines()
         self._process_data()
         return self.data
 
@@ -148,6 +149,12 @@ class dataBaseBackend():
     def _result_from_query(self, query):
         self.cursor.execute(query)
         return self.cursor.fetchall()
+
+    def _get_reference_lines(self):
+        """Get the reference lines from the database"""
+        # KARL TODO Here, fetch the reference line data from the
+        # database and save the information in self.data (which is a
+        # dictionary) under a new key e.g. 'reference_line_info'.
 
     def _process_data(self):
         """ Call functions to do the data processing on the data """

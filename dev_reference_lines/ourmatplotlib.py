@@ -111,6 +111,7 @@ class Plot():
         if self._plot(data):
             self._zoom_and_flip(data)
             self._title_and_labels(plot_info)
+            self._add_reference_lines(data)
         self._save(plot_info)
 
     def _init_plot(self, data):
@@ -360,6 +361,13 @@ class Plot():
             # Make legend lines thicker
             for legend_handle in legends.legendHandles:
                 legend_handle.set_linewidth(6)
+
+    def _add_reference_lines(self, data):
+        """Add reference lines to the plot"""
+        # KARL TODO. In this method, actually draw the reference lines
+        # onto the graph. Remember, the data argument is the dict you
+        # wrote information to in databasebackend and the lef axes
+        # (which I think is the one you want to use is called self.ax1
 
     def _save(self, plot_info):
         """ Save the figure """

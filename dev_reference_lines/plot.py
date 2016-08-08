@@ -73,6 +73,10 @@ class Plot():
 	parser.add_option('--manual_labels_n_titel') # Manual labels and title for mpl
 	parser.add_option('--input_id')              # Database id for plugin input
 
+        # KARL TODO To __init__ add command line options to recieve
+        # the reference line sets that should be displayer and parse
+        # it
+
         # Parse the options
         (options, args) = parser.parse_args()
 

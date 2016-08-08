@@ -701,23 +701,23 @@
     <setup_title>VHP Setup</setup_title>
     <link>
       <title>Chamber Pressure</title>
-      <ref>vhp_setup3/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
+      <ref>vhp_setup/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
     </link>
     <link>
       <title>Mass spectrums</title>
-      <ref>vhp_setup3/xyplot.php?type=massspectra</ref>
+      <ref>vhp_setup/xyplot.php?type=massspectra</ref>
     </link>
     <link>
       <title>Mass-time</title>
-      <ref>vhp_setup3/xyplot.php?type=masstime</ref>
+      <ref>vhp_setup/xyplot.php?type=masstime</ref>
     </link>
     <link>
       <title>GC</title>
-      <ref>vhp_setup3/xyplot.php?type=gc&amp;matplotlib=checked</ref>
+      <ref>vhp_setup/xyplot.php?type=gc&amp;matplotlib=checked</ref>
     </link>
     <link>
       <title>GC Raw</title>
-      <ref>vhp_setup3/xyplot.php?type=gc_raw&amp;matplotlib=checked&amp;plugin_settings[ShiftGraphs][input]=auto</ref>
+      <ref>vhp_setup/xyplot.php?type=gc_raw&amp;matplotlib=checked&amp;plugin_settings[ShiftGraphs][input]=auto</ref>
     </link>
   </setup>
 
@@ -863,6 +863,20 @@
       <title>Temperature, Small Office</title>
       <ref>offices_312/dateplot.php?type=multidateplot&amp;left_plotlist[]=3&amp;left_plotlist[]=4&amp;matplotlib=checked</ref>
     </link>
+  </setup>
+
+  <!-- dev reference lines -->
+  <setup codename="def_reference_lines">
+    <setup_title>Dev reference lines</setup_title>
+    <link>
+      <title>Mass spectra</title>
+      <ref>dev_reference_lines/xyplot.php?type=massspectrum</ref>
+    </link>
+    <link>
+      <title>Mass-time</title>
+      <ref>dev_reference_lines/xyplot.php?type=masstime&amp;matplotlib=checked</ref>
+    </link>
+
   </setup>
 
 

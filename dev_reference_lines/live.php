@@ -20,7 +20,7 @@
     <http://www.gnu.org/licenses/>.
   */
 
-
+fhg
 function make_container_divs($containers){
   # Sort container names naturally
   $container_names = array_keys($containers);

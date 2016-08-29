@@ -54,7 +54,6 @@ class Plot():
     
     def __init__(self):
         """ Description of init """
-
         # Create optionparser
         parser = OptionParser()
 
@@ -62,19 +61,20 @@ class Plot():
         # Option help at https://cinfwiki.fysik.dtu.dk/cinfwiki/Software/
         # DataWebPageDeveloperDocumentation#plot.py
         parser.add_option('--type')                  # String option
-	parser.add_option('--boolean_options')       # Boolean options
-	parser.add_option('--left_plotlist')         # int list
-	parser.add_option('--right_plotlist')        # int list
-	parser.add_option('--xscale_bounding')       # Float pair
-	parser.add_option('--left_yscale_bounding')  # Float pair
-	parser.add_option('--right_yscale_bounding') # Float pair
-	parser.add_option('--from_to')               # Time stamp pair NOT HANDLED
-	parser.add_option('--image_format')          # String options
-	parser.add_option('--manual_labels_n_titel') # Manual labels and title for mpl
-	parser.add_option('--input_id')              # Database id for plugin input
-
+		parser.add_option('--boolean_options')       # Boolean options
+		parser.add_option('--left_plotlist')         # int list
+		parser.add_option('--right_plotlist')        # int list
+		parser.add_option('--xscale_bounding')       # Float pair
+		parser.add_option('--left_yscale_bounding')  # Float pair
+		parser.add_option('--right_yscale_bounding') # Float pair
+		parser.add_option('--from_to')               # Time stamp pair NOT HANDLED
+		parser.add_option('--image_format')          # String options
+		parser.add_option('--manual_labels_n_titel') # Manual labels and title for mpl
+		parser.add_option('--input_id')              # Database id for plugin input
+		
+		#parser.add_option('--reference_lines')		 # Reference lines
         # KARL TODO To __init__ add command line options to recieve
-        # the reference line sets that should be displayer and parse
+        # the reference line sets that should be displayed and parse
         # it
 
         # Parse the options
@@ -155,6 +155,7 @@ class Plot():
         3) Determine the label
         4) Ask the plotting engine to make the plot
         """
+
         self.data = self.db.get_data()
         self.plot_info = self.titles_and_labels(self.data)
         self.plot_info.update(self.data['data_treatment'])

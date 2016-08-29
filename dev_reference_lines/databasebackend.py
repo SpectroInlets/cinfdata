@@ -152,6 +152,12 @@ class dataBaseBackend():
 
     def _get_reference_lines(self):
         """Get the reference lines from the database"""
+		#query = "SELECT * FROM {0}".format(reference_data)
+		
+		#table_contents = self._result_from_query(query)
+
+		#return self.data['reference_line_info'] = table_contents
+            
         # KARL TODO Here, fetch the reference line data from the
         # database and save the information in self.data (which is a
         # dictionary) under a new key e.g. 'reference_line_info'.

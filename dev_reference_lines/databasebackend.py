@@ -152,11 +152,18 @@ class dataBaseBackend():
 
     def _get_reference_lines(self):
         """Get the reference lines from the database"""
-		#query = "SELECT * FROM {0}".format(reference_data)
+        query = "SELECT x,y FROM reference_data"
+        
+        y_values = "SELECT y FROM reference_data"
+        
+        
+        max_intensity_temp = max(self._result_from_query(y_values)) #Finds maximum y value
+        max_intensity = max_intensity_temp[0]                       #Saves the maximum y value as a float
+        
+        table_contents = self._result_from_query(query)
+        self.data['reference_line_info'] = table_contents
+        return self.data
 		
-		#table_contents = self._result_from_query(query)
-
-		#return self.data['reference_line_info'] = table_contents
             
         # KARL TODO Here, fetch the reference line data from the
         # database and save the information in self.data (which is a

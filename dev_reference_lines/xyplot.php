@@ -73,6 +73,7 @@ $xlabel            = isset($_GET["xlabel"])             ? weed($_GET["xlabel"]) 
 $left_ylabel       = isset($_GET["left_ylabel"])        ? weed($_GET["left_ylabel"])   : "";
 $right_ylabel      = isset($_GET["right_ylabel"])       ? weed($_GET["right_ylabel"])  : "";
 $plugin_settings   = isset($_GET["plugin_settings"])    ? $_GET["plugin_settings"]     : Array();
+$reference_lines   = isset($_GET["reference_lines"])    ? $_GET["reference_lines"]     : Array();
 
 // Figure out whether there are plugins that produce output
 $produce_output = False;
@@ -168,7 +169,7 @@ foreach($options as $value){
 }
 
 // ... and lists ...
-foreach(array('left_plotlist', 'right_plotlist') as $value){
+foreach(array('left_plotlist', 'right_plotlist', 'reference_lines') as $value){
   foreach($$value as $id){
   $options_line .= '&' . $value . '[]=' . $id;
   }
@@ -229,6 +230,27 @@ if ($matplotlib == 'checked'){
 	      <b>x-max:</b><input name="xmax" type="text" value="<?php echo($xmax);?>" size="13"><br>
 	      <input id="submit_button" type="submit" value="Update">
         </div>
+
+  <!-- Reference lines -->
+  <b>Select reference lines:</b><br>
+  <select multiple size="8" name="reference_lines[]">
+  # HERE
+<?php
+
+  #$mysqli
+  $sql = "SELECT DISTINCT(label) FROM reference_data";
+  $result = $mysqli->query($sql);
+  while($row = $result->fetch_row()) {
+    $ref_line_selected = "";
+    if (in_array($row[0], $reference_lines)){
+      $ref_line_selected = "selected";
+    }
+    echo("<option value=\"${row[0]}\" $ref_line_selected >${row[0]}</option>");
+   print $row . "<br>";
+  }
+
+?>
+
         <b>Plot options</b><input type="checkbox" name="plot_options" onClick="javascript:toggle('plot_options')" value="checked" <?php echo($plot_options);?>><br>
           <?php
 

@@ -364,6 +364,10 @@ class Plot():
 
     def _add_reference_lines(self, data):
         """Add reference lines to the plot"""
+        for value in data['reference_line_info']:
+            plt.axvline(x=value[0], ymax=( value[1] / 10000 )
+        
+        
         # KARL TODO. In this method, actually draw the reference lines
         # onto the graph. Remember, the data argument is the dict you
         # wrote information to in databasebackend and the lef axes

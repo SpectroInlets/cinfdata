@@ -29,7 +29,7 @@ $manual_labels_n_titel = 'title=' . $_GET['title'] . ',xlabel=' . $_GET['xlabel'
   ',left_ylabel=' . $_GET['left_ylabel'] . ',right_ylabel=' . $_GET['right_ylabel'];
 # Plotlists
 $left_plotlist = ''; $right_plotlist = '';
-foreach (array('left_plotlist', 'right_plotlist') as $list){
+foreach (array('left_plotlist', 'right_plotlist', 'reference_lines') as $list){
   $$list = '';
   if (count($_GET[$list]) > 0){
     foreach($_GET[$list] as $id){
@@ -56,6 +56,7 @@ $command = './plot.py --type ' . $_GET['type'] .
   ' --boolean_options "' . $boolean_options . '"' .
   ' --left_plotlist "' . $left_plotlist . '"' .
   ' --right_plotlist "' . $right_plotlist . '"' .
+  ' --reference_lines "' . $reference_lines . '"' .
   ' --xscale_bounding "' . $xscale_bounding . '"' .
   ' --left_yscale_bounding "' . $left_yscale_bounding . '"' .
   ' --right_yscale_bounding "' . $right_yscale_bounding . '"' .

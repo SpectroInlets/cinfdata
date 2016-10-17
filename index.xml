@@ -299,8 +299,20 @@
   <setup codename="hall">
     <setup_title>Hall</setup_title>
     <link>
-      <title>Temperature</title>
-      <ref>hall/dateplot.php?type=temperature&amp;matplotlib=checked&amp;left_plotlist%5B%5D=1</ref>
+      <title>Temperature and Humidity</title>
+      <ref>hall/dateplot.php?type=temperature&amp;matplotlib=checked&amp;left_plotlist%5B%5D=1&amp;right_plotlist%5B%5D=8</ref>
+    </link>
+    <link>
+      <title>Cooling Water Temperature and Pressure</title>
+      <ref>hall/dateplot.php?type=temperature&amp;matplotlib=checked&amp;left_plotlist%5B%5D=4&amp;left_plotlist%5B%5D=5&amp;right_plotlist%5B%5D=2</ref>
+    </link>
+    <link>
+      <title>Ar 5.0 pressure</title>
+      <ref>hall/dateplot.php?type=temperature&amp;matplotlib=checked&amp;left_plotlist%5B%5D=3</ref>
+    </link>
+    <link>
+      <title>Ventilation Pressure</title>
+      <ref>hall/dateplot.php?type=temperature&amp;matplotlib=checked&amp;left_plotlist%5B%5D=7</ref>
     </link>
     <link>
       <title>Live Values</title>

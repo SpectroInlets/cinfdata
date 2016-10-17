@@ -12,54 +12,117 @@
     <title>Status for experimental hall</title>
     <ylabel>Temperature / C</ylabel>
     <dateplot1>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type = 166 and value between -1 and 1300 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type = 166 and value between -1 and 1300 and time between
+      "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <title>Temperature in the experimental hall</title>
       <legend>T. hall</legend>
       <color>1</color>
     </dateplot1>
     <dateplot2>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type=160 and value > -1 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type=160 and value > -1 and time between "{from}" and
+      "{to}" order by time</query>
       <ylabel>Pressure / Bar</ylabel>
       <title>Cooling water pressure</title>
       <legend>Pressure</legend>
       <color>2</color>
     </dateplot2>
     <dateplot3>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type=161 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type=161 and time between "{from}" and "{to}" order by
+      time</query>
       <ylabel>Pressure / Bar</ylabel>
       <title>N5 argon pressure</title>
       <legend>Pressure</legend>
       <color>3</color>
     </dateplot3>
     <dateplot4>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type=162 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type=162 and time between "{from}" and "{to}" order by
+      time</query>
       <ylabel>Temperature / C</ylabel>
       <title>Cooling water return temperature</title>
       <legend>Temperature</legend>
       <color>4</color>
     </dateplot4>
     <dateplot5>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type=163 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type=163 and time between "{from}" and "{to}" order by
+      time</query>
       <ylabel>Temperature / C</ylabel>
       <title>Cooling water forward temperature</title>
       <legend>Temperature</legend>
       <color>5</color>
     </dateplot5>
     <dateplot7>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type = 167 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type = 167 and time between "{from}" and "{to}" order by
+      time</query>
       <ylabel>Pressure / Pa</ylabel>
       <title>Ventilation pressure</title>
       <legend>P. ventilation</legend>
       <color>7</color>
     </dateplot7>
     <dateplot8>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_hall where type = 168 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type = 168 and time between "{from}" and "{to}" order by
+      time</query>
       <ylabel>Humidity / %</ylabel>
       <title>Humidity</title>
       <legend>Humidity</legend>
       <color>8</color>
     </dateplot8>
+  </graph>
+
+  <!-- TEMPERATURE -->
+  <graph type='work'>
+    <matplotlib_settings>
+      <width>1400</width>
+      <height>800</height>
+    </matplotlib_settings>
+
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <default_xscale>dat</default_xscale>
+    <title>Workday Burndown</title>
+    <ylabel>Temperature / C</ylabel>
+    <dateplot1>
+      <query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_completed") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Hours of work</ylabel>
+      <title>Work completed</title>
+      <legend>Completed</legend>
+      <color>1</color>
+    </dateplot1>
+    <dateplot2>
+      <query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_estimate") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Hours of work</ylabel>
+      <title>Estimate</title>
+      <legend>Estimate</legend>
+      <color>2</color>
+    </dateplot2>
+    <dateplot3>
+      <query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_total") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Hours of work</ylabel>
+      <title>Work Total</title>
+      <legend>Total</legend>
+      <color>3</color>
+    </dateplot3>
+    <dateplot4>
+      <query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_left_minus_started") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Hours of work</ylabel>
+      <ylabel>Hours of work</ylabel>
+      <title>Work left - started</title>
+      <legend>Left - started</legend>
+      <color>4</color>
+    </dateplot4>
+    <dateplot5>
+      <query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Hours of work</ylabel>
+      <title>Work left</title>
+      <legend>Left</legend>
+      <color>5</color>
+    </dateplot5>
   </graph>
 
   <graph type="live_values">
@@ -597,6 +660,123 @@
 	  </item5>
 	</data>
       </container8>
+    </containers>
+  </graph>
+
+  <graph type="live_work">
+    <page_width>1250</page_width>
+    <page_title>Workday Live Plots</page_title> <!-- option page title -->
+    <containers>
+
+      <!-- Container 1, contains the second plot -->
+      <container0>
+	<type>date_figure</type>
+	<title>Burndown</title>
+	<width>600</width>
+	<height>400</height>
+	<jump_ahead>0.3</jump_ahead>
+	<x_window>32400</x_window>
+	<!--<x_window>14400</x_window>-->
+	<!-- Experimental, to fix bad y-range selection with log plot and
+	     constant values -->
+	<!-- <yrangepad>10</yrangepad> -->
+	<line_width>3</line_width>
+	<!-- reduce the amount of points that gets plotted -->
+	<data_reduction>
+	  <time>1</time>
+	  <absolute>0.01</absolute>
+	</data_reduction>
+	<figure>
+	  <plot0>
+	    <data_channel>kenni-desk:work_estimate</data_channel>
+	    <label>Estimate</label>
+	    <color>#FF0000</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_estimate") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	  <plot1>
+	    <data_channel>kenni-desk:work_left_minus_started</data_channel>
+	    <label>Left minus started</label>
+	    <color>#7CFC00</color>
+	    <line_width>2</line_width>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_left_minus_started") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot1>
+	  <plot2>
+	    <data_channel>kenni-desk:work_left</data_channel>
+	    <label>Left</label>
+	    <color>#006400</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot2>
+	  <plot3>
+	    <data_channel>kenni-desk:work_completed</data_channel>
+	    <label>Completed</label>
+	    <color>#0000FF</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_completed") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot3>
+	  <plot4>
+	    <data_channel>kenni-desk:work_total</data_channel>
+	    <label>Total</label>
+	    <color>#FFCC00</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_hall where type=(SELECT id FROM dateplots_descriptions where codename="work_total") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot4>
+	</figure>
+      </container0>
+
+
+      <container1>
+	<type>table</type>
+	<bgcolor>#E7E7E7</bgcolor>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>600</width>
+	<height>1000</height>
+	<fontsize>17</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>40px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>kenni-desk:work_estimate</data_channel>
+	    <label>Proj. left</label>
+	    <color>#FF0000</color>
+	    <format>.2f</format>
+	    <unit>MH</unit>
+	  </item0>
+	  <item1>
+	    <data_channel>kenni-desk:work_left</data_channel>
+	    <label>Left</label>
+	    <color>#006400</color>
+	    <format>.2f</format>
+	    <unit>MH</unit>
+	  </item1>
+	  <item2>
+	    <data_channel>kenni-desk:work_left_minus_started</data_channel>
+	    <label>Left - started</label>
+	    <color>#7CFC00</color>
+	    <format>.2f</format>
+	    <unit>MH</unit>
+	  </item2>
+	  <item3>
+	    <data_channel>kenni-desk:work_completed</data_channel>
+	    <label>Completed</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>MH</unit>
+	  </item3>
+	  <item4>
+	    <data_channel>kenni-desk:work_total</data_channel>
+	    <label>Total</label>
+	    <color>#FFCC00</color>
+	    <format>.2f</format>
+	    <unit>MH</unit>
+	  </item4>
+	  <item5>
+	    <data_channel>kenni-desk:work_highscore</data_channel>
+	    <label>Highscore</label>
+	    <color>#FFFFFF</color>
+	    <format>pre</format>
+	    <unit></unit>
+	  </item5>
+	</data>
+      </container1>
     </containers>
   </graph>
 

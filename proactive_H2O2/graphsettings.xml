@@ -79,6 +79,11 @@
             <data_channel>CINF-H2O2-PROA1:A1_current</data_channel>
             <label>Current / A</label>
 	  </plot2>
+	  <plot3>
+            <color>#000000</color>
+            <data_channel>CINF-H2O2-PROA1:A1_current_limit</data_channel>
+            <label>Current Limit / A</label>
+	  </plot3>
 	</figure>
       </container0>
 
@@ -116,6 +121,22 @@
 	    <unit>A</unit>
             <xformat>.2f</xformat>
 	  </item2>
+	  <item3>
+	    <data_channel>CINF-H2O2-PROA1:A1_current_limit</data_channel>
+	    <label>Current Limit</label>
+	    <color>#000000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item3>
+	  <item4>
+	    <data_channel>CINF-H2O2-PROA1:A1_accum_charge</data_channel>
+	    <label>Accumulated Charge</label>
+	    <color>#FFFFFF</color>
+	    <format>.2f</format>
+	    <unit>C</unit>
+            <xformat>.2f</xformat>
+	  </item4>
 	</data>
       </container1>
 
@@ -151,6 +172,11 @@
             <data_channel>CINF-H2O2-PROA1:A2_current</data_channel>
             <label>Current / A</label>
 	  </plot2>
+	  <plot3>
+            <color>#000000</color>
+            <data_channel>CINF-H2O2-PROA1:A2_current_limit</data_channel>
+            <label>Current Limit / A</label>
+	  </plot3>
 	</figure>
       </container2>
 
@@ -188,8 +214,210 @@
 	    <unit>A</unit>
             <xformat>.2f</xformat>
 	  </item2>
+	  <item3>
+	    <data_channel>CINF-H2O2-PROA1:A2_current Limit</data_channel>
+	    <label>Current Limit</label>
+	    <color>#000000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item3>
+	  <item4>
+	    <data_channel>CINF-H2O2-PROA1:A2_accum_charge</data_channel>
+	    <label>Accumulated Charge</label>
+	    <color>#FFFFFF</color>
+	    <format>.2f</format>
+	    <unit>C</unit>
+            <xformat>.2f</xformat>
+	  </item4>
 	</data>
       </container3>
+
+      <container4>
+	<type>xy_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>3</min_update_time>
+	<width>600</width>
+	<height>300</height>
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Voltage and Current Channel B1</title>
+	<xlabel>Time</xlabel>
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<!--<format>.1e</format>-->
+	<figure>
+	  <plot0>
+            <color>#00FF00</color>
+            <data_channel>CINF-H2O2-PROA1:B1_voltage_setpoint</data_channel>
+            <label>Voltage Setpoint / V</label>
+	  </plot0>
+	  <plot1>
+            <color>#0000FF</color>
+            <data_channel>CINF-H2O2-PROA1:B1_voltage</data_channel>
+            <label>Voltage / V</label>
+	  </plot1>
+	  <plot2>
+            <color>#FF0000</color>
+            <data_channel>CINF-H2O2-PROA1:B1_current</data_channel>
+            <label>Current / A</label>
+	  </plot2>
+	  <plot3>
+            <color>#000000</color>
+            <data_channel>CINF-H2O2-PROA1:B1_current_limit</data_channel>
+            <label>Current Limit / A</label>
+	  </plot3>
+	</figure>
+      </container4>
+
+      <container5>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>600</width>
+	<height>300</height>
+	<fontsize>14</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>20px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>CINF-H2O2-PROA1:B1_voltage_setpoint</data_channel>
+	    <label>Voltage Setpoint</label>
+	    <color>#00FF00</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item0>
+	  <item1>
+	    <data_channel>CINF-H2O2-PROA1:B1_voltage</data_channel>
+	    <label>Voltage</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item1>
+	  <item2>
+	    <data_channel>CINF-H2O2-PROA1:B1_current</data_channel>
+	    <label>Current</label>
+	    <color>#FF0000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item2>
+	  <item3>
+	    <data_channel>CINF-H2O2-PROA1:B1_current_limit</data_channel>
+	    <label>Current Limit</label>
+	    <color>#000000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item3>
+	  <item4>
+	    <data_channel>CINF-H2O2-PROA1:B1_accum_charge</data_channel>
+	    <label>Accumulated Charge</label>
+	    <color>#FFFFFF</color>
+	    <format>.2f</format>
+	    <unit>C</unit>
+            <xformat>.2f</xformat>
+	  </item4>
+	</data>
+      </container5>
+
+      <container6>
+	<type>xy_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>3</min_update_time>
+	<width>600</width>
+	<height>300</height>
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Voltage and Current Channel B2</title>
+	<xlabel>Time</xlabel>
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<!--<format>.1e</format>-->
+	<figure>
+	  <plot0>
+            <color>#00FF00</color>
+            <data_channel>CINF-H2O2-PROA1:B2_voltage_setpoint</data_channel>
+            <label>Voltage Setpoint/ V</label>
+	  </plot0>
+	  <plot1>
+            <color>#0000FF</color>
+            <data_channel>CINF-H2O2-PROA1:B2_voltage</data_channel>
+            <label>Voltage / V</label>
+	  </plot1>
+	  <plot2>
+            <color>#FF0000</color>
+            <data_channel>CINF-H2O2-PROA1:B2_current</data_channel>
+            <label>Current / A</label>
+	  </plot2>
+	  <plot3>
+            <color>#000000</color>
+            <data_channel>CINF-H2O2-PROA1:B2_current_limit</data_channel>
+            <label>Current Limit / A</label>
+	  </plot3>
+	</figure>
+      </container6>
+
+      <container7>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>600</width>
+	<height>300</height>
+	<fontsize>14</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>20px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>CINF-H2O2-PROA1:B2_voltage_setpoint</data_channel>
+	    <label>Voltage Setpoint</label>
+	    <color>#00FF00</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item0>
+	  <item1>
+	    <data_channel>CINF-H2O2-PROA1:B2_voltage</data_channel>
+	    <label>Voltage</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>V</unit>
+            <xformat>.2f</xformat>
+	  </item1>
+	  <item2>
+	    <data_channel>CINF-H2O2-PROA1:B2_current</data_channel>
+	    <label>Current</label>
+	    <color>#FF0000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item2>
+	  <item3>
+	    <data_channel>CINF-H2O2-PROA1:B2_current Limit</data_channel>
+	    <label>Current Limit</label>
+	    <color>#000000</color>
+	    <format>.2f</format>
+	    <unit>A</unit>
+            <xformat>.2f</xformat>
+	  </item3>
+	  <item4>
+	    <data_channel>CINF-H2O2-PROA1:B2_accum_charge</data_channel>
+	    <label>Accumulated Charge</label>
+	    <color>#FFFFFF</color>
+	    <format>.2f</format>
+	    <unit>C</unit>
+            <xformat>.2f</xformat>
+	  </item4>
+	</data>
+      </container7>
 
     </containers>
   </graph>

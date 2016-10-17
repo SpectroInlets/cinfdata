@@ -537,6 +537,13 @@
     <legend>
       <default>{id} - {time}</default>
     </legend>
+    <plugins>
+      <MassSpectraOffset>
+	<title>Offset the spectra to avoid negative values</title>
+	<output>raw</output>
+      </MassSpectraOffset>
+    </plugins>
+
   </graph>
 
   <!-- GLOBAL SETTINGS -->

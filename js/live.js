@@ -119,6 +119,10 @@ function format_data(value, format) {
        decimals is located at index [1: -1] */
     var decimals = parseInt(format.substring(1, format.length - 1), 10);
 
+    if (format === 'pre'){
+	return '<pre>'.concat(value, '</pre>');
+    }
+
     // The format type is just the last character
     switch (format.substring(format.length - 1)) {
     case "f":

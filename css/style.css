@@ -455,6 +455,12 @@ table.nicetable td.alert{
     background-color: #FF0000;
 }
 
+table.nicetable td.all_good{
+    padding: 2px 8px;
+    /* Pleasent green ;) */
+    background-color: #43AF11;
+}
+
 .nobr{
     white-space: nowrap;
 }

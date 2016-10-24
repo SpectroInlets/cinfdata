@@ -24,52 +24,118 @@ include("../common_functions_v2.php");
 echo(html_header());
 $con = std_dbi();
 
-echo("\n\n<h1>System status</h1>\n");
 
-# Generel System Status
-echo("\n<h2>Generel</h2>\n");
-$query = "select * from status_b312gasalarm where device=254 " .
-  "and time >= DATE_ADD(NOW(), INTERVAL -1 DAY) order by time desc";
-$result = mysqli_query($con, $query);
-echo("<table class=\"nicetable\" border=1>\n");
-echo("<tr><th>Time</th><th>Standard checkin</th><th>Status strings</th></tr>\n");
-while($row = mysqli_fetch_array($result)) {
-  $status_array = json_decode($row['status']);
-  foreach ($status_array as $key => $value){
-    $status_array[$key] = "\"" . $value . "\"";
-  }
-  $status_str = implode("\", \"", $status_array);
-  if ($status_str == "\"All OK\""){
-    $status_str = "<td>" . $status_str . "</td>";
-  } else {
-    $status_str = "<td class=\"alert\">" . $status_str . "</td>";
-  }
-  $checkin = $row['check_in'] == 1 ? "<td>True</td>" : "<td class=\"alert\">False</td>";
-  
-  echo("<tr><td>${row['time']}</td> $checkin $status_str</tr>\n");
+### functions
+
+function general_status($device_number){
+    /* Produce the generel system status table
+
+     Args:
+        device_number (int): The device number of the generel system status in
+            the status_b312gasalarm table
+    */
+    global $con;
+    # Get all log entries of the last day for the generel status
+    $query = "
+    SELECT * FROM status_b312gasalarm
+    WHERE device = $device_number AND time >= DATE_ADD(NOW(), INTERVAL -1 DAY)
+    ORDER BY time DESC
+    ";
+    $result = mysqli_query($con, $query);
+
+    # Make a nice table of them
+    echo("<table class=\"nicetable\" border=1>\n");
+    echo(
+        "<tr>\n" .
+        "<th>Time</th>\n<th>Standard checkin</th>\n<th>Status strings</th>\n" .
+        "</tr>\n"
+    );
+
+    # Iterate over result rows and produce a table row for eahc
+    while($row = mysqli_fetch_array($result)) {
+        # Start row and insert time
+        echo("<tr>\n");
+        echo("<td>${row['time']}</td>\n");
+
+        # Produce checkin status cell
+        if ($row['check_in'] == 1){
+            echo("<td class=\"all_good\">True</td>\n");
+        } else {
+            echo("<td class=\"alert\">False</td>\n");
+        }
+
+        # Produce status cell. All the status message are stored as a json
+        # encoded array, so decode it
+        $status_array = json_decode($row['status']);
+
+        # Put all the status string in quotes and tie together around ", "
+        foreach ($status_array as $key => $value){
+            $status_array[$key] = "\"" . $value . "\"";
+        }
+        $status_str = implode(", ", $status_array);
+
+        # and output 
+        if ($status_str == "\"All OK\""){
+            echo("<td class=\"all_good\">" . $status_str . "</td>\n");
+        } else {
+            echo("<td class=\"alert\">" . $status_str . "</td>\n");
+        }
+        echo("</tr>");
+    }
+    echo("</table>\n");
+
 }
-echo("</table>\n");
 
-# System Power Status
-echo("\n<h2>Power status</h2>\n");
-$query = "select * from status_b312gasalarm where device=255 " .
-  "and time >= DATE_ADD(NOW(), INTERVAL -1 DAY) order by time desc";
-$result = mysqli_query($con, $query);
-echo("<table class=\"nicetable\" border=1>");
-echo("<tr><th>Time</th><th>Standard checkin</th><th>Status</th></tr>");
-while($row = mysqli_fetch_array($result)) {
-  $status_str = $row['status'];
-  if ($status_str == "\"OK\""){
-    $status_str = "<td>" . $status_str . "</td>";
-  } else {
-    $status_str = "<td class=\"alert\">" . $status_str . "</td>";
-  }
-  $checkin = $row['check_in'] == 1 ?  "<td>True</td>" : "<td class=\"alert\">False</td>";
-  echo("<tr><td>${row['time']}</td> $checkin $status_str</tr>\n");
+
+function power_status($device_number){
+    /* Produce the system power status table
+
+     Args:
+        device_number (int): The device number of the system power status in
+            the status_b312gasalarm table
+    */
+
+    global $con;
+    
+    # Get all log entries for the last day for power
+    $query = "
+    SELECT * FROM status_b312gasalarm
+    WHERE device = $device_number AND time >= DATE_ADD(NOW(), INTERVAL -1 DAY)
+    ORDER BY time DESC";
+    $result = mysqli_query($con, $query);
+
+    # Make a nice table of them
+    echo("<table class=\"nicetable\" border=1>\n");
+    echo("<tr><th>Time</th><th>Standard checkin</th><th>Status</th></tr>\n");
+
+    # Iterate over result rows and produce one table row for each
+    while($row = mysqli_fetch_array($result)) {
+        # Start table row and output time
+        echo("<tr>\n");
+        echo("<td>${row['time']}</td>\n");
+
+        # Output checkin status
+        if ($row['check_in'] == 1){
+            echo("<td class=\"all_good\">True</td>\n");
+        } else {
+            echo("<td class=\"alert\">False</td>\n");
+        }
+
+        # Output status
+        if ($row['status'] == "\"OK\""){
+            echo("<td class=\"all_good\">" . $row['status'] . "</td>\n");
+        } else {
+            echo("<td class=\"alert\">" . $row['status'] . "</td>\n");
+        }
+
+        echo("</tr>\n");  # End row
+    }
+    echo("</table>\n");
+
 }
-echo("</table>\n");
 
-# Detector status
+
+# Constant codename translation (used for detector status table)
 $codename_translation = 
   Array(
 	'1 Pumperum' => 'B312_gasalarm_H2_pumproom',
@@ -86,42 +152,117 @@ $codename_translation =
 	'12 NY LAB' => 'B312_gasalarm_CO_microscopy_east',
 	);
 
-echo("\n<h2>Detector status</h2>\n");
-$query = "select * from status_b312gasalarm where device<254 and " .
-  "time >= DATE_ADD(NOW(), INTERVAL -1 DAY)" .
-  "order by time desc";
-$result = mysqli_query($con, $query);
-echo("<table class=\"nicetable\" border=1>");
-echo("<tr><th>Time</th><th>Detector</th><th>Codename</th><th>Standard checkin</th><th>Inhibit</th><th>Status</th></tr>");
-while($row = mysqli_fetch_array($result)) {
-  # Form the check field
-  $checkin = $row['check_in'] == '1' ? "<td>True</td>" : "<td class=\"alert\">False</td>";
+function detector_status($sql_result){
+    /* Produce the detector status table */
 
-  # Parse the status json and form the status field
-  $status_array = json_decode($row['status'], $assoc=True);
+    global $codename_translation;
+    
+    # Table and header
+    echo("<table class=\"nicetable\" border=1>\n");
+    echo("<tr><th>Time</th><th>Detector</th><th>Codename</th><th>Standard checkin</th><th>Inhibit</th><th>Status</th></tr>\n");
 
-  $status_string_array = $status_array['status'];
-  foreach ($status_string_array as $key => $value){
-    $status_string_array[$key] = "\"" . $value . "\"";
-  }
-  $status_string = implode(", ", $status_string_array);
-  if ($status_string == "\"OK\""){
-    $status_string = "<td>" . $status_string . "</td>";
-  } else {
-    $status_string = "<td class=\"alert\">" . $status_string . "</td>";
-  }
-  
-  # Form the inhibit field
-  $inhibit = $status_array['inhibit'] ? "<td class=\"alert\">True</td>" : "<td>False</td>";
+    # Iterate over SQL result rows and produce one table row for each
+    while($row = mysqli_fetch_array($sql_result)) {
+        # Start table row and output time and device
+        echo("<tr>\n");
+        echo("<td>${row['time']}</td>\n");
+        echo("<td>${row['device']}</td>\n");
 
-  # Form the codename
-  $codename_key = "${row['device']} ${status_array['codename']}";
-  $codename = $codename_translation[$codename_key];
-  
-  echo("<tr><td>${row['time']}</td><td>${row['device']}</td><td>$codename</td> $checkin $inhibit $status_string</tr>\n");
+        # Parse the status json to get the status array
+        $status_array = json_decode($row['status'], $assoc=True);
+
+        # Output the codename cell
+        $codename_key = "${row['device']} ${status_array['codename']}";
+        if (array_key_exists($codename_key, $codename_translation)){
+            echo("<td>" . $codename_translation[$codename_key] . "</td>\n");
+        } else {
+            echo("<td>" . $status_array['codename'] . "</td>\n");
+        }
+
+        # Output the check-in field
+        if ($row['check_in'] == '1'){
+            echo("<td class=\"all_good\">True</td>\n");
+        } else {
+            echo("<td class=\"alert\">False</td>\n");
+        }
+
+        # Output the inhibit field
+        if ($status_array['inhibit']){
+            echo("<td class=\"alert\">True</td>\n");
+        } else {
+            echo("<td class=\"all_good\">False</td>\n");
+        }
+
+        # Extract status strings, quote and gather them in sigle comma
+        # separated string
+        $status_string_array = $status_array['status'];
+        foreach ($status_string_array as $key => $value){
+            $status_string_array[$key] = "\"" . $value . "\"";
+        }
+        $status_string = implode(", ", $status_string_array);
+
+        # Output status cell
+        if ($status_string == "\"OK\""){
+            echo("<td class=\"all_good\">" . $status_string . "</td>\n");
+        } else {
+            echo("<td class=\"alert\">" . $status_string . "</td>\n");
+        }
+
+        echo("</tr>\n");  # End table row
+    }
+    echo("</table>\n\n");
 }
-echo("</table>\n\n");
 
+
+##### Main document
+
+
+### System status CO and H2 Alarm
+echo("\n\n<h1>System status <span style=\"color:blue;\">CO and H2</span> Gas Alarm Central</h1>\n");
+
+# Generel System Status
+echo("\n<h2>Generel status log entries of the last day</h2>\n");
+general_status(254);
+
+# System Power Status
+echo("\n<h2>Power status log entries of the last day</h2>\n");
+power_status(255);
+
+
+### System status H2S Alarm
+echo("\n\n<h1>System status <span style=\"color:blue;\">H2S</span> Gas Alarm Central</h1>\n");
+
+# Generel System Status
+echo("\n<h2>Generel status log entries of the last day</h2>\n");
+general_status(120);
+
+# System Power Status
+echo("\n<h2>Power status log entries of the last day</h2>\n");
+power_status(121);
+
+
+### Detector status (last reported)
+echo("\n<h1>Detector status (last reported status)</h1>\n");
+$query = "
+SELECT t1.*
+FROM status_b312gasalarm t1
+WHERE t1.time = (SELECT MAX(t2.time)
+                 FROM status_b312gasalarm t2
+                 WHERE t2.device = t1.device AND device < 119);
+";
+$result = mysqli_query($con, $query);
+detector_status($result);
+
+
+### Detector status (last 2 days)
+echo("\n<h1>Detector status (all, from last two days)</h1>\n");
+$query = "
+SELECT * FROM status_b312gasalarm
+WHERE device < 119 AND time >= DATE_ADD(NOW(), INTERVAL -2 DAY)
+ORDER BY time DESC
+";
+$result = mysqli_query($con, $query);
+detector_status($result);
 
 echo(html_footer());
 ?>

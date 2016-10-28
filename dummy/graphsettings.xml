@@ -522,6 +522,67 @@
   </graph>
 
 
+  <graph type="live_dummy">
+    <page_width>1250</page_width>
+    <page_title>Hall Live Plots</page_title> <!-- option page title -->
+    <containers>
+
+      <!-- Container 1, contains the second plot -->
+      <container0>
+	<type>date_figure</type>
+	<title>Sine</title>
+	<!-- <bgcolor>#E7E7E7</bgcolor>-->
+	<width>400</width>
+	<height>350</height>
+	<jump_ahead>0.3</jump_ahead>
+	<x_window>60</x_window>
+	<!-- Experimental, to fix bad y-range selection with log plot and
+	     constant values -->
+	<!-- <yrangepad>10</yrangepad> -->
+	<line_width>3</line_width>
+	<!-- reduce the amount of points that gets plotted -->
+	<figure>
+	  <plot0>
+	    <data_channel>kenni-desk:dummy_sine_one</data_channel>
+	    <label>Sine 1</label>
+	    <color>#990099</color>
+	  </plot0>
+	  <plot1>
+	    <data_channel>kenni-desk:dummy_sine_two</data_channel>
+	    <label>Sine 2</label>
+	    <color>#009900</color>
+	  </plot1>
+	</figure>
+      </container0>
+
+      <container1>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>450</width>
+	<height>200</height>
+	<fontsize>17</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>40px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>kenni-desk:dummy_sine_one</data_channel>
+	    <label>Sine 1</label>
+	    <color>#990099</color>
+	    <format>.2f</format>
+	    <unit></unit>
+	  </item0>
+	  <item1>
+	    <data_channel>kenni-desk:dummy_sine_two</data_channel>
+	    <label>Sine 1</label>
+	    <color>#009900</color>
+	    <format>.2f</format>
+	    <unit></unit>
+	  </item1>
+	</data>
+      </container1>
+    </containers>
+  </graph>
 
   <global_settings>
     <measurements_table>measurements_dummy</measurements_table>

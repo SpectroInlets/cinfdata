@@ -365,6 +365,35 @@
       <ylabel>[%]</ylabel>
       <color>3</color>
     </dateplot3>
+    <dateplot4>
+      <title>Numer of Pythons 3 compat. source code</title>
+      <legend>Py3 LOC</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="lines_of_py3_code") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>4</color>
+    </dateplot4>
+    <dateplot5>
+      <title>Python 3 compatible LOC relative to LOC</title>
+      <legend>Py3 compat. LOC relative to LOC</legend>
+      <query>
+	select unix_timestamp(lines_of_py3_code.time), (lines_of_py3_code.value / number_of_lines.value) * 100 from
+
+	(SELECT time, value
+	FROM dateplots_hall
+	WHERE type = (SELECT id FROM dateplots_descriptions where codename="lines_of_py3_code")
+	and time between "{from}" and "{to}") lines_of_py3_code,
+
+	(SELECT time, value
+	FROM dateplots_hall
+	WHERE type = (SELECT id FROM dateplots_descriptions where codename="lines_of_code")
+	and time between "{from}" and "{to}") number_of_lines 
+
+	WHERE lines_of_py3_code.time = number_of_lines.time
+	ORDER BY lines_of_py3_code.time
+      </query>
+      <ylabel>[%]</ylabel>
+      <color>5</color>
+    </dateplot5>
   </graph>
 
 

@@ -682,6 +682,14 @@
       <ref>chillers/dateplot.php?type=multidateplot_xrd&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;right_plotlist[]=4&amp;right_plotlist[]=5&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>
     <link>
+      <title>Chiller New XRD</title>
+      <ref>chillers/dateplot.php?type=multidateplot_new_xrd&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;right_plotlist[]=4&amp;right_plotlist[]=5&amp;right_ymin=0&amp;right_ymax=0</ref>
+    </link>
+    <link>
+      <title>Chiller Omciron</title>
+      <ref>chillers/dateplot.php?type=multidateplot_omicron&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;right_plotlist[]=4&amp;right_plotlist[]=5&amp;right_ymin=0&amp;right_ymax=0</ref>
+    </link>
+    <link>
       <title>Chiller PS</title>
       <ref>chillers/dateplot.php?type=multidateplot_ps&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;right_plotlist[]=4&amp;right_plotlist[]=5&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>

@@ -146,7 +146,7 @@ function html_header_normal($root, $title, $includehead, $charset, $width, $html
   $header = $header . "<html>\n";
   $header = $header . "  <head>\n";
   $header = $header . "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset={$charset}\">\n";
-  $header = $header . "    <title>CINF data logging</title>\n";
+  $header = $header . "    <title>SurfCat data logging</title>\n";
   $header = $header . "    <link rel=\"StyleSheet\" href=\"{$root}css/style.css\" type=\"text/css\" media=\"screen\">\n";
   if ($root == "../"){
     # $header = $header . "    <script type=\"text/javascript\" src=\"dygraph/dygraph-dev.js\"></script>\n";
@@ -178,7 +178,7 @@ function header_v2(){
   $header = $header . "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
   $header = $header . "<html>\n";
   $header = $header . "  <head>\n";
-  $header = $header . "    <title>CINF data logging</title>\n";
+  $header = $header . "    <title>SurfCat data logging</title>\n";
   $header = $header . "    <link rel=\"StyleSheet\" href=\"../css/style.css\" type=\"text/css\" media=\"screen\">\n";
   $header = $header . "  </head>\n";
   $header = $header . "  <body>\n";
@@ -226,7 +226,7 @@ function html_footer_v2(){
 
 function html_code_header($file){
     $header = "";
-    $header = $header . "<head><title>CINF data logging</title>\n";
+    $header = $header . "<head><title>SurfCat data logging</title>\n";
     $header = $header . "<link rel=\"StyleSheet\" href=\"../css/screen.css\" type=\"text/css\" media=\"screen\">\n";
     $header = $header . "</head>\n";
     $header = $header . "<body>\n";
@@ -255,7 +255,7 @@ function html_header_x($root, $title, $includehead, $charset, $width, $html5){
   $header = $header . "<html>\n";
   $header = $header . "  <head>\n";
   $header = $header . "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset={$charset}\">\n";
-  $header = $header . "    <title>CINF data logging</title>\n";
+  $header = $header . "    <title>SurfCat data logging</title>\n";
   $header = $header . "    <link rel=\"StyleSheet\" href=\"{$root}css/style.css\" type=\"text/css\" media=\"screen\">\n";
   if ($root == "../"){
     #$header = $header . "    <script type=\"text/javascript\" src=\"dygraph/dygraph-dev.js\"></script>\n";    

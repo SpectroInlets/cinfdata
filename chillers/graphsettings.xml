@@ -163,6 +163,59 @@
     </dateplot5>
   </graph>
 
+  <graph type='multidateplot_new_xrd'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- Fall back settings -->
+    <title>Multiple dateplots</title>
+    <ylabel>Mixed</ylabel>
+    <dygraph_settings>
+      <roll_period>5</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+
+    <dateplot1>
+      <title>Temperature, water</title>
+      <legend>Water / C</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_new_xrd where type = 372 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>1</color>
+    </dateplot1>
+
+    <dateplot2>
+      <title>Temperature, ambient</title>
+      <legend>Ambient / C</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_new_xrd where type = 374 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>2</color>
+    </dateplot2>
+
+    <dateplot3>
+      <title>Temperature, setpoint</title>
+      <legend>Setpoint / C</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_new_xrd where type = 373 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+    <dateplot4>
+      <title>Flow</title>
+      <legend>Flow / LPM</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_new_xrd where type = 370 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Flow rate / LPM</ylabel>
+      <color>4</color>
+    </dateplot4>
+
+    <dateplot5>
+      <title>Pressure</title>
+      <legend>Pressure / bar</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_new_xrd where type = 371 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>5</color>
+    </dateplot5>
+  </graph>
+
 
   <!-- MULTI DATEPLOT -->
   <graph type='multidateplot_thetaprobe'>
@@ -273,6 +326,61 @@
     </dateplot5>
   </graph>
 
+  <!-- MULTI DATEPLOT -->
+  <graph type='multidateplot_omicron'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- Fall back settings -->
+    <title>Multiple dateplots</title>
+    <ylabel>Mixed</ylabel>
+    <dygraph_settings>
+      <roll_period>5</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+
+    <dateplot1>
+      <title>Temperature, water</title>
+      <legend>Water / C</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_omicron where type = 382 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>1</color>
+    </dateplot1>
+
+    <dateplot2>
+      <title>Temperature, ambient</title>
+      <legend>Ambient / C</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_omicron where type = 384 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>2</color>
+    </dateplot2>
+
+    <dateplot3>
+      <title>Temperature, setpoint</title>
+      <legend>Setpoint / C</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_omicron where type = 383 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+    <dateplot4>
+      <title>Flow</title>
+      <legend>Flow / LPM</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_omicron where type = 380 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Flow rate / LPM</ylabel>
+      <color>4</color>
+    </dateplot4>
+
+    <dateplot5>
+      <title>Pressure</title>
+      <legend>Pressure / bar</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_omicron where type = 381 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>5</color>
+    </dateplot5>
+  </graph>
+
+
   <graph type="live_values">
     <page_width>1280</page_width>
     <page_title>Chiller Status</page_title>
@@ -319,10 +427,16 @@
 	  </plot2>
 	  <plot3>
             <color>#990099</color>
-            <data_channel>rasppi20:ps_chiller_temperature</data_channel>
-            <label>PS Temperature</label>
-	    <old_data_query>select unix_timestamp(time), value from dateplots_ps where type=(SELECT id FROM dateplots_descriptions where codename="ps_chiller_temperature") and unix_timestamp(time) > {from}</old_data_query>
+            <data_channel>rasppi20:omicron_chiller_temperature</data_channel>
+            <label>Omicron Temperature</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_omicron where type=(SELECT id FROM dateplots_descriptions where codename="omicron_chiller_temperature") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
+	  <plot4>
+            <color>#DDFF00</color>
+            <data_channel>rasppi60:new_xrd_chiller_temperature</data_channel>
+            <label>New XRD Temperature</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_new_xrd where type=(SELECT id FROM dateplots_descriptions where codename="new_xrd_chiller_temperature") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot4>
 	</figure>
       </container0>
 
@@ -368,10 +482,17 @@
 	  </plot2>
 	  <plot3>
             <color>#990099</color>
-            <data_channel>rasppi20:ps_chiller_flow</data_channel>
-            <label>PS Flow</label>
-	    <old_data_query>select unix_timestamp(time), value from dateplots_ps where type=(SELECT id FROM dateplots_descriptions where codename="ps_chiller_flow") and unix_timestamp(time) > {from}</old_data_query>
+            <data_channel>rasppi20:omiron_chiller_flow</data_channel>
+            <label>Omicron Flow</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_omicron where type=(SELECT id FROM dateplots_descriptions where codename="omicron_chiller_flow") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
+	  <plot4>
+            <color>#DDFF00</color>
+            <data_channel>rasppi60:new_xrd_chiller_flow</data_channel>
+            <label>New XRD Flow</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_new_xrd where type=(SELECT id FROM dateplots_descriptions where codename="new_xrd_chiller_flow") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot4>
+
 	</figure>
       </container1>
 
@@ -407,40 +528,55 @@
 	    <unit>C</unit>
 	  </item2>
 	  <item3>
-	    <data_channel>rasppi20:ps_chiller_temperature</data_channel>
-	    <label>PS Temp.</label>
+	    <data_channel>rasppi20:omicron_chiller_temperature</data_channel>
+	    <label>Omicron Temp.</label>
 	    <color>#990099</color>
 	    <format>.2f</format>
 	    <unit>C</unit>
 	  </item3>
 	  <item4>
+	    <data_channel>rasppi60:new_xrd_chiller_temperature</data_channel>
+	    <label>New XRD Temp.</label>
+	    <color>#DDFF00</color>
+	    <format>.2f</format>
+	    <unit>C</unit>
+	  </item4>
+	  <item5>
 	    <data_channel>rasppi57:thetaprobe_chiller_flow</data_channel>
 	    <label>θ-probe Flow</label>
 	    <color>#0000FF</color>
 	    <format>.2f</format>
 	    <unit>L/min</unit>
-	  </item4>
-	  <item5>
+	  </item5>
+	  <item6>
 	    <data_channel>rasppi60:xrd_chiller_flow</data_channel>
 	    <label>XRD Flow</label>
 	    <color>#00FF00</color>
 	    <format>.2f</format>
 	    <unit>L/min</unit>
-	  </item5>
-	  <item6>
+	  </item6>
+	  <item7>
 	    <data_channel>rasppi21:sputterchamber_chiller_flow</data_channel>
 	    <label>SC Flow</label>
 	    <color>#FF0000</color>
 	    <format>.2f</format>
 	    <unit>L/min</unit>
-	  </item6>
-	  <item7>
-	    <data_channel>rasppi20:ps_chiller_flow</data_channel>
-	    <label>PS Flow</label>
+	  </item7>
+	  <item8>
+	    <data_channel>rasppi20:omicron_chiller_flow</data_channel>
+	    <label>Omicron Flow</label>
 	    <color>#990099</color>
 	    <format>.2f</format>
 	    <unit>L/min</unit>
-	  </item7>
+	  </item8>
+	  <item9>
+	    <data_channel>rasppi60:new_xrd_chiller_flow</data_channel>
+	    <label>New XRD Flow</label>
+	    <color>#DDFF00</color>
+	    <format>.2f</format>
+	    <unit>L/min</unit>
+	  </item9>
+
 	</data>
       </container2>
 
@@ -486,10 +622,17 @@
 	  </plot2>
 	  <plot3>
             <color>#990099</color>
-            <data_channel>rasppi20:ps_chiller_pressure</data_channel>
-            <label>PS Pressure</label>
-	    <old_data_query>select unix_timestamp(time), value from dateplots_ps where type=(SELECT id FROM dateplots_descriptions where codename="ps_chiller_pressure") and unix_timestamp(time) > {from}</old_data_query>
+            <data_channel>rasppi20:omicron_chiller_pressure</data_channel>
+            <label>Omicron Pressure</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_omicron where type=(SELECT id FROM dateplots_descriptions where codename="omicron_chiller_pressure") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
+	  <plot4>
+            <color>#DDFF00</color>
+            <data_channel>rasppi60:new_xrd_chiller_pressure</data_channel>
+            <label>New XRD Pressure</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_new_xrd where type=(SELECT id FROM dateplots_descriptions where codename="new_xrd_chiller_pressure") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot4>
+
 	</figure>
       </container3>
 
@@ -535,10 +678,16 @@
 	  </plot2>
 	  <plot3>
             <color>#990099</color>
-            <data_channel>rasppi20:ps_chiller_temperature_ambient</data_channel>
-            <label>PS temperature_ambient</label>
-	    <old_data_query>select unix_timestamp(time), value from dateplots_ps where type=(SELECT id FROM dateplots_descriptions where codename="ps_chiller_temperature_ambient") and unix_timestamp(time) > {from}</old_data_query>
+            <data_channel>rasppi20:omicron_chiller_temperature_ambient</data_channel>
+            <label>Omicron temperature_ambient</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_omicron where type=(SELECT id FROM dateplots_descriptions where codename="omicron_chiller_temperature_ambient") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot3>
+	  <plot4>
+            <color>#DDFF00</color>
+            <data_channel>rasppi60:new_xrd_chiller_temperature_ambient</data_channel>
+            <label>New XRD temperature_ambient</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_new_xrd where type=(SELECT id FROM dateplots_descriptions where codename="new_xrd_chiller_temperature_ambient") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot4>
 	</figure>
       </container4>
 
@@ -574,40 +723,54 @@
 	    <unit>Bar</unit>
 	  </item2>
 	  <item3>
-	    <data_channel>rasppi20:ps_chiller_pressure</data_channel>
-	    <label>PS Pressure</label>
+	    <data_channel>rasppi20:omicron_chiller_pressure</data_channel>
+	    <label>Omicron Pressure</label>
 	    <color>#990099</color>
 	    <format>.1f</format>
 	    <unit>Bar</unit>
 	  </item3>
 	  <item4>
+	    <data_channel>rasppi60:new_xrd_chiller_pressure</data_channel>
+	    <label>New XRD Pressure</label>
+	    <color>#DDFF00</color>
+	    <format>.1f</format>
+	    <unit>Bar</unit>
+	  </item4>
+	  <item5>
 	    <data_channel>rasppi57:thetaprobe_chiller_temperature_ambient</data_channel>
 	    <label>θ-probe Ambient</label>
 	    <color>#0000FF</color>
 	    <format>.1f</format>
 	    <unit>C</unit>
-	  </item4>
-	  <item5>
+	  </item5>
+	  <item6>
 	    <data_channel>rasppi60:xrd_chiller_temperature_ambient</data_channel>
-	    <label>XRD Ambint</label>
+	    <label>XRD Ambient</label>
 	    <color>#00FF00</color>
 	    <format>.1f</format>
 	    <unit>C</unit>
-	  </item5>
-	  <item6>
+	  </item6>
+	  <item7>
 	    <data_channel>rasppi21:sputterchamber_chiller_temperature_ambient</data_channel>
 	    <label>SC Ambient</label>
 	    <color>#FF0000</color>
 	    <format>.1f</format>
 	    <unit>C</unit>
-	  </item6>
-	  <item7>
-	    <data_channel>rasppi20:ps_chiller_temperature_ambient</data_channel>
-	    <label>PS Ambient</label>
+	  </item7>
+	  <item8>
+	    <data_channel>rasppi20:omicron_chiller_temperature_ambient</data_channel>
+	    <label>Omicron Ambient</label>
 	    <color>#990099</color>
 	    <format>.1f</format>
 	    <unit>C</unit>
-	  </item7>
+	  </item8>
+	  <item9>
+	    <data_channel>rasppi60:new_xrd_chiller_temperature_ambient</data_channel>
+	    <label>New XRD Ambient</label>
+	    <color>#DDFF00</color>
+	    <format>.1f</format>
+	    <unit>C</unit>
+	  </item9>
 	</data>
       </container5>
 

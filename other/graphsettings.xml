@@ -321,6 +321,9 @@
     <title>Multiple dateplots</title>
     <ylabel>Mixed</ylabel>
     <default_time>720</default_time>
+    <matplotlib_settings>
+      <linewidth>2.5</linewidth>
+    </matplotlib_settings>
     <dygraph_settings>
       <roll_period>1</roll_period>
       <labels_side>true</labels_side>

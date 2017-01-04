@@ -1,5 +1,6 @@
 from scipy import signal
 import numpy
+import math
 import sys
 sys.path.append('flighttime')
 import tof_model as tm
@@ -99,6 +100,7 @@ class Intensitymap(object):
     def run(self, left, right):
         for dat in left + right:
             t = time.time()
+            print 'id: ' + str(dat['meta']['id'])
             if dat['meta']['tof_p1_0'] is None:
                 if dat['meta']['tof_R1_voltage'] == 0:
                     dat['data'][:, 1] = 0
@@ -116,7 +118,8 @@ class Intensitymap(object):
                 p1_2 = dat['meta']['tof_p1_2']
                 dat['data'][:, 0] = p1_1*pow(dat['data'][:, 0]-p1_0, p1_2)
                 print 'Found in db lookup!'
-            print time.time() - t
+                print 'Fitting function: time = ' + str(math.sqrt(1/p1_1)) + ' * mass^' + str(1/p1_2)
+            print 'Execution time: ' + str(time.time() - t)
 
 
             if self.range[1] > self.range[0]:
@@ -129,7 +132,7 @@ class Intensitymap(object):
             new_size = 650
             ratio = (old_size / new_size)+1
             print 'Ratio: ' + str(ratio)
-
+            print '------'
             new = numpy.zeros((new_size, 2))
             for i in range(0, new_size):
                 values = dat['data'][start_index+(ratio * i):start_index+(ratio * (i + 1)), 0]
@@ -180,6 +183,7 @@ class Intensitymap_wide(object):
                 p1_2 = dat['meta']['tof_p1_2']
                 dat['data'][:, 0] = p1_1*pow(dat['data'][:, 0]-p1_0, p1_2)
                 print 'Found in db lookup!'
+                print 'Fitting function: time = ' + str(math.sqrt(1/p1_1)) + ' * mass^' + str(1/p1_2)
             print time.time() - t
 
 

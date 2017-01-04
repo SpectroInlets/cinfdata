@@ -167,9 +167,9 @@ type=
 	<figure>
 	  <plot0>
             <color>#0000FF</color>
-            <data_channel>rasppi24:M11200362H</data_channel>
+	    <data_channel>rasppi24:M11213502A</data_channel>
             <label>Pressure / bar</label>
-	    <old_data_query>select unix_timestamp(time), value/1000 from dateplots_mgw where type=69 and unix_timestamp(time) > {from}</old_data_query>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_mgw where type=69 and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	</figure>
       </container2>
@@ -286,8 +286,8 @@ type=
       <container6>
 	<type>table</type>
 	<!--<bgcolor>#FF0000</bgcolor>-->
-	<width>1100</width>
-	<height>600</height>
+	<width>600</width>
+	<height>400</height>
 	<fontsize>24</fontsize>
 	<!-- optional html padding string, remember to subtract the padding in
 	     the size top, right, bottom, top, right, bottom, left-->
@@ -296,49 +296,82 @@ type=
 	  <item0>
 	    <data_channel>rasppi109:tof_iongauge_main</data_channel>
 	    <label>Main chamber</label>
-	    <color>#990099</color>
+	    <color>#0000FF</color>
 	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item0>
 	  <item1>
 	    <data_channel>rasppi109:tof_pirani_roughing</data_channel>
-	    <label>TOF roughing pressure</label>
-	    <color>#990099</color>
+	    <label>TOF roughing</label>
+	    <color>#0000FF</color>
 	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item1>
 	  <item2>
-	    <data_channel>rasppi24:M11200362H</data_channel>
+	    <data_channel>rasppi24:M11213502A</data_channel>
 	    <label>Reactor</label>
-	    <color>#009900</color>
+	    <color>#0000FF</color>
 	    <format>.2f</format>
-	    <unit>bar</unit>
+	    <unit>mbar</unit>
 	  </item2>
 	  <item3>
 	    <data_channel>rasppi49:emission</data_channel>
 	    <label>Emission</label>
-	    <color>#009900</color>
+	    <color>#0000FF</color>
 	    <format>.4f</format>
 	    <unit>mA</unit>
 	  </item3>
-<!--
 	  <item4>
 	    <data_channel>rasppi53:buffer_pressure</data_channel>
 	    <label>Buffer</label>
-	    <color>#009900</color>
-	    <format>.2f</format>
+	    <color>#0000FF</color>
+	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item4>
-	  <item5>
+           <item5>
 	    <data_channel>rasppi53:containment_pressure</data_channel>
 	    <label>Containment</label>
-	    <color>#009900</color>
+	    <color>#0000FF</color>
 	    <format>.2f</format>
 	    <unit>mbar</unit>
 	  </item5>
--->
 	</data>
       </container6>
+
+      <container7>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>600</width>
+	<height>400</height>
+	<fontsize>24</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>40px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>rasppi24:M11200362B</data_channel>
+	    <label>Flow 1</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>mL/min</unit>
+	  </item0>
+	  <item1>
+            <color>#0000FF</color>
+            <data_channel>rasppi37:21984839</data_channel>
+            <label>Flow 2</label>
+	    <format>.2f</format>
+	    <unit>mL/min</unit>
+	  </item1>
+	  <item2>
+            <color>#0000FF</color>
+            <data_channel>rasppi37:21984838</data_channel>
+            <label>Flow 3</label>
+	    <format>.2f</format>
+	    <unit>mL/min</unit>
+	  </item2>
+	</data>
+      </container7>
+
     </containers>
   </graph>
 
@@ -359,7 +392,7 @@ type=
     </matplotlib_settings>
     <flight_time_estimate>true</flight_time_estimate>
     <queries>
-      <default>SELECT x*1000000,y  FROM xy_values_tof where measurement = {id} order by id</default>
+      <default>SELECT x*1000000,y  FROM xy_values_tof where measurement = {id} order by x</default>
     </queries>
     <ylabel>
       <default>TOF Signal / Counts</default>
@@ -501,7 +534,7 @@ type=
     </matplotlib_settings>
     <flight_time_estimate>true</flight_time_estimate>
     <queries>
-      <default>SELECT x*1000000,y  FROM xy_values_tof where measurement = {id} order by id</default>
+      <default>SELECT x*1000000,y  FROM xy_values_tof where measurement = {id} order by x</default>
     </queries>
     <ylabel>
       <default>TOF Signal / Counts</default>

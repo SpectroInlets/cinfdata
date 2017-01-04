@@ -184,6 +184,42 @@
       <color>19</color>
     </dateplot19>
 
+   <!-- Flow 1 -->
+    <dateplot20>
+      <title>Flow 1</title>
+      <legend>Flow 1</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 274 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Flow / mL/min</ylabel>
+      <color>20</color>
+    </dateplot20>
+
+   <!-- Flow 2 -->
+    <dateplot21>
+      <title>Flow 2</title>
+      <legend>Flow 2</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 275 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Flow / mL/min</ylabel>
+      <color>21</color>
+    </dateplot21>
+
+   <!-- Flow 3 -->
+    <dateplot22>
+      <title>Flow 3</title>
+      <legend>Flow 3</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 276 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Flow / mL/min</ylabel>
+      <color>22</color>
+    </dateplot22>
+
+   <!-- Flow 4 -->
+    <dateplot23>
+      <title>Flow 4</title>
+      <legend>Flow 4</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 277 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Flow / mL/min</ylabel>
+      <color>23</color>
+    </dateplot23>
+
   </graph>
 
   <!-- MASSTIME -->

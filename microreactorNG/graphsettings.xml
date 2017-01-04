@@ -578,8 +578,8 @@
     </dygraph_settings>
 
     <matplotlib_settings>
-      <width>900</width>
-      <height>600</height>
+      <width>1100</width>
+      <height>800</height>
       <title_size>24</title_size>
       <xtick_labelsize>12</xtick_labelsize>
       <ytick_labelsize>12</ytick_labelsize>

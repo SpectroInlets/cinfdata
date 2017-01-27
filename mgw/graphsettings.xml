@@ -121,104 +121,186 @@
       <color>12</color>
     </dateplot12>
 
-   <!-- Tube-temperature ch08 -->
+    <!-- SR630 ch01 -->
     <dateplot13>
-      <title>T, Ch08</title>
-      <legend>T, Ch08</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 217 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch01</title>
+      <legend>T, SR630_01</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 350 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>13</color>
+      <color>1</color>
     </dateplot13>
 
-   <!-- Tube-temperature ch09 -->
+    <!-- SR630 ch02 -->
     <dateplot14>
-      <title>T, Ch09</title>
-      <legend>T, Ch09</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 218 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch02</title>
+      <legend>T, SR630_02</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 351 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>14</color>
+      <color>2</color>
     </dateplot14>
 
-   <!-- Tube-temperature ch10 -->
+   <!-- SR630 ch03 -->
     <dateplot15>
-      <title>T, Ch10</title>
-      <legend>T, Ch10</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 219 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch03</title>
+      <legend>T, SR630_03</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 352 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>15</color>
+      <color>3</color>
     </dateplot15>
 
-   <!-- Tube-temperature ch11 -->
+   <!-- SR630 ch04 -->
     <dateplot16>
-      <title>T, Ch11</title>
-      <legend>T, Ch11</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 270 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch04</title>
+      <legend>T, SR630_04</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 353 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>16</color>
+      <color>4</color>
     </dateplot16>
 
-   <!-- Tube-temperature ch12 -->
+   <!-- SR630 ch05 -->
     <dateplot17>
-      <title>T, Ch12</title>
-      <legend>T, Ch12</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 271 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch05</title>
+      <legend>T, SR630_05</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 354 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>17</color>
+      <color>5</color>
     </dateplot17>
 
-   <!-- Tube-temperature ch13 -->
+   <!-- SR630 ch06 -->
     <dateplot18>
-      <title>T, Ch13</title>
-      <legend>T, Ch13</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 272 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch06</title>
+      <legend>T, SR630_06</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 355 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>18</color>
+      <color>6</color>
     </dateplot18>
 
-   <!-- Tube-temperature ch14 -->
+   <!-- SR630 ch07 -->
     <dateplot19>
-      <title>T, Ch14</title>
-      <legend>T, Ch14</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 273 and time between "{from}" and "{to}" order by time</query>
+      <title>SR630, Ch07</title>
+      <legend>T, SR630_07</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 356 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>19</color>
+      <color>7</color>
     </dateplot19>
 
-   <!-- Flow 1 -->
+   <!-- SR630 ch08 -->
     <dateplot20>
+      <title>SR630, Ch08</title>
+      <legend>T, SR630_08</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 357 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>8</color>
+    </dateplot20>
+
+   <!-- SR630 ch09 -->
+    <dateplot21>
+      <title>SR630, Ch09</title>
+      <legend>T, SR630_09</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 358 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>9</color>
+    </dateplot21>
+
+   <!-- SR630 ch10 -->
+    <dateplot22>
+      <title>SR630, Ch10</title>
+      <legend>T, SR630_10</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 359 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>10</color>
+    </dateplot22>
+
+   <!-- SR630 ch11 -->
+    <dateplot23>
+      <title>SR630, Ch11</title>
+      <legend>T, SR630_11</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 360 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>11</color>
+    </dateplot23>
+
+   <!-- SR630 ch12 -->
+    <dateplot24>
+      <title>SR630, Ch12</title>
+      <legend>T, SR630_12</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 361 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>12</color>
+    </dateplot24>
+
+   <!-- SR630 ch13 -->
+    <dateplot25>
+      <title>SR630, Ch13</title>
+      <legend>T, SR630_13</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 362 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>13</color>
+    </dateplot25>
+
+   <!-- SR630 ch14 -->
+    <dateplot26>
+      <title>SR630, Ch14</title>
+      <legend>T, SR630_14</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 363 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>14</color>
+    </dateplot26>
+
+   <!-- SR630 ch15 -->
+    <dateplot27>
+      <title>SR630, Ch15</title>
+      <legend>T, SR630_15</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 364 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>15</color>
+    </dateplot27>
+
+   <!-- SR630 ch16 -->
+    <dateplot28>
+      <title>SR630, Ch16</title>
+      <legend>T, SR630_16</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 365 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>16</color>
+    </dateplot28>
+
+
+   <!-- Flow 1 -->
+    <dateplot29>
       <title>Flow 1</title>
       <legend>Flow 1</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 274 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / mL/min</ylabel>
       <color>20</color>
-    </dateplot20>
+    </dateplot29>
 
    <!-- Flow 2 -->
-    <dateplot21>
+    <dateplot30>
       <title>Flow 2</title>
       <legend>Flow 2</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 275 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / mL/min</ylabel>
       <color>21</color>
-    </dateplot21>
+    </dateplot30>
 
    <!-- Flow 3 -->
-    <dateplot22>
+    <dateplot31>
       <title>Flow 3</title>
       <legend>Flow 3</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 276 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / mL/min</ylabel>
       <color>22</color>
-    </dateplot22>
+    </dateplot31>
 
    <!-- Flow 4 -->
-    <dateplot23>
+    <dateplot32>
       <title>Flow 4</title>
       <legend>Flow 4</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 277 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / mL/min</ylabel>
       <color>23</color>
-    </dateplot23>
+    </dateplot32>
 
   </graph>
 

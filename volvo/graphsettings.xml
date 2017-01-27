@@ -92,7 +92,7 @@
             <color>#0000FF</color>
             <data_channel>rasppi04:volvo_temperature</data_channel>
             <label>Temperature</label>
-	    <old_data_query>select unix_timestamp(time), value from dateplots_volvo where type=(SELECT id FROM dateplots_descriptions where codename="volvo_temperature") and unix_timestamp(time) > {from}</old_data_query>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_volvo where value > -10 and type=(SELECT id FROM dateplots_descriptions where codename="volvo_temperature") and unix_timestamp(time) > {from}</old_data_query>
 	  </plot0>
 	</figure>
       </container1>
@@ -153,12 +153,11 @@
 	<figure>
 	  <plot0>
             <color>#0000FF</color>
-            <data_channel>cinf-volvo:qms-value</data_channel>
+            <data_channel>cinf-volvo-desktop:qms-value</data_channel>
             <label>QMS current / A</label>
 	  </plot0>
 	</figure>
       </container0>
-
     </containers>
   </graph>
 

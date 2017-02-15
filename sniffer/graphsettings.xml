@@ -441,7 +441,25 @@
 	<output>raw</output>
       </MassTimeOffset>
     </plugins>
-
+    <!-- colors -->
+    <colors type="abort_on_collision">
+      <!-- matches implicitely on entire string with re.match -->
+      <column>mass_label</column>
+      <color><reg_match>^M2$</reg_match><code>#1E90FF</code></color>
+      <color><reg_match>^M4$</reg_match><code>#FFA500</code></color>
+      <color><reg_match>^M15$</reg_match><code>#FF0000</code></color>
+      <color><reg_match>^M18$</reg_match><code>#A52A2A</code></color>
+      <color><reg_match>^M20$</reg_match><code>#800080</code></color>
+      <color><reg_match>^M26$</reg_match><code>#32CD32</code></color>
+      <color><reg_match>^M27$</reg_match><code>#006400</code></color>
+      <color><reg_match>^M28$</reg_match><code>#808080</code></color>
+      <color><reg_match>^M31$</reg_match><code>#FF00FF</code></color>
+      <color><reg_match>^M32$</reg_match><code>#000080</code></color>
+      <color><reg_match>^M34$</reg_match><code>#FF0000</code></color>
+      <color><reg_match>^M36$</reg_match><code>#32CD32</code></color>
+      <color><reg_match>^M40$</reg_match><code>#40E0D0</code></color>
+      <color><reg_match>^M44$</reg_match><code>#000000</code></color>
+    </colors>
   </graph>
 
   <!-- MASSSPECTRUM -->

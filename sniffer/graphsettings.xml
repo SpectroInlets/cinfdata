@@ -194,7 +194,7 @@
 	    <unit>mbar</unit>
 	  </item3>
 	  <item4>
-	    <data_channel>rasppi24:M11210022A</data_channel>
+	    <data_channel>rasppi45:M11210022A</data_channel>
 	    <label>Chip Pressure</label>
 	    <color>#00aacc</color>
 	    <format>.2e</format>
@@ -445,20 +445,27 @@
     <colors type="abort_on_collision">
       <!-- matches implicitely on entire string with re.match -->
       <column>mass_label</column>
-      <color><reg_match>^M2$</reg_match><code>#1E90FF</code></color>
-      <color><reg_match>^M4$</reg_match><code>#FFA500</code></color>
-      <color><reg_match>^M15$</reg_match><code>#FF0000</code></color>
-      <color><reg_match>^M18$</reg_match><code>#A52A2A</code></color>
-      <color><reg_match>^M20$</reg_match><code>#800080</code></color>
-      <color><reg_match>^M26$</reg_match><code>#32CD32</code></color>
-      <color><reg_match>^M27$</reg_match><code>#006400</code></color>
+      <color><reg_match>^M34$</reg_match><code>#8b0000</code></color>
       <color><reg_match>^M28$</reg_match><code>#808080</code></color>
-      <color><reg_match>^M31$</reg_match><code>#FF00FF</code></color>
-      <color><reg_match>^M32$</reg_match><code>#000080</code></color>
-      <color><reg_match>^M34$</reg_match><code>#FF0000</code></color>
-      <color><reg_match>^M36$</reg_match><code>#32CD32</code></color>
-      <color><reg_match>^M40$</reg_match><code>#40E0D0</code></color>
-      <color><reg_match>^M44$</reg_match><code>#000000</code></color>
+      <color><reg_match>^M3$</reg_match><code>#b8860b</code></color>
+      <color><reg_match>^M70$</reg_match><code>#800080</code></color>
+      <color><reg_match>^M36$</reg_match><code>#006400</code></color>
+      <color><reg_match>^M43$</reg_match><code>#adff2f</code></color>
+      <color><reg_match>^M40$</reg_match><code>#00bfbf</code></color>
+      <color><reg_match>^M27$</reg_match><code>#32cd32</code></color>
+      <color><reg_match>^M20$</reg_match><code>#6a5acd</code></color>
+      <color><reg_match>^M32$</reg_match><code>#000000</code></color>
+      <color><reg_match>^M44$</reg_match><code>#a52a2a</code></color>
+      <color><reg_match>^M30$</reg_match><code>#808000</code></color>
+      <color><reg_match>^M4$</reg_match><code>#bf00bf</code></color>
+      <color><reg_match>^M16$</reg_match><code>#4b0082</code></color>
+      <color><reg_match>^M15$</reg_match><code>#ff0000</code></color>
+      <color><reg_match>^M31$</reg_match><code>#98fb98</code></color>
+      <color><reg_match>^M17$</reg_match><code>#d2691e</code></color>
+      <color><reg_match>^M2$</reg_match><code>#0000ff</code></color>
+      <color><reg_match>^M19$</reg_match><code>#008080</code></color>
+      <color><reg_match>^M18$</reg_match><code>#bfbf00</code></color>
+      <color><reg_match>^M26$</reg_match><code>#008000</code></color>
     </colors>
   </graph>
 

@@ -10,75 +10,39 @@
 
     <!-- Temperature -->
     <dateplot1>
-      <title>Temperature in the Omicron</title>
+      <title>Temperature of the Omicron RTD stage</title>
       <legend>temp. omicron</legend>
-      <query>SELECT unix_timestamp(time), temperature FROM temperature_omicron where time between "{from}" and "{to}" order by time desc</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_omicron where type = 385 and time between "{from}" and "{to}" order by time desc</query>
       <ylabel>Temperature / K</ylabel>
       <color>1</color>
     </dateplot1>
 
-    <!-- TEMPERATURE AGGREGATION -->
-    <dateplot2>
-      <query>SELECT unix_timestamp(time), temperature FROM temperature_omicron_nanobeam_aggregation where time between "{from}" and "{to}" order by time desc</query>
-      <ylabel>Temperature / C</ylabel>
-      <title>Temperature in the Nanobeam aggregation</title>
-      <legend>temp. agg.</legend>
-      <color>2</color>
-    </dateplot2>
-    
     <!-- PRESSURE_ANA -->
-    <dateplot3>
+    <dateplot2>
       <query>SELECT unix_timestamp(time), pressure FROM pressure_omicron_ana where time between "{from}" and "{to}" order by time desc</query>
       <ylabel>Pressure / mbar</ylabel>
       <title>Pressure in the Omicron Analytical chamber</title>
       <legend>pressure omicron ana</legend>
       <color>3</color>
-    </dateplot3>
-    
-    <!-- HEATING POWER -->
-    <dateplot4>
-      <query>SELECT unix_timestamp(time), voltage*current FROM power_omicron where time between "{from}" and "{to}" order by time desc</query>
-      <ylabel>Heating Power / Watt</ylabel>
-      <title>Sample Heating Power</title>
-      <legend>heating power</legend>
-      <color>4</color>
-    </dateplot4>
-    
+    </dateplot2>
+
     <!-- PRESSURE_ANA -->
-    <dateplot5>
+    <dateplot3>
       <query>SELECT unix_timestamp(time), pressure FROM pressure_omicron_nanobeam where time between "{from}" and "{to}" order by time desc</query>
       <ylabel>Pressure / mbar</ylabel>
       <title>Pressure in the Omicron Nanobeam chamber</title>
       <legend>p omicron nanobeam</legend>
       <color>5</color>
-    </dateplot5>
+    </dateplot3>
   
-    <!-- MORNING_PRESSURE_ANA -->
-    <dateplot6>
-      <query>select unix_timestamp(date(time)), avg(pressure) from pressure_omicron_ana where hour(time) = 7 and minute(time) between 00 and 20 and time between "{from}" and "{to}" group by date(time) order by time desc limit 30</query>
-      <ylabel>Pressure / mbar</ylabel>
-      <title>Pressure at 7 am in the Omicron Analytical chamber</title>
-      <legend>p. omicron morning</legend>
-      <color>6</color>
-      <default_style>barplot</default_style>
-    </dateplot6>
-    
     <!-- PRESSURE_PREP -->
-    <dateplot7>
+    <dateplot4>
       <query>SELECT unix_timestamp(time), pressure FROM pressure_omicron_prep where time between "{from}" and "{to}" and pressure &gt; 1e-13 order by time desc</query>
       <ylabel>Pressure / mbar</ylabel>
       <title>Pressure in the Omicron Prep chamber</title>
       <legend>p. omicron prep</legend>
       <color>7</color>
-    </dateplot7>
-
-    <dateplot8>
-      <query>select unix_timestamp(date(time)), avg(pressure) from pressure_omicron_prep where hour(time) = 7 and minute(time) between 00 and 20 and time between "{from}" and "{to}" group by date(time) order by time desc limit 30</query>
-      <ylabel>Pressure / mbar</ylabel>
-      <title>Pressure at 7 am in the Omicron Prep chamber</title>
-      <legend>p. prep. morning</legend>
-      <color>8</color>
-    </dateplot8>
+    </dateplot4>
   </graph>
 
   <!-- DEPOSITION -->

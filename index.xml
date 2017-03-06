@@ -826,6 +826,24 @@
     </link>
   </setup>
 
+  <!-- b307_049  -->
+  <setup codename="b307_049">
+    <setup_title>B307-049</setup_title>
+    <link>
+      <title>H2 Pressure</title>
+      <ref>b307_049/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
+    </link>
+    <link>
+      <title>Temperature</title>
+      <ref>b307_049/dateplot.php?type=multidateplot&amp;left_plotlist[]=2&amp;right_plotlist[]=3&amp;matplotlib=checked</ref>
+    </link>
+    <link>
+      <title>Live</title>
+      <ref>b307_049/live.php?type=live_values</ref>
+    </link>
+  </setup>
+
+
   <!--sniffer-->
   <setup codename="sniffer">
     <setup_title>Sniffer</setup_title>

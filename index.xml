@@ -221,20 +221,12 @@
   <setup codename="omicron">
     <setup_title>Omicron</setup_title>
     <link>
-      <title>Temperature</title>
+      <title>Temperature of TPD stage</title>
       <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=1</ref>
-    </link>
-    <link>
-      <title>Temperature, aggregation</title>
-      <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=2</ref>
     </link>
     <link>
       <title>Pressure, analytical chamber</title>
       <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=3&amp;left_logscale=checked</ref>
-    </link>
-    <link>
-      <title>Heating Power</title>
-      <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=4</ref>
     </link>
     <link>
       <title>Pressure, prep chamber</title>
@@ -243,14 +235,6 @@
     <link>
       <title>Pressure, nanobeam</title>
       <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=5&amp;left_logscale=checked</ref>
-    </link>
-    <link>
-      <title>Morning pressure, analytical chamber</title>
-      <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=6&amp;left_logscale=checked</ref>
-    </link>
-    <link>
-      <title>Morning pressure, prep chamber</title>
-      <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=8&amp;left_logscale=checked</ref>
     </link>
     <link>
       <title>Deposition</title>

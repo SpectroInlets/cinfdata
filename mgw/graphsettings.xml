@@ -302,6 +302,42 @@
       <color>23</color>
     </dateplot32>
 
+   <!-- Heater voltage 1 -->
+    <dateplot33>
+      <title>Voltage, Heater 1</title>
+      <legend>VH1</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 390 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Heater 1  / V</ylabel>
+      <color>5</color>
+    </dateplot33>
+
+   <!-- Heater voltage 2 -->
+    <dateplot34>
+      <title>Voltage, Heater 2</title>
+      <legend>VH2</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 391 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Heater 2  / V</ylabel>
+      <color>6</color>
+    </dateplot34>
+
+   <!-- Heater current 1 -->
+    <dateplot35>
+      <title>Current, Heater 1</title>
+      <legend>IH1</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 392 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Heater 1  / A</ylabel>
+      <color>7</color>
+    </dateplot35>
+
+   <!-- Heater current 2 -->
+    <dateplot36>
+      <title>Current, Heater 2</title>
+      <legend>IH2</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_mgw where type = 393 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Heater 2  / A</ylabel>
+      <color>8</color>
+    </dateplot36>
+
   </graph>
 
   <!-- MASSTIME -->
@@ -452,7 +488,7 @@
       </field3>
     </mandatory_export_fields>
     <matplotlib_settings>
-      <width>900</width>
+      <width>1200</width>
       <height>600</height>
       <title_size>24</title_size>
       <xtick_labelsize>12</xtick_labelsize>

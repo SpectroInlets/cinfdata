@@ -429,6 +429,10 @@
       <ref>dummy/xyplot.php?type=masstime&amp;matplotlib=checked</ref>
     </link>
     <link>
+      <title>PID Optimization</title>
+      <ref>dummy/xyplot.php?type=pid_optim&amp;matplotlib=checked</ref>
+    </link>
+    <link>
       <title>Mass spectrums</title>
       <ref>dummy/xyplot.php?type=massspectrum</ref>
     </link>
@@ -439,6 +443,10 @@
     <link>
       <title>Current/Temperature</title>
       <ref>dummy/xyplot.php?type=it&amp;matplotlib=checked</ref>
+    </link>
+    <link>
+      <title>Live (note change hostname)</title>
+      <ref>dummy/live.php?type=live_dummy</ref>
     </link>
   </setup>
 

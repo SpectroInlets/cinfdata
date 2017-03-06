@@ -278,6 +278,86 @@
   </graph>
 
 
+  <!-- MASSTIME -->
+  <graph type='pid_optim'>
+    <default_xscale>lin</default_xscale>
+    <type>64</type>
+    <xlabel>Time / s</xlabel>
+    <title>PID Optimization</title>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- dygraph -->
+    <dygraph_settings>
+      <labels_newline>true</labels_newline>
+      <roll_period>1</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+    <!-- queries -->
+    <queries>
+      <default>SELECT x, y  FROM xy_values_dummy where measurement = {id} order by id</default>
+      <column>mass_label</column>
+    </queries>
+    <!-- ylabel -->
+    <ylabel>
+      <default>Mixed units</default>
+      <column>mass_label</column>
+      <pattern0>
+	<reg_match>^.*korr$</reg_match>
+	<ylabel>pump speed [mL/min]</ylabel>
+      </pattern0>
+      <pattern1>
+	<reg_match>^ph.*$</reg_match>
+	<ylabel>pH</ylabel>
+      </pattern1>
+      <pattern2>
+	<reg_match>^pump_rate$</reg_match>
+	<ylabel>pump speed [mL/min]</ylabel>
+      </pattern2>
+    </ylabel>
+    <!-- legend -->
+    <legend>
+      <default>{mass_label}</default>
+      <column>mass_label</column>
+    </legend>
+    <!-- parameters -->
+    <parameters>
+      <param0>
+	<field>sem_voltage</field>
+	<name>SEM Voltage / V</name>
+      </param0>
+      <param1>
+	<field>preamp_range</field>
+	<name>Range</name>
+      </param1>
+    </parameters>
+    <!-- data treatment -->
+    <flip_x>
+      <gui>Flip x-scale</gui>
+    </flip_x>
+    <as_function_of>
+      <gui>As function of T</gui>
+      <column>mass_label</column>
+      <reg_match>RTD temperature</reg_match>
+      <xlabel>Temperature / C</xlabel>
+    </as_function_of>
+    <diff_left_y>
+      <gui>Diff. left y-axis</gui>
+      <ylabel_addition>diff</ylabel_addition>
+    </diff_left_y>
+    <diff_right_y>
+      <gui>Diff. right y-axis</gui>
+      <ylabel_addition>diff</ylabel_addition>
+    </diff_right_y>
+    <linscale_x0>
+      <gui>X-axis in hours</gui>
+      <xlabel_addition>convert to hours</xlabel_addition>
+      <!-- 1/3600 -->
+      <a>0.0002777777777777778</a>
+      <b>0</b>
+    </linscale_x0>
+  </graph>
+
+
 
 
   <!-- MASSTIME -->

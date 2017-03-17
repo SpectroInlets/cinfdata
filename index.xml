@@ -568,6 +568,10 @@
       <title>Fridays Pies</title>
       <ref>other/fridays_stats.php</ref>
     </link>
+    <link>
+      <title>Pizza Transactions</title>
+      <ref>other/pizza_transactions.php</ref>
+    </link>
   </setup>
 
   <!--NH3 Synthesis-->

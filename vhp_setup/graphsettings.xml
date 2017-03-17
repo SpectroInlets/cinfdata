@@ -77,6 +77,32 @@
       <ylabel>Temperature / C</ylabel>
       <color>8</color>
     </dateplot8>
+
+    <dateplot9>
+      <title>Medium Pressure</title>
+      <legend>Medium Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=421 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>9</color>
+    </dateplot9>
+
+    <dateplot10>
+      <title>High Pressure</title>
+      <legend>High Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=422 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>10</color>
+    </dateplot10>
+
+    <dateplot11>
+      <title>BPR, Backside Pressure</title>
+      <legend>BPR, Backside Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=423 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>11</color>
+    </dateplot11>
+
+
   </graph>
 
   <!-- MASSSPECTRUM -->

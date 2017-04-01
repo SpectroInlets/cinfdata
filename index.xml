@@ -746,6 +746,16 @@
     </link>
   </setup>
 
+  <!--b311-->
+  <setup codename="b311">
+    <setup_title>Building 311</setup_title>
+    <link>
+      <title>Lounge Temperature</title>
+      <ref>b311/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
+    </link>
+  </setup>
+
+
   <!--Gas alarm, 307-->
   <setup codename="gasalarm307">
     <setup_title>Gas alarm, 307</setup_title>

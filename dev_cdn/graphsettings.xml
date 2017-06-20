@@ -1,0 +1,539 @@
+<?xml version='1.0' standalone='yes'?>
+<graphs>
+
+  <!-- MULTI DATEPLOT -->
+  <graph type='multidateplot'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- Fall back settings -->
+    <title>Multiple dateplots</title>
+    <ylabel>Mixed</ylabel>
+    <dygraph_settings>
+      <roll_period>1</roll_period>
+    </dygraph_settings>
+
+    <!-- Date plot 1 - Chamber pressure -->
+    <dateplot1>
+      <title>QMS pressure</title>
+      <legend>QMS pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sniffer where type=240 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>1</color>
+    </dateplot1>
+
+    <!-- Date plot 2 - PIRANI BUFFER VOLUME -->
+    <dateplot2>
+      <title>Buffer pressure</title>
+      <legend>Buffer pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sniffer where type = 243 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>2</color>
+    </dateplot2>
+
+    <!-- Date plot 3 - BACKING PRESSURE, BUFFER TURBO -->
+    <dateplot3>
+      <title>QMS roughing pressure</title>
+      <legend>QMS roughing pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sniffer where type = 242 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+    <!-- Date plot 4 - BACKING PRESSURE, QMS -->
+    <dateplot4>
+      <title>Buffer roughing pressure</title>
+      <legend>Buffer roughing pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sniffer where type = 241 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>4</color>
+    </dateplot4>
+
+    <!-- Date plot 5 - Gas Inlet Pressure -->
+    <dateplot5>
+      <title>Gas inlet pressure</title>
+      <legend>Gas inlet pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sniffer where type = 244 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>5</color>
+    </dateplot5>
+
+    <!-- Date plot 6 - Sniffer Chip Pressure -->
+    <dateplot6>
+      <title>Sniffer chip pressure</title>
+      <legend>Sniffer chip pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sniffer where type = 245 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>6</color>
+    </dateplot6>
+  </graph>
+
+  <graph type="live_values">
+    <page_width>1240</page_width>
+    <page_title>sniffer setup</page_title>
+    <containers> 
+      <container0>
+	<type>date_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>3</min_update_time>
+	<width>410</width>
+	<height>300</height>
+	<!-- General plot options -->
+	<!--<bgcolor>#00FFFF</bgcolor>--> <!-- optional color, default #FFFFFF -->
+	<!-- optional html padding string, remember to subtract the padding
+	     in the size -->
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Chamber and Buffer [mbar]</title> <!-- optional (escaped) html-->
+	<xlabel>Time</xlabel> <!-- optional (escaped) html -->
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<logscale>true</logscale> <!-- optional bool, default false -->
+	<format>.1e</format>
+	<data_reduction>
+	  <time>10</time>
+	  <relative>1</relative>
+	</data_reduction>
+	<figure>
+	  <plot0>
+            <color>#0000FF</color>
+            <data_channel>rasppi107:sniffer_qms_ion_gauge</data_channel>
+            <label>QMS Pressure / mbar</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_sniffer where type=(SELECT id FROM dateplots_descriptions where codename="sniffer_qms_ion_gauge") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	  <plot1>
+            <color>#FF0000</color>
+            <data_channel>rasppi107:sniffer_buffer_pressure</data_channel>
+            <label>Buf Pressure / mbar</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_sniffer where type=(SELECT id FROM dateplots_descriptions where codename="sniffer_buffer_pressure") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot1>
+	</figure>
+      </container0>
+
+      <container1>
+	<type>date_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>3</min_update_time>
+	<width>410</width>
+	<height>300</height>
+	<!-- General plot options -->
+	<!--<bgcolor>#00FFFF</bgcolor>--> <!-- optional color, default #FFFFFF -->
+	<!-- optional html padding string, remember to subtract the padding
+	     in the size -->
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Roughing pressure [mbar]</title> <!-- optional (escaped) html-->
+	<xlabel>Time</xlabel> <!-- optional (escaped) html -->
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<logscale>true</logscale> <!-- optional bool, default false -->
+ 	<format>.1e</format>
+	<data_reduction>
+	  <time>10</time>
+	  <relative>1</relative>
+	</data_reduction>
+	<figure>
+	  <plot0>
+            <color>#000000</color>
+            <data_channel>rasppi107:sniffer_qms_roughing</data_channel>
+            <label>QMS Roughing / mbar</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_sniffer where type=(SELECT id FROM dateplots_descriptions where codename="sniffer_qms_roughing") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+
+	  <plot1>
+            <color>#00FF00</color>
+            <data_channel>rasppi107:sniffer_buffer_roughing</data_channel>
+            <label>Buf Roughing / mbar</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_sniffer where type=(SELECT id FROM dateplots_descriptions where codename="sniffer_buffer_roughing") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot1>
+	</figure>
+      </container1>
+
+      <container2>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>400</width>
+	<height>300</height>
+	<fontsize>14</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>20px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>rasppi107:sniffer_qms_ion_gauge</data_channel>
+	    <label>Ion Gauge</label>
+	    <color>#0000FF</color>
+	    <format>.2e</format>
+	    <unit>mbar</unit>
+	  </item0>
+	  <item1>
+	    <data_channel>rasppi107:sniffer_buffer_pressure</data_channel>
+	    <label>Buffer</label>
+	    <color>#FF0000</color>
+	    <format>.2e</format>
+	    <unit>mbar</unit>
+	  </item1>
+	  <item2>
+	    <data_channel>rasppi107:sniffer_qms_roughing</data_channel>
+	    <label>QMS Roughing</label>
+	    <color>#000000</color>
+	    <format>.2e</format>
+	    <unit>mbar</unit>
+	  </item2>
+	  <item3>
+	    <data_channel>rasppi107:sniffer_buffer_roughing</data_channel>
+	    <label>Buffer Roughing</label>
+	    <color>#00FF00</color>
+	    <format>.2e</format>
+	    <unit>mbar</unit>
+	  </item3>
+	  <item4>
+	    <data_channel>rasppi45:M11210022A</data_channel>
+	    <label>Chip Pressure</label>
+	    <color>#00aacc</color>
+	    <format>.2e</format>
+	    <unit>bar</unit>
+	  </item4>
+	  <item5>
+	    <data_channel>rasppi06:sniffer_inlet_gas_pressure</data_channel>
+	    <label>Inlet Pressure</label>
+	    <color>#bbaa22</color>
+	    <format>.2e</format>
+	    <unit>bar</unit>
+	  </item5>
+	</data>
+      </container2>
+
+      <container3>
+	<type>date_figure</type>
+	<x_window>3600</x_window> <!-- x axis interval, seconds -->
+	<min_update_time>5</min_update_time>
+	<width>410</width>
+	<height>300</height>
+	<!-- General plot options -->
+	<!--<bgcolor>#FF00FF</bgcolor>--> <!-- optional color, default #FFFFFF -->
+	<!-- optional html padding string, remember to subtract the padding
+	     in the size -->
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>MFC Flow [mL/min]</title> <!-- optional (escaped) html-->
+	<xlabel>Time</xlabel> <!-- optional (escaped) html -->
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+ 	<format>.2f</format>
+	<logscale>false</logscale> <!-- optional bool, default false -->
+	<data_reduction>
+	  <time>10</time>
+	  <absolute>0.1</absolute>
+	</data_reduction>
+	<figure>
+	  <plot0>
+            <color>#0000FF</color>
+            <data_channel>rasppi37:21984878</data_channel>
+            <label>Flow 1</label>
+	  </plot0>
+	  <plot1>
+            <color>#00AA00</color>
+            <data_channel>rasppi37:21984877</data_channel>
+            <label>Flow 2</label>
+	  </plot1>
+	  <plot2>
+            <color>#FF0000</color>
+            <data_channel>rasppi37:21984876</data_channel>
+            <label>Flow 3</label>
+	  </plot2>
+	  <plot3>
+            <color>#FF00FF</color>
+            <data_channel>rasppi37:21984879</data_channel>
+            <label>Flow 4</label>
+	  </plot3>
+	</figure>
+      </container3>
+
+      <container4>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>400</width>
+	<height>300</height>
+	<fontsize>14</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>20px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+            <color>#0000FF</color>
+            <data_channel>rasppi37:21984878</data_channel>
+            <label>Flow 1</label>
+	    <format>.3f</format>
+	    <unit>mL/min</unit>
+	  </item0>
+	  <item1>
+            <color>#00AA00</color>
+            <data_channel>rasppi37:21984877</data_channel>
+            <label>Flow 2</label>
+	    <format>.3f</format>
+	    <unit>mL/min</unit>
+	  </item1>
+	  <item2>
+            <color>#FF0000</color>
+            <data_channel>rasppi37:21984876</data_channel>
+            <label>Flow 3</label>
+	    <format>.3f</format>
+	    <unit>mL/min</unit>
+	  </item2>
+	  <item3>
+            <color>#FF00FF</color>
+            <data_channel>rasppi37:21984879</data_channel>
+            <label>Flow 4</label>
+	    <unit>mL/min</unit>
+	    <format>.3f</format>
+	  </item3>
+	</data>
+      </container4>
+
+    </containers>
+  </graph>
+
+  <graph type="live_single_mass">
+    <page_width>1280</page_width>
+    <page_title>Sniffer</page_title>
+    <containers> 
+      <container0>
+	<type>date_figure</type>
+	<x_window>600</x_window> <!-- x axis interval, seconds -->
+	<width>1050</width>
+	<height>600</height>
+	<!-- General plot options -->
+	<bgcolor>#FFFFFF</bgcolor> <!-- optional color, default #FFFFFF -->
+	<!-- optional html padding string, remember to subtract the padding
+	     in the size -->
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>Mass Spec Current [A]</title> <!-- optional (escaped) html-->
+	<xlabel>Time</xlabel> <!-- optional (escaped) html -->
+	<!-- <ylabel>Temperature [&amp;deg;C]</ylabel> --><!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<logscale>false</logscale> <!-- optional bool, default false -->
+	<format>.1e</format>
+	<figure>
+	  <plot0>
+            <color>#0000FF</color>
+            <data_channel>cinf-sniffer-ms:qms-value</data_channel>
+            <label>QMS current / A</label>
+	  </plot0>
+	</figure>
+      </container0>
+
+    </containers>
+  </graph>
+
+  <!-- MASSTIME -->
+  <graph type='masstime'>
+    <default_xscale>lin</default_xscale>
+    <type>5</type>
+    <xlabel>Time / s</xlabel>
+    <title>Mass vs. time</title>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- dygraph -->
+    <dygraph_settings>
+      <labels_newline>true</labels_newline>
+      <roll_period>1</roll_period>
+      <labels_side>true</labels_side>
+      <ygrid>true</ygrid>
+      <series_highlight>true</series_highlight>
+    </dygraph_settings>
+    <!-- queries -->
+    <queries>
+      <default>SELECT x/1000, y  FROM xy_values_sniffer where y &lt; 1 and measurement = {id} order by id</default>
+      <column>mass_label</column>
+    </queries>
+    <!-- ylabel -->
+    <ylabel>
+      <default>Mixed units</default>
+      <column>mass_label</column>
+      <pattern0>
+	<reg_match>^M[0-9]{1,2}$</reg_match>
+	<ylabel>SEM current / A</ylabel>
+      </pattern0>
+      <pattern1>
+	<reg_match>^.*temperature$</reg_match>
+	<ylabel>Temperature / C</ylabel>
+      </pattern1>
+      <pattern2>
+	<reg_match>^.*pressure$|^Pirani.*$</reg_match>
+	<ylabel>Pressure / mbar</ylabel>
+      </pattern2>
+      <pattern3>
+	<reg_match>^Input power$</reg_match>
+	<ylabel>Power / W</ylabel>
+      </pattern3>
+      <pattern4>
+	<reg_match>^Flow [0-9]$</reg_match>
+	<ylabel>Flow / mL/min</ylabel>
+      </pattern4>
+    </ylabel>
+    <!-- legend -->
+    <legend>
+      <default>{mass_label}</default>
+      <column>mass_label</column>
+      <pattern0>
+	<reg_match>^.*temperature$</reg_match>
+	<legend>Temp.</legend>
+      </pattern0>
+    </legend>
+    <!-- parameters -->
+    <parameters>
+      <param0>
+	<field>sem_voltage</field>
+	<name>SEM Voltage / V</name>
+      </param0>
+      <param1>
+	<field>preamp_range</field>
+	<name>Range</name>
+      </param1>
+    </parameters>
+    <!-- data treatment -->
+    <flip_x>
+      <gui>Flip x-scale</gui>
+    </flip_x>
+    <diff_left_y>
+      <gui>Diff. left y-axis</gui>
+      <ylabel_addition>diff</ylabel_addition>
+    </diff_left_y>
+    <diff_right_y>
+      <gui>Diff. right y-axis</gui>
+      <ylabel_addition>diff</ylabel_addition>
+    </diff_right_y>
+    <linscale_x0>
+      <gui>x-axis in hours</gui>
+      <xlabel_addition>converted to hours</xlabel_addition>
+      <!-- 1/3600 -->
+      <a>0.0002777777777777778</a>
+      <b>0</b>
+    </linscale_x0>
+    <!--
+    <matplotlib_settings>
+      <width>900</width>
+      <height>600</height>
+      <title_size>74</title_size>
+      <xtick_labelsize>4</xtick_labelsize>
+      <ytick_labelsize>8</ytick_labelsize>
+      <legend_fontsize>16</legend_fontsize>
+      <label_fontsize>16</label_fontsize>
+      <linewidth>5</linewidth>
+      <grid>True</grid>
+    </matplotlib_settings>
+    -->
+    <plugins>
+      <MassTimeOffset>
+	<title>Offset the spectra to avoid negative values</title>
+	<output>raw</output>
+      </MassTimeOffset>
+    </plugins>
+    <!-- colors -->
+    <colors type="abort_on_collision">
+      <!-- matches implicitely on entire string with re.match -->
+      <column>mass_label</column>
+      <color><reg_match>^M34$</reg_match><code>#8b0000</code></color>
+      <color><reg_match>^M28$</reg_match><code>#808080</code></color>
+      <color><reg_match>^M3$</reg_match><code>#b8860b</code></color>
+      <color><reg_match>^M70$</reg_match><code>#800080</code></color>
+      <color><reg_match>^M36$</reg_match><code>#006400</code></color>
+      <color><reg_match>^M43$</reg_match><code>#adff2f</code></color>
+      <color><reg_match>^M40$</reg_match><code>#00bfbf</code></color>
+      <color><reg_match>^M27$</reg_match><code>#32cd32</code></color>
+      <color><reg_match>^M20$</reg_match><code>#6a5acd</code></color>
+      <color><reg_match>^M32$</reg_match><code>#000000</code></color>
+      <color><reg_match>^M44$</reg_match><code>#a52a2a</code></color>
+      <color><reg_match>^M30$</reg_match><code>#808000</code></color>
+      <color><reg_match>^M4$</reg_match><code>#bf00bf</code></color>
+      <color><reg_match>^M16$</reg_match><code>#4b0082</code></color>
+      <color><reg_match>^M15$</reg_match><code>#ff0000</code></color>
+      <color><reg_match>^M31$</reg_match><code>#98fb98</code></color>
+      <color><reg_match>^M17$</reg_match><code>#d2691e</code></color>
+      <color><reg_match>^M2$</reg_match><code>#0000ff</code></color>
+      <color><reg_match>^M19$</reg_match><code>#008080</code></color>
+      <color><reg_match>^M18$</reg_match><code>#bfbf00</code></color>
+      <color><reg_match>^M26$</reg_match><code>#008000</code></color>
+    </colors>
+  </graph>
+
+  <!-- MASSSPECTRUM -->
+  <graph type='massspectrum'>
+    <default_xscale>lin</default_xscale>
+    <type>4</type>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <label_column>id</label_column>
+    <xlabel>Mass / amu</xlabel>
+    <ylabel>
+      <default>SEM current / A</default>
+    </ylabel>
+    <!-- queries -->
+    <queries>
+      <default>SELECT x,y  FROM xy_values_sniffer where measurement = {id} order by id</default>
+    </queries>
+    <!-- legend -->
+    <legend>
+      <default>{id} - {time}</default>
+    </legend>
+    <!-- plugins -->
+    <plugins>
+      <MassSpectraOffset>
+	<title>Offset the spectra to avoid negative values</title>
+	<output>raw</output>
+      </MassSpectraOffset>
+    </plugins>
+  </graph>
+
+
+  <!-- GLOBAL SETTINGS -->
+  <global_settings>
+    <folder_name>sniffer</folder_name>
+    <measurements_table>measurements_sniffer</measurements_table>
+    <xyvalues_table>xy_values_sniffer</xyvalues_table>
+    <sql_username>sniffer</sql_username>
+    <image_format>png</image_format>
+    <label_column>mass_label</label_column>
+    <mandatory_export_fields>
+      <field0>
+	<field>id</field>
+	<name>Id</name>
+      </field0>
+      <field1>
+	<field>type</field>
+	<name>Type</name>
+      </field1>
+      <field2>
+	<field>time</field>
+	<name>Recorded at</name>
+      </field2>
+      <field3>
+	<field>comment</field>
+	<name>Comment</name>
+      </field3>
+    </mandatory_export_fields>
+    <matplotlib_settings>
+      <width>900</width>
+      <height>600</height>
+      <title_size>24</title_size>
+      <xtick_labelsize>12</xtick_labelsize>
+      <ytick_labelsize>12</ytick_labelsize>
+      <legend_fontsize>10</legend_fontsize>
+      <label_fontsize>16</label_fontsize>
+    </matplotlib_settings>
+  </global_settings>
+</graphs>

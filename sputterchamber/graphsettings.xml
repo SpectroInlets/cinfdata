@@ -16,47 +16,92 @@
     <!-- Chamber pressure -->
     <dateplot1>
       <title>Chamber pressure</title>
-      <legend>Chamber pressure</legend>
+      <legend>Ion Gauge</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 208 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Pressure / mbar</ylabel>
+      <ylabel>Pressure / torr</ylabel>
       <color>1</color>
     </dateplot1>
 
-    <!-- QCM Frequency -->
+    <!-- Baratron pressure -->
     <dateplot2>
+      <title>Baratron pressure</title>
+      <legend>Baratron</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 401 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / torr</ylabel>
+      <color>2</color>
+    </dateplot2>
+
+    <!-- Pirani pressure -->
+    <dateplot3>
+      <title>Pirani pressure</title>
+      <legend>Pirani</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 209 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / torr</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+    <!-- Load Lock pressure -->
+    <dateplot4>
+      <title>Load Lock pressure</title>
+      <legend>Load Lock pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 400 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / torr</ylabel>
+      <color>4</color>
+    </dateplot4>
+
+    <!-- Rough pump pressure, Main Chamber-->
+    <dateplot5>
+      <title>Rough pump, main</title>
+      <legend>Rough pump, main</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 403 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / torr</ylabel>
+      <color>5</color>
+    </dateplot5>
+
+    <!-- Rough pump pressure, Load Lock-->
+    <dateplot6>
+      <title>Rough pump, LL</title>
+      <legend>Rough pump, LL</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 402 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / torr</ylabel>
+      <color>6</color>
+    </dateplot6>
+
+    <!-- QCM Frequency -->
+    <dateplot7>
       <title>QCM Frequency</title>
       <legend>QCM Frequency</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 205 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Frequency / Hz</ylabel>
       <color>2</color>
-    </dateplot2>
+    </dateplot7>
 
     <!-- QCM Thickness -->
-    <dateplot3>
+    <dateplot8>
       <title>QCM Thickness</title>
       <legend>QCM Thickness</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 206 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Thickness / kÅ</ylabel>
       <color>3</color>
-    </dateplot3>
+    </dateplot8>
 
     <!-- QCM Crystal Life -->
-    <dateplot4>
+    <dateplot9>
       <title>QCM Crystal Life</title>
       <legend>QCM Crystal Life</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 207 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Life / %</ylabel>
       <color>4</color>
-    </dateplot4>
+    </dateplot9>
 
     <!-- Chiller flow -->
-    <dateplot5>
+    <dateplot10>
       <title>Chiller flow</title>
       <legend>Flow</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 200 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / L/min</ylabel>
       <color>5</color>
-    </dateplot5>
+    </dateplot10>
 
 
 

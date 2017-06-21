@@ -150,7 +150,8 @@ function html_header_normal($root, $title, $includehead, $charset, $width, $html
   $header = $header . "    <link rel=\"StyleSheet\" href=\"{$root}css/style.css\" type=\"text/css\" media=\"screen\">\n";
   if ($root == "../"){
     # $header = $header . "    <script type=\"text/javascript\" src=\"dygraph/dygraph-dev.js\"></script>\n";
-    $header = $header . "    <script type=\"text/javascript\" src=\"dygraph-combined.js\"></script>\n";
+    $header = $header . "    <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.js\"></script>\n";
+    $header = $header . "    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.css\">\n";
   }
   $header = $header . "    <script type=\"text/javascript\" src=\"{$root}js/update.js\"></script> \n";
   $header = $header . "    <script type=\"text/javascript\" src=\"{$root}js/toogle.js\"></script>\n";
@@ -259,7 +260,9 @@ function html_header_x($root, $title, $includehead, $charset, $width, $html5){
   $header = $header . "    <link rel=\"StyleSheet\" href=\"{$root}css/style.css\" type=\"text/css\" media=\"screen\">\n";
   if ($root == "../"){
     #$header = $header . "    <script type=\"text/javascript\" src=\"dygraph/dygraph-dev.js\"></script>\n";    
-    $header = $header . "    <script type=\"text/javascript\" src=\"dygraph-combined.js\"></script>\n";
+    #$header = $header . "    <script type=\"text/javascript\" src=\"dygraph-combined.js\"></script>\n";
+    $header = $header . "    <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.js\"></script>\n";
+    $header = $header . "    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.css\">\n";
   }
   $header = $header . "    <script type=\"text/javascript\" src=\"{$root}js/update.js\"></script> \n";
   $header = $header . "    <script type=\"text/javascript\" src=\"{$root}js/toogle.js\"></script>\n";

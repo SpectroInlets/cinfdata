@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# pylint: disable=I0011,R0902,C0103,R0903
 
 """
 This file is part of the CINF Data Presentation Website
@@ -24,7 +25,19 @@ along with The CINF Data Presentation Website.  If not, see
 import time
 import sys
 import uuid
+import json
 from common import Color
+
+
+def bool_str(string):
+    """Convert false and true strings to bool"""
+    if string == "true":
+        return True
+    elif string == "false":
+        return False
+    else:
+        raise ValueError('Bool value must be "true" or "false"')
+
 
 class Plot():
     """ This class is used to generate the dygraph content.
@@ -44,6 +57,7 @@ class Plot():
         self.right_yaxis = len(self.o['right_plotlist']) > 0
         self.out = sys.stdout
         self.tab = '    '
+        self.measurement_count = None
         # Colors object, will be filled in at new_plot
         self.c = None
         self.reduction = 1
@@ -54,12 +68,12 @@ class Plot():
         """
         self.c = Color(data, self.ggs)
         self.measurement_count = sum(measurement_count)
-        self._header(self.out, data, plot_info)
-        self._data(self.out, data, plot_info)
-        self._options(self.out, data, plot_info)
-        self._end(self.out, data, plot_info)
+        self._header()
+        self._data(data)
+        self._options(data, plot_info)
+        self._end()
         
-    def _header(self, out, data, plot_info):
+    def _header(self):
         """ Form the header """
         # Get max points from settings of any, default 10000
         #max_points = 100000
@@ -79,28 +93,28 @@ class Plot():
                                            self.reduction, max_points)
             warning = '<b title=\\"{0}\\">Reduced data set (hover for '\
                 'details)</b>'.format(mouse_over)
-            out.write('document.getElementById("warning_div").innerHTML='\
-                          '\"{0}\";'.format(warning))
+            self.out.write('document.getElementById("warning_div").innerHTML='\
+                               '\"{0}\";'.format(warning))
 
         # Write dygraph header
-        out.write('g = new Dygraph(\n' +
-                  self.tab + 'document.getElementById("graphdiv"),\n') 
+        self.out.write('g = new Dygraph(\n' +
+                       self.tab + 'document.getElementById("graphdiv"),\n') 
 
-    def _data(self, out, data, plot_info):
+    def _data(self, data):
         """ Determine the type of the plot and call the appropriate
         _data_*** function
         """
         # Generate a random filename for the data
         filename = '../figures/{0}.csv'.format(uuid.uuid4())
-        out.write('{0}"{1}",\n'.format(self.tab, filename))
+        self.out.write('{0}"{1}",\n'.format(self.tab, filename))
         file_ = open(filename, 'w')
         if self.ggs['default_xscale'] == 'dat':
-            self._data_dateplot(file_, data, plot_info)
+            self._data_dateplot(file_, data)
         else:
-            self._data_xyplot(file_, data, plot_info)
+            self._data_xyplot(file_, data)
         file_.close()
 
-    def _data_dateplot(self, out, data, plot_info):
+    def _data_dateplot(self, out, data):
         """Generate the CSV data for a dateplot"""
         # Total number of plots
         plot_number = len(self.o['left_plotlist'] + self.o['right_plotlist'])
@@ -121,7 +135,7 @@ class Plot():
         if self.measurement_count == 0:
             out.write('42,42\n')
 
-    def _data_xyplot(self, out, data, plot_info):
+    def _data_xyplot(self, out, data):
         """Generate the CSV data for a XY plot"""
         # Total number of plots
         plot_number = len(self.o['left_plotlist'] + self.o['right_plotlist'])
@@ -140,192 +154,196 @@ class Plot():
         if self.measurement_count == 0:
             out.write('42,42\n')
 
-    def _options(self, out, data, plot_info):
-        """ Form all the options and ask _output_options to print them in a
-        javascript friendly way
-        """
-
-        def _q(string):
-            """ _q for _quote: Utility function to add quotes to strings """
-            return '\'{0}\''.format(string)
-
+    def _options(self, data, plot_info):
+        """Form all the options and output as JSON"""
         # Form labels string
         labels = [self.ggs['xlabel'] if self.ggs.has_key('xlabel') else '']
-        for dat in data['left']:
+        for dat in data['left'] + data['right']:
             labels.append(dat['lgs']['legend'])
-        r_ylabels=[]
-        for dat in data['right']:
-            labels.append(dat['lgs']['legend'])
-            r_ylabels.append(dat['lgs']['legend'])
         # Overwrite labels if there is no data
         if self.measurement_count == 0:
             labels = ['NO DATA X', 'NO DATA Y']
 
-        # Initiate options variable. A group of options are contained in a list
-        # and the options are given as a key value pair in in a dictionary
-        # containing only one item
-        options = [{'labels': str(labels)}]
+        # Initiate options variable.
+        options = {
+            'labels': labels,
+            'connectSeparatedPoints': True,
+            'legend': 'always',
+            }
+
+        # FIXME WORK-AROUND: There is a bug in the new dygraphs, so
+        # that if logscale is to be used on any of the axis, it must
+        # be set to true as a top level option as well as in the axis
+        # specific options:
+        # https://github.com/danvk/dygraphs/issues/867
+        if self.o['left_logscale'] or self.o['right_logscale']:
+            options['logscale'] = True
+
+        # Form the series specific options. Looks like:
+        #"series": {
+        #    "M4": {
+        #        "color": "#63650b", 
+        #        "axis": "y"
+        #    }, 
+        #    "Gas flow 1 [He] (r)": {
+        #        "color": "#3b3914", 
+        #        "axis": "y2"
+        #    }, 
+        #}
+        series = {}
+        for side, axis in (('left', 'y'), ('right', 'y2')):
+            for dat in data[side]:
+                series[dat['lgs']['legend']] = {
+                    'axis': axis,
+                    'color': self.c.get_color_hex(),
+                }
+        options['series'] = series
+
+        # Add axes options
+        self._options_axes(options, plot_info)
+
+        # Add title, and axis labels
+        self._options_title_axes_labels(options, plot_info)
+
+        # X-scale
+        if self.o['xscale_bounding'] is not None and\
+                self.o['xscale_bounding'][1] > self.o['xscale_bounding'][0]:
+            options['dateWindow'] = self.o['xscale_bounding']
+
+        replacements = self._options_from_graphsettings(options)
+
+        # Generate options, replace function placeholder and write out
+        options_text = json.dumps(options, indent=4) + '\n'
+        for placeholder, replacement in replacements.items():
+            options_text = options_text.replace(placeholder, replacement)
+        self.out.write(options_text)
+
+
+    def _options_axes(self, options, plot_info):
+        """Form the axes options, will modify options variable"""
+        axes = {
+            'x': {'drawGrid': True},
+            'y': {
+                'logscale': self.o['left_logscale'],
+                'drawGrid': False,
+                },
+            }
+        # Zoom, left y-scale
+        if self.o['left_yscale_bounding'] is not None:
+            axes['y']['valueRange'] = self.o['left_yscale_bounding']
 
         # Add second yaxis configuration
-        two_line_y_axis_label = False
         if self.right_yaxis:
-            first_label = r_ylabels[0]
-            # Add first data set to secondary axis
-            # Ex: 'Containment (r)': {axis: {}}
-            y2options = [{'logscale': str(self.o['right_logscale']).lower()}]
+            axes['y2'] = {
+                'logscale': self.o['right_logscale'],
+                'drawGrid': False,
+                }
             if self.o['right_yscale_bounding'] is not None:
-                y2options.append(
-                    {'valueRange': str(list(self.o['right_yscale_bounding']))}
-                    )
-            options.append({_q(first_label): [{'axis': y2options}]})
-            # Add remaining datasets to secondary axis
-            for label in r_ylabels[1:]:
-                # Ex: 'IG Buffer (r)': {axis: 'Containment (r)'}
-                a = {_q(label): [{'axis': _q(first_label)}]}
-                options.append(a)
+                axes['y2']['valueRange'] = self.o['right_yscale_bounding']
 
             # Add the right y label
             if plot_info.has_key('right_ylabel'):
                 if plot_info['y_right_label_addition'] == '':
-                    options.append({'y2label': _q(plot_info['right_ylabel'])})
+                    axes['y2']['axisLabelWidth'] = 80
+                    y2label = plot_info['right_ylabel']
                 else:
-                    two_line_y_axis_label = True
-                    label = '<font size="3">{0}<br />{1}</font>'.format(
-                        plot_info['right_ylabel'], plot_info['y_right_label_addition'])
-                    options.append({'y2label':_q(label)})
+                    axes['y2']['axisLabelWidth'] = 100
+                    y2label = '<font size="3">{0}<br />{1}</font>'.format(
+                        plot_info['right_ylabel'], 
+                        plot_info['y_right_label_addition'],
+                        )
+                options['y2label'] = y2label
 
-        # General options
-        options += [{'logscale': str(self.o['left_logscale']).lower()},
-                    {'connectSeparatedPoints': 'true'},
-                    {'legend': _q('always')},
-                    #{'lineWidth': '0'}
-                    ]
-     
+        options['axes'] = axes
+
+    def _options_title_axes_labels(self, options, plot_info):
+        """Add title and axis labels"""
         # Add title
         if plot_info.has_key('title'):
             if self.measurement_count == 0:
-                options.append({'title': _q('NO DATA')})
+                options['title'] = 'NO DATA'
             else:
-                options.append({'title': _q(plot_info['title'])})
+                options['title'] = plot_info['title']
 
+        axes = options['axes']
         # Add the left y label
         if plot_info.has_key('left_ylabel'):
             if plot_info['y_left_label_addition'] == '':
-                options.append({'ylabel': _q(plot_info['left_ylabel'])})
+                axes['y']['axisLabelWidth'] = 80
+                ylabel = plot_info['left_ylabel']
             else:
-                two_line_y_axis_label = True
-                label = '<font size="3">{0}<br />{1}</font>'.format(
-                    plot_info['left_ylabel'], plot_info['y_left_label_addition'])
-                options.append({'ylabel':_q(label)})
-
-        # Set the proper space for y axis labels
-        if two_line_y_axis_label:
-            options.append({'yAxisLabelWidth': '100'})
-        else:
-            options.append({'yAxisLabelWidth': '80'})
+                axes['y']['axisLabelWidth'] = 100
+                ylabel = '<font size="3">{0}<br />{1}</font>'.format(
+                    plot_info['left_ylabel'],
+                    plot_info['y_left_label_addition'],
+                    )
+            options['ylabel'] = ylabel
 
         # Determine the labels and add them
         if plot_info.has_key('xlabel'):
             if self.ggs['default_xscale'] != 'dat':
                 if plot_info['xlabel_addition'] == '':
-                    options.append({'xlabel': _q(plot_info['xlabel'])})
+                    options['xlabel'] = plot_info['xlabel']
                 else:
                     label = '<font size="3">{0}<br />{1}</font>'.format(
-                        plot_info['xlabel'], plot_info['xlabel_addition'])
-                    options.append({'xlabel':_q(label)})
+                        plot_info['xlabel'],
+                        plot_info['xlabel_addition'],
+                        )
+                    options['xlabel'] = label
                     options.append({'xLabelHeight': '30'})
 
-        colors = [self.c.get_color_hex() for dat in data['left'] + data['right']]
-        options.append({'colors':str(colors)})
-        
-        # Zoom, left y-scale
-        if self.o['left_yscale_bounding'] is not None:
-            options.append({'valueRange':
-                                str(list(self.o['left_yscale_bounding']))})
-        # X-scale
-        if self.o['xscale_bounding'] is not None and\
-                self.o['xscale_bounding'][1] > self.o['xscale_bounding'][0]:
-            xzoomstring = '[{0}, {1}]'.format(self.o['xscale_bounding'][0],
-                                              self.o['xscale_bounding'][1])
-            options.append({'dateWindow': xzoomstring})
-
-        grids = [{'drawXGrid': 'true'}, {'drawYGrid': 'false'}]
+    def _options_from_graphsettings(self, options):
+        """Add options from graphsettings"""
+        replacements = {}
         # Add modifications from settings file
         if self.ggs.has_key('dygraph_settings'):
             # roller
             if self.ggs['dygraph_settings'].has_key('roll_period'):
-                period = self.ggs['dygraph_settings']['roll_period']
-                options += [{'showRoller': 'true'}, {'rollPeriod': period}]
+                period = int(self.ggs['dygraph_settings']['roll_period'])
+                options.update({'showRoller': 'true', 'rollPeriod': period})
+
             # grids
-            if self.ggs['dygraph_settings'].has_key('xgrid'):
-                grids[0]['drawXGrid'] = self.ggs['dygraph_settings']['xgrid']
-            if self.ggs['dygraph_settings'].has_key('ygrid'):
-                grids[1]['drawYGrid'] = self.ggs['dygraph_settings']['ygrid']
+            for axis_name in 'xy':
+                grid_settings_str = self.ggs['dygraph_settings']\
+                    .get(axis_name + 'grid')
+                if grid_settings_str is not None:
+                    grid_settings = bool_str(grid_settings_str)
+                    options['axes'][axis_name]['drawGrid'] = grid_settings
+
             # high light series
             if self.ggs['dygraph_settings'].has_key('series_highlight'):
                 if self.ggs['dygraph_settings']['series_highlight'] == 'true':
-                    options.append(
-                        {'highlightSeriesOpts': [
-                                {'strokeWidth': '2'},
-                                {'strokeBorderWidth': '1'},
-                                {'highlightCircleSize': '5'}
-                                ]
-                         })
+                    options['highlightSeriesOpts'] = {
+                        'strokeWidth': 2,
+                        'strokeBorderWidth': 1,
+                        'highlightCircleSize': 5,
+                        }
+
+            # Labels modifications
+            labels_options = {}
             if self.ggs['dygraph_settings'].has_key('labels_side'):
                 if self.ggs['dygraph_settings']['labels_side'] == 'true':
-                    sep_new_lines = 'true'
-                    if self.ggs['dygraph_settings'].has_key('labels_newline'):
-                        sep_new_lines = self.ggs['dygraph_settings']['labels_newline']
-                    options += [{'labelsDiv': 'document.getElementById("labels")'},
-                                {'labelsSeparateLines': sep_new_lines}]
-            elif self.ggs['dygraph_settings'].has_key('labels_newline'):
-                sep_new_lines = self.ggs['dygraph_settings']['labels_newline']
-                options += [{'labelsSeparateLines': sep_new_lines}]
+                    labels_options.update({
+                            'labelsSeparateLines': True,
+                            # func1 is just a placeholder that will
+                            # be replaced by:
+                            # document.getElementById("labels")
+                            # in the serialized json, because json
+                            # cannot serialize functions
+                            'labelsDiv': '#func1#',
+                            })
+                    replacements['"#func1#"'] = \
+                        'document.getElementById("labels")'
 
-        # Disable grids
-        options += grids
+            sep_new_lines_str = self.ggs['dygraph_settings']\
+                .get('labels_newline')
+            if sep_new_lines_str is not None:
+                labels_options['labelsSeparateLines'] = \
+                    bool_str(sep_new_lines_str)
+            options.update(labels_options)
 
+        return replacements
 
-        self._output_options(out, None, options, 1, last=True)
-
-    def _output_options(self, out, name, options, level, last=False):
-        """ Oh boy! I wish I had documented this when I wrote it! KN """
-        if name is None:
-            out.write(self.tab * level + '{\n')
-        else:
-            out.write(self.tab * level + name + ': {\n')
-
-        for n, (key, value) in enumerate([op.items()[0] for op in options]):
-            if isinstance(value, list):
-                if n == len(value)-1:
-                    self._output_options(out, key, value, level+1, last=True)
-                else:
-                    self._output_options(out, key, value, level+1, last=False)
-            else:
-                if n == len(options)-1:
-                    out.write(self.tab*(level+1) + key + ': ' + value + '\n')
-                else:
-                    out.write(self.tab*(level+1) + key + ': ' + value + ',\n')
-                
-        if last:
-            out.write(self.tab * level + '}\n')
-        else:
-            out.write(self.tab * level + '},\n')
-
-    def _end(self, out, data, plot_info):
+    def _end(self):
         """ Output last line """
-        out.write(');')
-
-# Flip x is not possible with dygraph :( it simply does not show the
-# data points
-# x_min = x_max = yl_min = yl_max = ry_min = yl_max = None
-#if self.o['flip_x']:
-#    if len(data['left'] + data['right']) > 0:
-#        x_min = min([min(dat['data'][:,0]) for dat in
-#                     data['left'] + data['right']])
-#        x_max = max([max(dat['data'][:,0]) for dat in
-#                     data['left'] + data['right']])
-#    if x_min is not None and x_max is not None:
-#        options.append({'dateWindow':
-#                            '[{0}, {1}]'.format(x_max, x_min)})
-            
+        self.out.write(');')

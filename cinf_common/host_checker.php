@@ -29,7 +29,8 @@ border-radius: 50%;
 #exec('python snapshot.py',$output);
 #exec('python host_status.py',$output);
 #passthru('python host_status.py');
-$file = file_get_contents('http://robertj/hosts.php');
+#$file = file_get_contents('http://robertj/hosts.php');
+$file = file_get_contents('http://rasppi42/');
 $output = explode("\n",$file);
 
 #echo("<table border=1 padding=5>");

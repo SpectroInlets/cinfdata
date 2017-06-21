@@ -441,6 +441,10 @@
       <ref>dummy/xyplot.php?type=xps</ref>
     </link>
     <link>
+      <title>RTD Calib</title>
+      <ref>dummy/xyplot.php?type=rtd_calib</ref>
+    </link>
+    <link>
       <title>Current/Temperature</title>
       <ref>dummy/xyplot.php?type=it&amp;matplotlib=checked</ref>
     </link>
@@ -854,6 +858,19 @@
     <link>
       <title>Live</title>
       <ref>b307_049/live.php?type=live_values</ref>
+    </link>
+  </setup>
+
+  <!-- Propene Oxidation Setup  -->
+  <setup codename="propene_ox">
+    <setup_title>Propene Oxidation Setup</setup_title>
+    <link>
+      <title>Pressure</title>
+      <ref>propene_ox/dateplot.php?type=multidateplot&amp;left_plotlist[]=1</ref>
+    </link>
+    <link>
+      <title>Live</title>
+      <ref>propene_ox/live.php?type=live_values</ref>
     </link>
   </setup>
 

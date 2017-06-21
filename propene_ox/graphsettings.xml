@@ -1,0 +1,108 @@
+<?xml version='1.0' standalone='yes'?>
+<graphs>
+
+  <graph type='multidateplot'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <title>Multiple dateplots</title>
+    <ylabel>Mixed</ylabel>
+    <default_time>24</default_time>
+    <dygraph_settings>
+      <roll_period>1</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+
+    <!-- H2 pressure -->
+    <dateplot1>
+      <title>H2 pressure</title>
+      <legend>Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_propene_ox where type=440 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>1</color>
+    </dateplot1>
+ </graph>
+
+
+  <graph type="live_values">
+    <page_width>1250</page_width>
+    <page_title>Hall Live Plots</page_title> <!-- option page title -->
+    <containers>
+
+      <!-- Container 1, contains the second plot -->
+      <container0>
+	<type>date_figure</type>
+	<title>Pressure [bar]</title>
+	<!-- <bgcolor>#E7E7E7</bgcolor>-->
+	<width>400</width>
+	<height>350</height>
+	<jump_ahead>0.3</jump_ahead>
+	<x_window>86400</x_window>
+	<!-- Experimental, to fix bad y-range selection with log plot and
+	     constant values -->
+	<!-- <yrangepad>10</yrangepad> -->
+	<line_width>3</line_width>
+	<!-- reduce the amount of points that gets plotted -->
+	<data_reduction>
+	  <time>600</time>
+	  <absolute>2</absolute>
+	</data_reduction>
+	<figure>
+	  <plot0>
+	    <data_channel>rasppi86:propene_ox_setup_abs_pressure</data_channel>
+	    <label>Pressure [mbar]</label>
+	    <color>#990099</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_propene_ox where type=(SELECT id FROM dateplots_descriptions where codename="propene_ox_setup_abs_pressure") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	</figure>
+      </container0>
+
+      <container1>
+	<type>table</type>
+	<!--<bgcolor>#FF0000</bgcolor>-->
+	<width>450</width>
+	<height>200</height>
+	<fontsize>17</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size top, right, bottom, top, right, bottom, left-->
+	<padding>40px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>rasppi86:propene_ox_setup_abs_pressure</data_channel>
+	    <label>Pressure</label>
+	    <color>#990099</color>
+	    <format>.2f</format>
+	    <unit>bar</unit>
+	  </item0>
+	</data>
+      </container1>
+    </containers>
+  </graph>
+
+  <global_settings>
+    <measurements_table>measurements_propene_ox</measurements_table>
+    <xyvalues_table>xy_values_propene_ox</xyvalues_table>
+    <sql_username>propene_ox</sql_username>
+    <label_column>mass_label</label_column>
+    <image_format>png</image_format>
+    <mandatory_export_fields>
+      <field0>
+	<field>id</field>
+	<name>Id</name>
+      </field0>
+      <field1>
+	<field>type</field>
+	<name>Type</name>
+      </field1>
+      <field2>
+	<field>time</field>
+	<name>Recorded at</name>
+      </field2>
+      <field3>
+	<field>comment</field>
+	<name>Comment</name>
+      </field3>
+    </mandatory_export_fields>
+  </global_settings>
+</graphs>
+

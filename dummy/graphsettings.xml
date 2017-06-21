@@ -60,6 +60,64 @@
 
   </graph>
 
+  <!-- iv -->
+  <graph type='iv'>
+    <default_xscale>lin</default_xscale>
+    <type>1</type>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <label_column>id</label_column>
+    <!-- queries -->
+    <queries>
+      <default>SELECT x,y  FROM xy_values_dummy where measurement = {id} order by id</default>
+    </queries>
+    <!-- legend -->
+    <legend>
+      <default>{id} - {time}</default>
+    </legend>
+    <flip_x>
+      <gui>Flip X-scale</gui>
+    </flip_x>
+
+   <parameters>
+      <param0>
+	<field>comment</field>
+	<name>Comment</name>
+      </param0>
+    </parameters>
+
+  </graph>
+
+
+  <!-- RTD Calibration -->
+  <graph type='rtd_calib'>
+    <default_xscale>lin</default_xscale>
+    <type>65</type>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <label_column>mass_label</label_column>
+    <!-- queries -->
+    <queries>
+      <default>SELECT x,y  FROM xy_values_dummy where measurement = {id} order by id</default>
+    </queries>
+    <!-- legend -->
+    <legend>
+      <default>{id} - {mass_label}</default>
+    </legend>
+    <flip_x>
+      <gui>Flip X-scale</gui>
+    </flip_x>
+
+   <parameters>
+      <param0>
+	<field>comment</field>
+	<name>Comment</name>
+      </param0>
+    </parameters>
+
+  </graph>
+
+
 
   <!-- XPS -->
   <graph type="xps_old">

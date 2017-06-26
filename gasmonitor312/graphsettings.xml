@@ -130,6 +130,47 @@
 
 
   <!-- MULTI DATEPLOT -->
+  <graph type='multidateplot_h2s'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- Fall back settings -->
+    <title>Multiple H2S levels</title>
+    <ylabel>Mixed</ylabel>
+    <dygraph_settings>
+      <roll_period>5</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+
+    <dateplot1>
+      <title>H2S Microscopy West</title>
+      <legend>H2S microscopy mest</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b312gasalarm WHERE type = (SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_microscopy_west") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Gas level / PPM</ylabel>
+      <color>1</color>
+    </dateplot1>
+
+    <dateplot2>
+      <title>H2S Hall West</title>
+      <legend>H2S hall west</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b312gasalarm WHERE type = (SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_hall_west") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Gas level / PPM</ylabel>
+      <color>2</color>
+    </dateplot2>
+
+    <dateplot3>
+      <title>H2S Chemlab</title>
+      <legend>H2S chemlab</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b312gasalarm WHERE type = (SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_chemlab") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Gas level / PPM</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+
+  </graph>
+
+
+  <!-- MULTI DATEPLOT -->
   <graph type='multidateplot'>
     <default_xscale>dat</default_xscale>
     <xlabel>Date</xlabel>
@@ -237,6 +278,30 @@
       <ylabel>Gas level / ppm</ylabel>
       <color>12</color>
     </dateplot12>
+
+    <dateplot13>
+      <title>H2S Microscopy West</title>
+      <legend>H2S microscopy mest</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b312gasalarm WHERE type = (SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_microscopy_west") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Gas level / ppm</ylabel>
+      <color>13</color>
+    </dateplot13>
+
+    <dateplot14>
+      <title>H2S Hall West</title>
+      <legend>H2S hall west</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b312gasalarm WHERE type = (SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_hall_west") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Gas level / ppm</ylabel>
+      <color>14</color>
+    </dateplot14>
+
+    <dateplot15>
+      <title>H2S Chemlab</title>
+      <legend>H2S chemlab</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b312gasalarm WHERE type = (SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_chemlab") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Gas level / ppm</ylabel>
+      <color>15</color>
+    </dateplot15>
 
     <!-- insert -->
 
@@ -546,6 +611,83 @@
 	  </item5>
 	</data>
       </container3>
+
+
+      <!--  -->
+      <!-- Container 0, plot of all values H2S values -->
+      <container4>
+	<type>date_figure</type>
+	<title>H2S Detectors</title>
+	<!-- <bgcolor>#E7E7E7</bgcolor>-->
+	<width>600</width>
+	<height>400</height>
+	<jump_ahead>0.3</jump_ahead>
+	<x_window>86400</x_window> <!-- 1 day -->
+	<!-- Experimental, to fix bad y-range selection with log plot and
+	     constant values -->
+	<yrangepad>10</yrangepad>
+	<line_width>3</line_width>
+	<data_reduction>
+	  <time>600</time>
+	  <absolute>0.15</absolute>
+	</data_reduction>
+	<figure>
+	  <plot0>
+	    <data_channel>rasppi15:B312_gasalarm_H2S_microscopy_west</data_channel>
+	    <label>H2S microscopy west</label>
+	    <color>#77583A</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_microscopy_west") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	  <plot1>
+	    <data_channel>rasppi15:B312_gasalarm_H2S_hall_west</data_channel>
+	    <label>H2S hall west</label>
+	    <color>#FF0000</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_hall_west") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot1>
+	  <plot2>
+	    <data_channel>rasppi15:B312_gasalarm_H2S_chemlab</data_channel>
+	    <label>H2S chemlab</label>
+	    <color>#009933</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_b312gasalarm where type=(SELECT id FROM dateplots_descriptions where codename="B312_gasalarm_H2S_chemlab") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot2>
+	</figure>
+      </container4>
+
+      <!-- Container 1, table with all H2S values -->
+      <container5>
+	<type>table</type>
+	<!--<bgcolor>#00FF00</bgcolor>-->
+	<width>600</width>
+	<height>364</height>
+	<fontsize>17</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size -->
+	<padding>36px 0px 0px 0px</padding>
+	<show_diff>true</show_diff>
+	<data>
+	  <item0>
+	    <data_channel>rasppi15:B312_gasalarm_H2S_microscopy_west</data_channel>
+	    <label>H2S microscopy west</label>
+	    <color>#77583A</color>
+	    <format>.1f</format>
+	    <unit>ppm</unit>
+	  </item0>
+	  <item1>
+	    <data_channel>rasppi15:B312_gasalarm_H2S_hall_west</data_channel>
+	    <label>H2S hall west</label>
+	    <color>#FF0000</color>
+	    <format>.1f</format>
+	    <unit>ppm</unit>
+	  </item1>
+	  <item2>
+	    <data_channel>rasppi15:B312_gasalarm_H2S_chemlab</data_channel>
+	    <label>H2S chemlab</label>
+	    <color>#009933</color>
+	    <format>.1f</format>
+	    <unit>ppm</unit>
+	  </item2>
+	</data>
+      </container5>
 
     </containers>
   </graph>

@@ -510,11 +510,11 @@
     </link>
     <link>
       <title>Host checker</title>
-      <ref>https://cinfdata.fysik.dtu.dk/cinf_common/host_checker.php</ref>
+      <ref>cinf_common/host_checker.php</ref>
     </link>
     <link>
       <title>Dateplots Descriptions</title>
-      <ref>https://cinfdata.fysik.dtu.dk/cinf_common/dateplots_descriptions.php</ref>
+      <ref>cinf_common/dateplots_descriptions.php</ref>
     </link>
     <link>
       <title>Email alarms</title>
@@ -716,7 +716,7 @@
     </link>
     <link>
       <title>Pressure Live</title>
-      <ref>https://cinfdata.fysik.dtu.dk/thetaprobe/live.php?type=live_pressures</ref>
+      <ref>thetaprobe/live.php?type=live_pressures</ref>
     </link>
   </setup>
 
@@ -769,51 +769,51 @@
     <setup_title>Gas alarm, 307</setup_title>
     <link>
       <title>System Status</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/system_status.php</ref>
+      <ref>gasmonitor307/system_status.php</ref>
     </link>
     <link>
       <title>Live Plots</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/live.php?type=live_values</ref>
+      <ref>gasmonitor307/live.php?type=live_values</ref>
     </link>
     <link>
       <title>All detectors</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=3&amp;left_plotlist[]=5&amp;left_plotlist[]=7&amp;left_plotlist[]=9&amp;left_plotlist[]=11&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=2&amp;right_plotlist[]=4&amp;right_plotlist[]=6&amp;right_plotlist[]=8&amp;right_plotlist[]=10&amp;right_plotlist[]=12</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=3&amp;left_plotlist[]=5&amp;left_plotlist[]=7&amp;left_plotlist[]=9&amp;left_plotlist[]=11&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=2&amp;right_plotlist[]=4&amp;right_plotlist[]=6&amp;right_plotlist[]=8&amp;right_plotlist[]=10&amp;right_plotlist[]=12</ref>
     </link>
     <link>
       <title>All CO detectors</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot_co&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;left_plotlist[]=4&amp;left_plotlist[]=5&amp;left_plotlist[]=6&amp;right_ymin=0&amp;right_ymax=0</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot_co&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;left_plotlist[]=4&amp;left_plotlist[]=5&amp;left_plotlist[]=6&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>
     <link>
       <title>All H2 detectors</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot_h2&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;left_plotlist[]=4&amp;left_plotlist[]=5&amp;left_plotlist[]=6&amp;right_ymin=0&amp;right_ymax=0</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot_h2&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;left_plotlist[]=2&amp;left_plotlist[]=3&amp;left_plotlist[]=4&amp;left_plotlist[]=5&amp;left_plotlist[]=6&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>
     <link>
       <title>CO and H2 051</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=2</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=2</ref>
     </link>
     <link>
       <title>CO and H2 055</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=3&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=4</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=3&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=4</ref>
     </link>
     <link>
       <title>CO and H2 059</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=5&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=6</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=5&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=6</ref>
     </link>
     <link>
       <title>CO and H2 061</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=7&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=8</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=7&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=8</ref>
     </link>
     <link>
       <title>CO and H2 932</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=11&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=12</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=11&amp;right_ymin=0&amp;right_ymax=0&amp;right_plotlist[]=12</ref>
     </link>
     <link>
       <title>CO 42-43</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=9&amp;right_ymin=0&amp;right_ymax=0</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=9&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>
     <link>
       <title>H2 2.Floor</title>
-      <ref>https://cinfdata.fysik.dtu.dk/gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=10&amp;right_ymin=0&amp;right_ymax=0</ref>
+      <ref>gasmonitor307/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=10&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>
   </setup>
 

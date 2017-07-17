@@ -130,6 +130,28 @@
 	    <format>.2f</format>
 	    <unit>&amp;deg;C</unit>
 	  </item3>
+	  <item4>
+	    <data_channel>rasppi71:thetaprobe_bakeout_setpoint</data_channel>
+	    <label>Bakeout setpoint</label>
+	    <color>#FFFFFF</color>
+	    <format>.1f</format>
+	    <unit>&amp;deg;C</unit>
+	  </item4>
+	  <item5>
+	    <data_channel>rasppi71:thetaprobe_bakeout_remaining</data_channel>
+	    <label>Bakeout remaining</label>
+	    <color>#FFFFFF</color>
+	    <format>text</format>
+	    <unit></unit>
+	  </item5>
+	  <item6>
+	    <data_channel>rasppi71:thetaprobe_ion_gauge_settings</data_channel>
+	    <label>Ion gun setting</label>
+	    <color>#FFFFFF</color>
+	    <format>text</format>
+	    <unit></unit>
+	  </item6>
+
 	</data>
       </container1>
 

@@ -2,6 +2,7 @@
 
 
 include("../common_functions_v2.php");
+require("SqlFormatter.php");
 $dbi = std_dbi("alarm");
 
 # Holds the data on existing alarms
@@ -10,6 +11,8 @@ $message_out = "";
 
 /* --- Functions --- */
 
+
+/** Return red colored message of $alarm is true */
 function msg($string, $alarm=false){
   if ($alarm){
     return "<p style=\"color:red\">" . htmlentities($string) . "</p>";
@@ -18,8 +21,45 @@ function msg($string, $alarm=false){
   }
 }
 
+
+/** Prepare a single row of data on an alarm for presentation in a HTML table
+
+    This preparation consists if JSON decoding the queries and syntax
+    highligthing them. The recipients and the email message are formatted with
+    newlines. All rows have HTML entities replaced with excapes and the check
+    and active is extracted.
+
+    @param array @row A database row for one alarm in an array
+
+    @return array An array of the following entities:
+       Array($quiries, $recipients, $message, $escaped_row, $active);
+
+ */
+function prepare_table_data($row){
+  # Format the quiries for a table cell
+  $quiries = JSON_decode($row[1]);
+  foreach($quiries as $key => $query){
+    $quiries[$key] = SqlFormatter::format($query);
+  }
+
+  # Format the recipients, the message and the check for a table cell
+  $recipients = implode("<br>", JSON_decode($row[6]));
+  $message = str_replace("\n", "<br>", $row[5]);
+
+  $escaped_row = Array();
+  foreach($row as $key=>$value){
+    $escaped_row[$key] = htmlentities($value);
+  }
+
+  $active = $row[11] == "1" ? "True"  : "False";
+
+  return Array($quiries, $recipients, $message, $escaped_row, $active);
+
+}
+
+
+/** Produces the HTML for the existing alarms table */
 function existing_alarms(){
-  /* Prints out a table of exiting alarms */
   global $dbi;
   global $alarm_data;
 
@@ -28,17 +68,12 @@ function existing_alarms(){
   $result = $dbi->query($query);
 
   # Start the table
-  echo("<form action=\"alarms.php#edit_alarm\">\n");
+  echo("<div style=\"width:45%;float:left\">");
+  echo("<h1><a id=\"existing\"></a>Existing alarms</h1>\n");
   echo("<table border=\"1\" class=\"nicetable\">\n");
-  echo("<tr>\n");
-  echo("<th>ID<br><br>Description</th>" .
-       "<th>Quiries</th>" .
-       "<th>Parameters<br><br>Check</th>" .
-       "<th style=\"width:100px\">No repeat interval<br><br>Active</th>" .
-       "<th>Message</th>" .
-       "<th>Subject<br><br>Recipients</th>" .
-       "<th>Action</th>\n");
-  echo("  </tr>\n");
+  echo("\n<tr>\n");
+  echo("<th>ID</th>\n<th>Description</th>\n<th colspan=3>Actions</th>\n");
+  echo("</tr>");
 
   # Loop over alarms
   while($row = $result->fetch_row()) {
@@ -49,62 +84,80 @@ function existing_alarms(){
   }
 
   # End the table
-  echo("</table>\n");
-  echo("</form>\n");
+  echo("\n\n</table>\n");
+  echo("</div>\n");
 }
+
 
 function single_alarm_row($row){
-  /* Generates a single alarm row
+  /** Produces HTML for a single row of the existing alarms table
 
-     The $row input is an array of the following items:
-       [id, quiries_json, parameters_json, check, no_repeat_interval, message,
-        recipients_json]
+      @param array $row An array of the following elements:
+          [id, quiries_json, parameters_json, check, no_repeat_interval, message,
+	  recipients_json]
+
+      @return void
 
   */
-  # Format the quiries for a table cell
-  $quiries = JSON_decode($row[1]);
-  foreach($quiries as $key => $query){
-    $quiries[$key] = htmlentities($query);
-  }
-  $quiries = implode("<br><br>", $quiries);
+  # Format content for a table cell
+  list($quiries, $recipients, $message, $escaped_row, $active) = prepare_table_data($row);
 
-  # Format the recipients, the message and the check for a table cell
-  $recipients = implode("<br>", JSON_decode($row[6]));
-  $message = str_replace("\n", "<br>", $row[5]);
-
-  $escaped_row = Array();
-  foreach($row as $key=>$value){
-    $escaped_row[$key] = htmlentities($value);
-  }
-  $check = htmlentities($row[3]);
-
-  $active = $row[11] == "1" ? "True"  : "False";
-
-  # Output the table row
-  echo("<tr>\n");
-  echo("<td style=\"width:150px\">{$escaped_row[0]}</td>" .
-       "<td rowspan=2 style=\"width:230px\">$quiries</td>" .
-       "<td>{$escaped_row[2]}</td>" .
-       "<td>{$escaped_row[4]}</td>" .
-       "<td rowspan=2>$message</td>" .
-       "<td>{$escaped_row[10]}</td>");
-  # Only show edit button on unlocked items
-  if ($row[7] == 0){
-    echo("<td rowspan=2><input name=\"action\" type=\"submit\" value=\"edit {$row[0]}\"><br><br>\n");
-    echo("<input name=\"action\" type=\"submit\" value=\"delete {$row[0]}\"></td>\n");
-  } else {
-    echo("<td rowspan=2>N/A</td>\n");
-  }
-  echo("</tr>\n");
+  # Produce table row
+  echo("\n\n<tr>\n");
+  echo("<td>{$escaped_row[0]}</td>\n");
+  echo("<td>{$escaped_row[9]}</td>\n");
+  echo("<td><form action=\"alarms.php\"><input name=\"action\" type=\"submit\" value=\"view {$row[0]}\"></form></td>\n");
+  echo("<td><form action=\"alarms.php#edit_alarm\"><input name=\"action\" type=\"submit\" value=\"edit {$row[0]}\"></form></td>\n");
+  echo("<td><form action=\"alarms.php#edit_alarm\"><input name=\"action\" type=\"submit\" value=\"delete {$row[0]}\"></form></td>\n");
   echo("</tr>");
-  echo("<td>{$escaped_row[9]}</td>" .
-       "<td>{$escaped_row[3]}</td>" .
-       "<td>{$active}</td>" .
-       "<td>$recipients</td>");
-  echo("</tr>\n");
-  echo("<tr style=\"background-color: #000000\"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+  return;
 }
 
+
+/** Produce the HTML for the current alarm view
+
+    @param string $alarm This string has the form "view 10" and therefore
+       contains the id of the alarm to view
+
+    @return void
+
+*/
+function view_alarm($action){
+  # Get html table suitable data
+  global $alarm_data;
+  $row_number = (int) substr($action, 5);
+  $row = $alarm_data[$row_number];
+  list($quiries, $recipients, $message, $escaped_row, $active) = prepare_table_data($row);
+
+  echo("\n<div style=\"width:50%; float:left; margin: 0% 0% 0% 5%;\">\n");
+  echo("<h1>View alarm ${escaped_row[0]}\n</h1>");
+
+  echo("<table class=\"nicetable\">\n");
+  echo("<tr><td class=\"nicetableleftheader\">ID</td><td>${escaped_row[0]}</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Description</td><td>${escaped_row[9]}</td></tr>");
+  foreach($quiries as $key => $query){
+    echo("<tr><td class=\"nicetableleftheader\">Query $key</td><td>$query</td></tr>");
+  }
+  echo("<tr><td class=\"nicetableleftheader\">Parameters</td><td>${escaped_row[2]}</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Check</td><td>${escaped_row[3]}</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">No repeat interval</td><td>${escaped_row[4]}</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Active</td><td>$active</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Recipients</td><td>$recipients</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Subject</td><td>${escaped_row[10]}</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Message</td><td>${escaped_row[5]}</td></tr>");
+  echo("</table>\n");
+  echo("</div>\n");
+}
+
+
+/** Converts an JSON array to array of HTML compat. strings
+
+    The strings are HTML escaped and any null values replaced by empty strings
+
+    @param string $json
+    @return array
+
+*/
 function from_json_to_array($json){
   $array = JSON_decode($json);
   for ($n = 0; $n <= 10; $n++) {
@@ -117,16 +170,23 @@ function from_json_to_array($json){
   return $array;
 }
 
-function edit_table($row){
-  /* Output edit table
 
-     The $row input is an array of the following items:
-       [id, quiries_json, parameters_json, check, no_repeat_interval, message,
-        recipients_json]
-  */
+/** Produce the HTML for the edit table
+
+    @param null, string or array $row If this parameter is null, it means that
+       the table is to be prefilled with default values for creating a new
+       alarm. If it is "continue new" or "continue edit" all the values for
+       the table is read from the page parameters. If it is an array the
+       values are read in from that. In the case of an array, it is on the
+       form: [id, quiries_json, parameters_json, check, no_repeat_interval, message,
+       recipients_json]
+    @return void
+
+*/
+function edit_table($row){
   # On continue edit or new, get the already filled in data from the url
   if ($row == "continue new" or $row == "continue edit"){
-    $alarm_id = isset($_GET["alarm_id"]) ? $_GET["alarm_id"] : null; 
+    $alarm_id = isset($_GET["alarm_id"]) ? $_GET["alarm_id"] : null;
     $check = isset($_GET["check"]) ? $_GET["check"] : "";
     $no_repeat_interval = isset($_GET["no_repeat_interval"]) ? $_GET["no_repeat_interval"] : 3600;
     $quiries = isset($_GET["quiries"]) ? $_GET["quiries"] : array_fill(0, 10, "");
@@ -232,11 +292,11 @@ function edit_table($row){
   echo("<tr><th>#</th><th>Parameter</th><th>Recipient</th><th>Query</th></tr>\n");
   for ($n = 0; $n <= 10; $n++) {
     echo("<tr><td>$n</td>" .
-	 "<td><input title=\"$parameter_help\" style=\"width:100%\" type=\"number\" name=\"parameters[]\" step=\"any\" value=\"{$parameters[$n]}\"></td>" . 
+	 "<td><input title=\"$parameter_help\" style=\"width:100%\" type=\"number\" name=\"parameters[]\" step=\"any\" value=\"{$parameters[$n]}\"></td>" .
 	 "<td><input title=\"$recipient_help\" style=\"width:100%\" type=\"email\" name=\"recipients[]\" value=\"{$recipients[$n]}\"></td>" .
 	 "<td><input title=\"$query_help\" style=\"width:100%\" type=\"text\" name=\"quiries[]\" value=\"{$quiries[$n]}\"></td>" .
 	 "</tr>\n");
-  } 
+  }
   echo("</table>\n");
 
   # Output submit buttons
@@ -253,8 +313,12 @@ function edit_table($row){
 
 }
 
+
+/** Prepares the data in the URL for insertion in the MySQL db
+
+    @return array associative array of data for database insertion
+*/
 function prepare_db_data(){
-  /* Prepares the data in the URL for insertion in the MySQL db */
   $output = Array("check" => $_GET["check"],
 		  "id" =>  $_GET["alarm_id"],
 		  "message" => str_replace("\r\n", "\n", $_GET["message"]),
@@ -273,7 +337,7 @@ function prepare_db_data(){
 	if ($key == "parameters"){
 	  $value = (float) $value;
 	}
-	$array[] = $value;	
+	$array[] = $value;
       } else {
 	break;
       }
@@ -297,13 +361,8 @@ function prepare_db_data(){
   return $output;
 }
 
-function p($object){
-  echo("<pre>");
-  echo(gettype($object) . " ");
-  echo(htmlentities(print_r($object, $return=true)));
-  echo("</pre>");
-}
 
+/** Insert a new alarm from the URL data into the database */
 function insert_new(){
   global $dbi;
   global $message_out;
@@ -359,6 +418,13 @@ function insert_new(){
   return true;
 }
 
+
+/** Delete an alarm by settings its visible int to 0
+
+    @param int $alarm_number the id of the alarm
+    @return void
+
+*/
 function delete_alarm($alarm_number){
   global $dbi;
   global $message_out;
@@ -378,6 +444,12 @@ function delete_alarm($alarm_number){
 
 }
 
+
+/** Update an alarm database entry with data from the URL
+
+    @return bool that indicates whether there was enough data to make the
+       update
+*/
 function update_existing(){
   global $dbi;
   global $message_out;
@@ -430,6 +502,7 @@ function update_existing(){
   return true;
 }
 
+
 /* --- Main Script --- */
 
 # Parse action
@@ -456,17 +529,24 @@ if (substr($action, 0, 4) === "edit"){
 /* --- Main page output --- */
 
 echo(html_header());
+echo("\n\n\n");
 echo($message_out);
 
-
-echo("<div style=\"float:right\">\n");
 echo("<form action=\"alarms.php\">\n");
-echo("<input name=\"action\" type=\"submit\" value=\"Cancel\"\n>");
+echo("<input name=\"action\" type=\"submit\" value=\"Cancel\">\n");
 echo("</form>\n");
-echo("</div>\n");
-echo("<h1><a id=\"existing\"></a>Existing alarms</h1>\n");
+echo("\n\n\n");
 
+# Existing alarms
 existing_alarms();
+
+# View alarm
+if (substr($action, 0, 4) == "view"){
+  view_alarm($action);
+
+}
+
+echo("<div class=\"clear\"></div>\n");
 
 if ($action == "new"){
   echo("<h1>Enter new alarm</h1>\n");
@@ -482,6 +562,7 @@ if ($action == "new"){
   edit_table($alarm_data[$alarm_number]);
 }
 
+echo("\n\n\n");
 echo(html_footer());
 
 ?>

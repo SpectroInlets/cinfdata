@@ -461,6 +461,14 @@ table.nicetable td.all_good{
     background-color: #43AF11;
 }
 
+.nicetableleftheader {
+    border: 1px solid black;
+    padding: 5px 12px;
+    background-color: #333333;
+    color: white;
+    font-weight: bold;
+}
+
 .nobr{
     white-space: nowrap;
 }

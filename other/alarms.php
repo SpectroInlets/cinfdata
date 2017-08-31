@@ -128,7 +128,7 @@ function view_alarm($action){
   $row_number = (int) substr($action, 5);
   $row = $alarm_data[$row_number];
   list($quiries, $recipients, $message, $escaped_row, $active) = prepare_table_data($row);
-
+  $message = str_replace("\n", "<br>", $escaped_row[5]);
   echo("\n<div style=\"width:50%; float:left; margin: 0% 0% 0% 5%;\">\n");
   echo("<h1>View alarm ${escaped_row[0]}\n</h1>");
 
@@ -144,7 +144,7 @@ function view_alarm($action){
   echo("<tr><td class=\"nicetableleftheader\">Active</td><td>$active</td></tr>");
   echo("<tr><td class=\"nicetableleftheader\">Recipients</td><td>$recipients</td></tr>");
   echo("<tr><td class=\"nicetableleftheader\">Subject</td><td>${escaped_row[10]}</td></tr>");
-  echo("<tr><td class=\"nicetableleftheader\">Message</td><td>${escaped_row[5]}</td></tr>");
+  echo("<tr><td class=\"nicetableleftheader\">Message</td><td>$message</td></tr>");
   echo("</table>\n");
   echo("</div>\n");
 }

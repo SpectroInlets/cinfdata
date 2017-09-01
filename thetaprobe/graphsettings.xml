@@ -80,6 +80,7 @@
 	     constant values -->
 	<!-- <yrangepad>10</yrangepad> -->
 	<line_width>3</line_width>
+	<format>.1e</format>
 	<data_reduction>
 	  <time>600</time>
 	  <relative>0.05</relative>
@@ -169,6 +170,7 @@
 	     constant values -->
 	<!-- <yrangepad>10</yrangepad> -->
 	<line_width>3</line_width>
+	<format>.1e</format>
 	<data_reduction>
 	  <time>600</time>
 	  <relative>0.05</relative>

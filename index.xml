@@ -221,6 +221,10 @@
   <setup codename="omicron">
     <setup_title>Omicron</setup_title>
     <link>
+      <title>Pressure Live</title>
+      <ref>omicron/live.php?type=live_pressures</ref>
+    </link>
+    <link>
       <title>Temperature of TPD stage</title>
       <ref>omicron/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist[]=1</ref>
     </link>

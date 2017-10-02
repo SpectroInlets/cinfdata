@@ -26,10 +26,13 @@ class UpdateSTMMetaData:
         self.last_sync = 222  # Should be parsed from file and be in epoc time
         self.files_basedir = '/u/data1/stm312/stm/Images'
         self.extension = '.mul'
-        self.database = MySQLdb.connect(user=stmimages_credentials.USER,
-                                  passwd=stmimages_credentials.PASS,
-                                  charset='utf8',
-                                  db='cinfdata')
+        self.database = MySQLdb.connect(
+            host='servcinf-sql',
+            user=stmimages_credentials.USER,
+            passwd=stmimages_credentials.PASS,
+            charset='utf8',
+            db='cinfdata',
+            )
         self.cursor = self.database.cursor()
 
     def get_file_changes(self):

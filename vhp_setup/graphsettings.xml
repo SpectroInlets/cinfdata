@@ -79,28 +79,37 @@
     </dateplot8>
 
     <dateplot9>
-      <title>Medium Pressure</title>
-      <legend>Medium Pressure</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=421 and time between "{from}" and "{to}" order by time</query>
+      <title>Low Pressure</title>
+      <legend>Low Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=420 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>9</color>
     </dateplot9>
 
     <dateplot10>
-      <title>High Pressure</title>
-      <legend>High Pressure</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=422 and time between "{from}" and "{to}" order by time</query>
+      <title>Medium Pressure</title>
+      <legend>Medium Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=421 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>10</color>
     </dateplot10>
 
+
     <dateplot11>
+      <title>High Pressure</title>
+      <legend>High Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=422 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>11</color>
+    </dateplot11>
+
+    <dateplot12>
       <title>BPR, Backside Pressure</title>
       <legend>BPR, Backside Pressure</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=423 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
-      <color>11</color>
-    </dateplot11>
+      <color>12</color>
+    </dateplot12>
 
 
   </graph>
@@ -113,6 +122,13 @@
     <label_column>id</label_column>
     <right_legend_suffix> (r)</right_legend_suffix>
     <gas_analysis>false</gas_analysis>
+    <plugins>
+      <MassSpectraOffset>
+	<title>Offset the spectra to avoid negative values</title>
+	<output>raw</output>
+      </MassSpectraOffset>
+    </plugins>
+
     <dygraph_settings>
       <series_highlight>true</series_highlight>
       <labels_side>true</labels_side>

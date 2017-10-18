@@ -399,6 +399,120 @@
     </dateplot5>
   </graph>
 
+  <graph type='trello_stats'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <title>Multiple dateplots</title>
+    <ylabel>Mixed</ylabel>
+    <default_time>720</default_time>
+    <matplotlib_settings>
+      <linewidth>2.5</linewidth>
+    </matplotlib_settings>
+    <dygraph_settings>
+      <roll_period>1</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+    
+    <!-- Purchases -->
+    <dateplot1>
+      <title>Unsorted</title>
+      <legend>Unsorted</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_unsorted") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>2</color>
+    </dateplot1>
+
+    <dateplot2>
+      <title>Far Down the Queue</title>
+      <legend>Far down the queue</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_down_the_queue") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>3</color>
+    </dateplot2>
+
+    <dateplot3>
+      <title>To Do PyExpLabSys</title>
+      <legend>ToDo PyExpLabSys</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_to_do_pyexplabsys") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>4</color>
+    </dateplot3>
+
+    <dateplot4>
+      <title>Doing</title>
+      <legend>Doing</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_doing") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>5</color>
+    </dateplot4>
+
+    <dateplot5>
+      <title>To Do SurfCat data</title>
+      <legend>ToDo SurfCatData</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_to_do_cinfdata_winfwiki") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>6</color>
+    </dateplot5>
+
+    <dateplot6>
+      <title>TODAY</title>
+      <legend>TODAY</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_TODAY") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>7</color>
+    </dateplot6>
+
+    <dateplot7>
+      <title>On Hold</title>
+      <legend>On hold</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_on_hold") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>8</color>
+    </dateplot7>
+
+    <dateplot8>
+      <title>To Do</title>
+      <legend>ToDo</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_list_to_do") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>9</color>
+    </dateplot8>
+
+    <dateplot9>
+      <title>Kenneth</title>
+      <legend>Kenneth</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_user_kenneth") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>2</color>
+    </dateplot9>
+
+    <dateplot10>
+      <title>Robert</title>
+      <legend>Robert</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_user_robert") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>3</color>
+    </dateplot10>
+
+    <dateplot11>
+      <title>Brian</title>
+      <legend>Brian</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_user_brian") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>4</color>
+    </dateplot11>
+
+    <dateplot12>
+      <title>Total</title>
+      <legend>Total</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall WHERE type = (SELECT id FROM dateplots_descriptions where codename="trello_total") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>[n]</ylabel>
+      <color>1</color>
+    </dateplot12>
+  </graph>
+
+
 
   <global_settings>
     <measurements_table>fridays</measurements_table>

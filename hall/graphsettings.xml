@@ -609,9 +609,9 @@
       <container8>
 	<type>table</type>
 	<!--<bgcolor>#FF0000</bgcolor>-->
-	<width>450</width>
+	<width>400</width>
 	<height>200</height>
-	<fontsize>17</fontsize>
+	<fontsize>14</fontsize>
 	<!-- optional html padding string, remember to subtract the padding in
 	     the size top, right, bottom, top, right, bottom, left-->
 	<padding>40px 0px 0px 0px</padding>

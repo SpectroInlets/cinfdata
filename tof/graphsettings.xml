@@ -357,14 +357,14 @@ type=
 	  </item0>
 	  <item1>
             <color>#0000FF</color>
-            <data_channel>rasppi37:21984839</data_channel>
+            <data_channel>rasppi90:21984839</data_channel>
             <label>Flow 2</label>
 	    <format>.2f</format>
 	    <unit>mL/min</unit>
 	  </item1>
 	  <item2>
             <color>#0000FF</color>
-            <data_channel>rasppi37:21984838</data_channel>
+            <data_channel>rasppi90:21984838</data_channel>
             <label>Flow 3</label>
 	    <format>.2f</format>
 	    <unit>mL/min</unit>

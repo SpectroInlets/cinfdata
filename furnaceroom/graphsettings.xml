@@ -15,37 +15,55 @@
 
     <!-- Furnace 1 -->
     <dateplot1>
-      <title>T, furnace 1</title>
-      <legend>T, furnace 1</legend>
+      <title>T, Main</title>
+      <legend>T, Main</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where value > -999 and type=130 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>1</color>
     </dateplot1>
 
+    <!-- T - extra -->
     <dateplot2>
-      <title>Setpoint, furnace 1</title>
-      <legend>Setpoint, furnace 1</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where type=132 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Extra</title>
+      <legend>T, Extra</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where value > -999 and type=131 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>2</color>
     </dateplot2>
 
-    <!-- Furnace 2 -->
+
     <dateplot3>
-      <title>T, furnace 2</title>
-      <legend>T, furnace 2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where value > -999 and type=131 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Temperature / C</ylabel>
+      <title>Setpoint</title>
+      <legend>Setpoint</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where type=132 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Setpoint / C</ylabel>
       <color>3</color>
     </dateplot3>
 
     <dateplot4>
-      <title>Setpoint, furnace 2</title>
-      <legend>Setpoint, furnace 2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where type=134 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Temperature / C</ylabel>
+      <title>pid-p</title>
+      <legend>pid-p</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where type=135 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>pid-p</ylabel>
       <color>4</color>
     </dateplot4>
+
+    <dateplot5>
+      <title>pid-i</title>
+      <legend>pid-i</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where type=136 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>pid-i</ylabel>
+      <color>5</color>
+    </dateplot5>
+
+
+    <dateplot6>
+      <title>Dutycycle</title>
+      <legend>Dutycycle</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_furnaceroom307 where type=134 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Dutycycle</ylabel>
+      <color>6</color>
+    </dateplot6>
 
 
   </graph>

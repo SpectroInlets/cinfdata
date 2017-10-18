@@ -1,0 +1,63 @@
+<?xml version='1.0' standalone='yes'?>
+<graphs>
+
+  <!-- iv -->
+  <graph type='iv'>
+    <default_xscale>lin</default_xscale>
+    <type>1</type>
+    <xlabel>Bias / V</xlabel>
+    <grouping_column>time</grouping_column>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <label_column>mass_label</label_column>
+    <!-- queries -->
+    <queries>
+      <default>SELECT x,y*1000  FROM xy_values_pv_setup where measurement = {id} order by id</default>
+    </queries>
+    <ylabel>
+      <default>Current / mA</default>
+      <column>mass_label</column>
+    </ylabel>
+    <!-- legend -->
+    <legend>
+<!--      <default>{id} - {time}</default> -->
+     <default>{mass_label}</default>
+    </legend>
+    <flip_x>
+      <gui>Flip X-scale</gui>
+    </flip_x>
+
+   <parameters>
+      <param0>
+	<field>comment</field>
+	<name>Comment</name>
+      </param0>
+    </parameters>
+
+  </graph>
+
+
+  <global_settings>
+    <measurements_table>measurements_pv_setup</measurements_table>
+    <xyvalues_table>xy_values_dummy</xyvalues_table>
+    <sql_username>cinf_reader</sql_username>
+    <label_column>mass_label</label_column>
+    <image_format>png</image_format>
+    <mandatory_export_fields>
+      <field0>
+	<field>id</field>
+	<name>Id</name>
+      </field0>
+      <field1>
+	<field>type</field>
+	<name>Type</name>
+      </field1>
+      <field2>
+	<field>time</field>
+	<name>Recorded at</name>
+      </field2>
+    </mandatory_export_fields>
+  </global_settings>
+</graphs>
+
+
+

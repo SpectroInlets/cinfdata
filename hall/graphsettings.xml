@@ -344,7 +344,7 @@
 	<!-- reduce the amount of points that gets plotted -->
 	<data_reduction>
 	  <time>600</time>
-	  <absolute>0.1</absolute>
+	  <absolute>0.0075</absolute>
 	</data_reduction>
 	<figure>
 	  <plot0>

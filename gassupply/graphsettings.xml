@@ -1,0 +1,386 @@
+<?xml version='1.0' standalone='yes'?>
+<graphs>
+
+  <!-- MULTI DATEPLOT -->
+  <graph type='multidateplot'>
+    <default_xscale>dat</default_xscale>
+    <xlabel>Date</xlabel>
+    <right_legend_suffix> (r)</right_legend_suffix>
+    <!-- Fall back settings -->
+    <title>Multiple dateplots</title>
+    <ylabel>Mixed</ylabel>
+    <dygraph_settings>
+      <roll_period>5</roll_period>
+      <labels_side>true</labels_side>
+    </dygraph_settings>
+    <matplotlib_settings>
+      <width>900</width>
+      <height>600</height>
+      <title_size>24</title_size>
+      <xtick_labelsize>12</xtick_labelsize>
+      <ytick_labelsize>12</ytick_labelsize>
+      <legend_fontsize>10</legend_fontsize>
+      <label_fontsize>16</label_fontsize>
+      <loc>upper left</loc>
+    </matplotlib_settings>
+    <dateplot1>
+      <title>CH4 Right</title>
+      <legend>CH4 Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_ch4_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>1</color>
+    </dateplot1>
+    <dateplot2>
+      <title>CH4 Left</title>
+      <legend>CH4 Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_ch4_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>2</color>
+    </dateplot2>
+    <dateplot3>
+      <title>H2 Right</title>
+      <legend>H2 Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_h2_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>3</color>
+    </dateplot3>
+    <dateplot4>
+      <title>H2 Left</title>
+      <legend>H2 Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_h2_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>4</color>
+    </dateplot4>
+    <dateplot5>
+      <title>CO Left</title>
+      <legend>CO Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_CO_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>5</color>
+    </dateplot5>
+    <dateplot6>
+      <title>CO Right</title>
+      <legend>CO Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_CO_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>6</color>
+    </dateplot6>
+    <dateplot7>
+      <title>Ar Right</title>
+      <legend>Ar Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_Ar_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>7</color>
+    </dateplot7>
+    <dateplot8>
+      <title>Ar Left</title>
+      <legend>Ar Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_Ar_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>8</color>
+    </dateplot8>
+    <dateplot9>
+      <title>O2 Right</title>
+      <legend>O2 Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_O2_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>9</color>
+    </dateplot9>
+    <dateplot10>
+      <title>O2 Left</title>
+      <legend>O2 Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_O2_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>10</color>
+    </dateplot10>
+    <dateplot11>
+      <title>N2 Right</title>
+      <legend>N2 Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_N2_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>11</color>
+    </dateplot11>
+    <dateplot12>
+      <title>N2 Left</title>
+      <legend>N2 Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_N2_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>12</color>
+    </dateplot12>
+    <dateplot13>
+      <title>He Right</title>
+      <legend>He Right</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_He_right") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>13</color>
+    </dateplot13>
+    <dateplot14>
+      <title>He Left</title>
+      <legend>He Left</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_gassupply WHERE type = (SELECT id FROM dateplots_descriptions where codename="gassupply_307_He_left") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / bar</ylabel>
+      <color>14</color>
+    </dateplot14>
+  </graph>
+
+  <graph type="live_values">
+    <page_width>1250</page_width>
+    <page_title>Gas Levels</page_title> <!-- option page title -->
+    <containers>
+      <!-- Container 0, plot of all values CO values -->
+      <container0>
+	<type>date_figure</type>
+	<title>CO Detectors</title>
+	<!-- <bgcolor>#E7E7E7</bgcolor>-->
+	<width>800</width>
+	<height>600</height>
+	<jump_ahead>0.3</jump_ahead>
+	<x_window>86400</x_window> <!-- 1 day -->
+	<!-- Experimental, to fix bad y-range selection with log plot and
+	     constant values -->
+	<yrangepad>10</yrangepad>
+	<line_width>3</line_width>
+	<data_reduction>
+	  <time>600</time>
+	  <absolute>0.15</absolute>
+	</data_reduction>
+	<figure>
+	  <plot0>
+	    <data_channel>rasppi99:gassupply_307_ch4_right</data_channel>
+	    <label>CH4 Right</label>
+	    <color>#77583A</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_ch4_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	  <plot1>
+	    <data_channel>rasppi99:gassupply_307_ch4_left</data_channel>
+	    <label>CH4 Left</label>
+	    <color>#77583A</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_ch4_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot1>
+	  <plot2>
+	    <data_channel>rasppi99:gassupply_307_h2_right</data_channel>
+	    <label>H2 Right</label>
+	    <color>#FF0000</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_h2_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot2>
+	  <plot3>
+	    <data_channel>rasppi99:gassupply_307_h2_left</data_channel>
+	    <label>H2 Left</label>
+	    <color>#FF0000</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_h2_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot3>
+	  <plot4>
+	    <data_channel>rasppi99:gassupply_307_CO_left</data_channel>
+	    <label>CO Left</label>
+	    <color>#009933</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_CO_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot4>
+	  <plot5>
+	    <data_channel>rasppi99:gassupply_307_CO_right</data_channel>
+	    <label>CO Right</label>
+	    <color>#009933</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_CO_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot5>
+	  <plot6>
+	    <data_channel>rasppi99:gassupply_307_Ar_right</data_channel>
+	    <label>Ar Right</label>
+	    <color>#0000FF</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_Ar_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot6>
+	  <plot7>
+	    <data_channel>rasppi99:gassupply_307_Ar_left</data_channel>
+	    <label>Ar Left</label>
+	    <color>#0000FF</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_Ar_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot7>
+	  <plot8>
+	    <data_channel>rasppi99:gassupply_307_O2_right</data_channel>
+	    <label>O2 Right</label>
+	    <color>#CCCC00</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_O2_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot8>
+	  <plot9>
+	    <data_channel>rasppi99:gassupply_307_O2_left</data_channel>
+	    <label>O2 Left</label>
+	    <color>#CCCC00</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_O2_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot9>
+	  <plot10>
+	    <data_channel>rasppi99:gassupply_307_N2_right</data_channel>
+	    <label>N2 Right</label>
+	    <color>#990099</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_N2_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot10>
+	  <plot11>
+	    <data_channel>rasppi99:gassupply_307_N2_left</data_channel>
+	    <label>N2 Left</label>
+	    <color>#990099</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_N2_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot11>
+	  <plot12>
+	    <data_channel>rasppi99:gassupply_307_He_right</data_channel>
+	    <label>He Right</label>
+	    <color>#112233</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_He_right") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot12>
+	  <plot13>
+	    <data_channel>rasppi99:gassupply_307_He_left</data_channel>
+	    <label>He Left</label>
+	    <color>#112233</color>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_gassupply where type=(SELECT id FROM dateplots_descriptions where codename="gassupply_307_He_left") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot13>
+	</figure>
+      </container0>
+
+      <!-- Container 1, table with all values -->
+      <container1>
+	<type>table</type>
+	<!--<bgcolor>#00FF00</bgcolor>-->
+	<width>400</width>
+	<height>800</height>
+	<fontsize>17</fontsize>
+	<!-- optional html padding string, remember to subtract the padding in
+	     the size -->
+	<padding>36px 0px 0px 0px</padding>
+	<data>
+	  <item0>
+	    <data_channel>rasppi99:gassupply_307_ch4_right</data_channel>
+	    <label>CH4 Right</label>
+	    <color>#77583A</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item0>
+	  <item1>
+	    <data_channel>rasppi99:gassupply_307_ch4_left</data_channel>
+	    <label>CH4 Left</label>
+	    <color>#77583A</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item1>
+	  <item2>
+	    <data_channel>rasppi99:gassupply_307_h2_right</data_channel>
+	    <label>H2 Right</label>
+	    <color>#FF0000</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item2>
+	  <item3>
+	    <data_channel>rasppi99:gassupply_307_h2_left</data_channel>
+	    <label>H2 Left</label>
+	    <color>#FF0000</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item3>
+	  <item4>
+	    <data_channel>rasppi99:gassupply_307_CO_left</data_channel>
+	    <label>CO Left</label>
+	    <color>#009933</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item4>
+	  <item5>
+	    <data_channel>rasppi99:gassupply_307_CO_right</data_channel>
+	    <label>CO Right</label>
+	    <color>#009933</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item5>
+	  <item6>
+	    <data_channel>rasppi99:gassupply_307_Ar_right</data_channel>
+	    <label>Ar Right</label>
+	    <color>#0000FF</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item6>
+	  <item7>
+	    <data_channel>rasppi99:gassupply_307_Ar_left</data_channel>
+	    <label>Ar Left</label>
+	    <color>#0000FF</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item7>
+	  <item8>
+	    <data_channel>rasppi99:gassupply_307_O2_right</data_channel>
+	    <label>O2 Right</label>
+	    <color>#CCCC00</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item8>
+	  <item9>
+	    <data_channel>rasppi99:gassupply_307_O2_left</data_channel>
+	    <label>O2 Left</label>
+	    <color>#CCCC00</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item9>
+	  <item10>
+	    <data_channel>rasppi99:gassupply_307_N2_right</data_channel>
+	    <label>N2 Right</label>
+	    <color>#990099</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item10>
+	  <item11>
+	    <data_channel>rasppi99:gassupply_307_N2_left</data_channel>
+	    <label>N2 Left</label>
+	    <color>#990099</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item11>
+	  <item12>
+	    <data_channel>rasppi99:gassupply_307_He_right</data_channel>
+	    <label>He Right</label>
+	    <color>#112233</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item12>
+	  <item13>
+	    <data_channel>rasppi99:gassupply_307_He_left</data_channel>
+	    <label>He Left</label>
+	    <color>#112233</color>
+	    <format>.1f</format>
+	    <unit>bar</unit>
+	  </item13>
+	</data>
+      </container1>
+    </containers>
+  </graph>
+
+  <!-- GLOBAL SETTINGS -->
+  <global_settings>
+    <measurements_table>measurements_gassupply</measurements_table>
+    <xyvalues_table>xy_values_gassupply</xyvalues_table>
+    <!--<chamber_name>microreactorNG</chamber_name>-->
+    <sql_username>gassupply</sql_username>
+    <folder_name>gassupply</folder_name>
+    <image_format>png</image_format>
+    <mandatory_export_fields>
+      <field0>
+	<field>id</field>
+	<name>Id</name>
+      </field0>
+      <field1>
+	<field>type</field>
+	<name>Type</name>
+      </field1>
+      <field2>
+	<field>time</field>
+	<name>Recorded at</name>
+      </field2>
+      <field3>
+	<field>comment</field>
+	<name>Comment</name>
+      </field3>
+    </mandatory_export_fields>
+    <matplotlib_settings>
+      <width>900</width>
+      <height>600</height>
+      <title_size>24</title_size>
+      <xtick_labelsize>12</xtick_labelsize>
+      <ytick_labelsize>12</ytick_labelsize>
+      <legend_fontsize>10</legend_fontsize>
+      <label_fontsize>16</label_fontsize>
+      <loc>center</loc>
+    </matplotlib_settings>
+  </global_settings>
+</graphs>

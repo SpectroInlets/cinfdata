@@ -208,6 +208,27 @@
     </link>
   </setup>
 
+  <!--Gas alarm, 312-->
+  <setup codename="gassupply">
+    <setup_title>Gas Supply</setup_title>
+    <link>
+      <title>All Levels</title>
+      <ref>gassupply/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist%5B%5D=1&amp;left_plotlist%5B%5D=2&amp;left_plotlist%5B%5D=3&amp;left_plotlist%5B%5D=4&amp;left_plotlist%5B%5D=5&amp;left_plotlist%5B%5D=6&amp;left_plotlist%5B%5D=7&amp;left_plotlist%5B%5D=8&amp;left_plotlist%5B%5D=9&amp;left_plotlist%5B%5D=10&amp;left_plotlist%5B%5D=11&amp;left_plotlist%5B%5D=12&amp;left_plotlist%5B%5D=13&amp;left_plotlist%5B%5D=14</ref>
+    </link>
+    <link>
+      <title>All Battery Levels</title>
+      <ref>gassupply/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist%5B%5D=7&amp;left_plotlist%5B%5D=8&amp;left_plotlist%5B%5D=11&amp;left_plotlist%5B%5D=12</ref>
+    </link>
+    <link>
+      <title>All Bottle Levels</title>
+      <ref>gassupply/dateplot.php?type=multidateplot&amp;matplotlib=checked&amp;left_plotlist%5B%5D=1&amp;left_plotlist%5B%5D=2&amp;left_plotlist%5B%5D=3&amp;left_plotlist%5B%5D=4&amp;left_plotlist%5B%5D=5&amp;left_plotlist%5B%5D=6&amp;left_plotlist%5B%5D=9&amp;left_plotlist%5B%5D=10&amp;left_plotlist%5B%5D=13&amp;left_plotlist%5B%5D=14</ref>
+    </link>
+    <link>
+      <title>All Levels Live</title>
+      <ref>gassupply/live.php?type=live_values</ref>
+    </link>
+  </setup>
+
   <!--GC MS-->
   <setup codename="gc_ms">
     <setup_title>GC MS</setup_title>
@@ -292,7 +313,7 @@
     </link>
     <link>
       <title>Cluster deposition</title>
-      <ref>omicron/xyplot.php?type=cluster_deposition&amp;matplotlib=checked</ref>
+      <ref>omicron/xyplot.php?type=cluster_deposition</ref>
     </link>
     <link>
       <title>Modify comments</title>
@@ -749,8 +770,12 @@
   <setup codename="uhv_sputterchamber">
     <setup_title>UHV Sputterchamber</setup_title>
     <link>
-      <title>Chiller Flow</title>
+      <title>Pressure</title>
       <ref>uhv_sputterchamber/dateplot.php?type=multidateplot&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=1&amp;right_ymin=0&amp;right_ymax=0</ref>
+    </link>
+    <link>
+      <title>Chiller Flow</title>
+      <ref>uhv_sputterchamber/dateplot.php?type=multidateplot&amp;left_ymin=0&amp;left_ymax=0&amp;left_plotlist[]=4&amp;right_ymin=0&amp;right_ymax=0</ref>
     </link>
   </setup>
 

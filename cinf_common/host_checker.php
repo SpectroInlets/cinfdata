@@ -58,7 +58,11 @@ for ($i=0; $i<sizeof($data); $i++){
   else{
     $sortval = 1000;
   }
-  echo("<td data-value=\"" . $sortval . "\">" . $data[$i]['hostname'] . "</td>");
+  $sort_pos = preg_replace('/\D/', '', $data[$i]['hostname']);
+  if ($sort_pos == ''){
+      $sort_pos = '99999';
+  }
+  echo("<td data-value=\"" . $sort_pos . "\">" . $data[$i]['hostname'] . "</td>");
   if ($data[$i]['up_or_down'] == false){
     echo("<td colspan=2><b>Host is down</b></td>");
   }else{

@@ -71,7 +71,7 @@
     <dateplot1>
       <title>Temperature, water</title>
       <legend>Water / C</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 480 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 482 and time between "{from}" and "{to}" and value > -9998 order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>1</color>
     </dateplot1>
@@ -95,7 +95,7 @@
     <dateplot4>
       <title>Flow</title>
       <legend>Flow / LPM</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 481 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 480 and time between "{from}" and "{to}" and value > -9998 order by time</query>
       <ylabel>Flow rate / LPM</ylabel>
       <color>4</color>
     </dateplot4>
@@ -103,7 +103,7 @@
     <dateplot5>
       <title>Pressure</title>
       <legend>Pressure / bar</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 482 and time between "{from}" and "{to}" and value > -9998 order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 481 and time between "{from}" and "{to}" and value > -9998 order by time</query>
       <ylabel>Pressure / bar</ylabel>
       <color>5</color>
     </dateplot5>

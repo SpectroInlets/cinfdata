@@ -17,7 +17,7 @@
     <dateplot1>
       <title>Dummy 1</title>
       <legend>Dummy 1</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 0 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 450 and time between "{from}" and "{to}" order by time</query>
       <ylabel>n</ylabel>
       <color>1</color>
     </dateplot1>
@@ -25,10 +25,20 @@
     <dateplot2>
       <title>Dummy 2</title>
       <legend>Dummy 2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 1 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 451 and time between "{from}" and "{to}" order by time</query>
       <ylabel>n</ylabel>
       <color>2</color>
     </dateplot2>
+    <dateplot3>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_hall
+      where type = 167 and time between "{from}" and "{to}" order by
+      time</query>
+      <ylabel>Pressure / Pa</ylabel>
+      <title>Ventilation pressure</title>
+      <legend>P. ventilation</legend>
+      <color>3</color>
+    </dateplot3>
+
   </graph>
 
 
@@ -64,16 +74,22 @@
   <graph type='iv'>
     <default_xscale>lin</default_xscale>
     <type>1</type>
+    <xlabel>Bias / V</xlabel>
     <grouping_column>time</grouping_column>
     <right_legend_suffix> (r)</right_legend_suffix>
-    <label_column>id</label_column>
+    <label_column>mass_label</label_column>
     <!-- queries -->
     <queries>
       <default>SELECT x,y  FROM xy_values_dummy where measurement = {id} order by id</default>
     </queries>
+    <ylabel>
+      <default>Current / A</default>
+      <column>mass_label</column>
+    </ylabel>
     <!-- legend -->
     <legend>
-      <default>{id} - {time}</default>
+<!--      <default>{id} - {time}</default> -->
+     <default>{mass_label}</default>
     </legend>
     <flip_x>
       <gui>Flip X-scale</gui>

@@ -529,7 +529,7 @@ type=
     <image_format>png</image_format>
     <charset>ISO-8859-1</charset>
     <matplotlib_settings>
-      <width>2700</width>
+      <width>3300</width>
       <height>1000</height>
     </matplotlib_settings>
     <flight_time_estimate>true</flight_time_estimate>

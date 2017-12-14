@@ -37,6 +37,22 @@
       <ylabel>Humidity / %</ylabel>
       <color>3</color>
     </dateplot3>
+    <!-- Vibrations -->
+    <dateplot4>
+      <title>Vibrations, gyroscope</title>
+      <legend>Vibrations, gyroscope</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b307_049 where type=413 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>vibrations / dps</ylabel>
+      <color>4</color>
+    </dateplot4>
+    <!-- Vibrations -->
+    <dateplot5>
+      <title>Vibrations, accl</title>
+      <legend>Vibrations, accl</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_b307_049 where type=414 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>vibrations / g</ylabel>
+      <color>5</color>
+    </dateplot5>
  </graph>
 
 

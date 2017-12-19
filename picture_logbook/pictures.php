@@ -9,7 +9,7 @@ echo(html_header());
 $setup = $_GET['setup'];
 
 #This will be the query to use when real data is inserted
-$query = 'select time, user, pictureid, login from picture_logbooks where setup = "' . $setup . '" order by time desc';
+$query = 'select time, user, pictureid, login from picture_logbooks where setup = "' . $setup . '" order by time desc limit 100';
 $result = mysql_query($query, $db);
 
 echo('<table border=0> ' . PHP_EOL);

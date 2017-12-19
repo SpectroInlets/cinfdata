@@ -15,30 +15,52 @@
 
     <!-- Dummy 1 -->
     <dateplot1>
-      <title>Dummy 1</title>
-      <legend>Dummy 1</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 450 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>n</ylabel>
+      <title>Fumehood 2</title>
+      <legend>Fumehood 2</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 451 and value > -1 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Sensor voltage</ylabel>
       <color>1</color>
     </dateplot1>
     <!-- Dummy 2 -->
     <dateplot2>
-      <title>Dummy 2</title>
-      <legend>Dummy 2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 451 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>n</ylabel>
+      <title>Fumehood 3</title>
+      <legend>Fumehood 3</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 452 and value > -1 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Sensor voltage</ylabel>
       <color>2</color>
     </dateplot2>
     <dateplot3>
+      <title>Fumehood 2 Wind</title>
+      <legend>Fumehood 2 Wind</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 454 and value > -1 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>m/s</ylabel>
+      <color>3</color>
+    </dateplot3>
+    <!-- Dummy 2 -->
+    <dateplot4>
+      <title>Fumehood 3 Wind</title>
+      <legend>Fumehood 3 Wind</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_dummy where type = 455 and value > -1 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>m/s</ylabel>
+      <color>4</color>
+    </dateplot4>
+    <dateplot5>
       <query>SELECT unix_timestamp(time), value FROM dateplots_hall
       where type = 167 and time between "{from}" and "{to}" order by
       time</query>
       <ylabel>Pressure / Pa</ylabel>
       <title>Ventilation pressure</title>
       <legend>P. ventilation</legend>
-      <color>3</color>
-    </dateplot3>
-
+      <color>5</color>
+    </dateplot5>
+    <!-- Air Temperature -->
+    <dateplot6>
+      <title>Air Temperature</title>
+      <legend>Temperature</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_chemlab312 where type=171 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>7</color>
+    </dateplot6>
   </graph>
 
 

@@ -13,50 +13,61 @@
       <labels_side>true</labels_side>
     </dygraph_settings>
 
-    <!-- Chiller flow -->
+    <!-- Chamber pressure -->
     <dateplot1>
+      <title>Chamber pressure</title>
+      <legend>Ion Gauge</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 488 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>1</color>
+    </dateplot1>
+
+    <!-- Baratron pressure -->
+    <dateplot2>
+      <title>Baratron pressure</title>
+      <legend>Baratron</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 511 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>2</color>
+    </dateplot2>
+
+    <!-- Pirani pressure -->
+    <dateplot3>
+      <title>Pirani pressure</title>
+      <legend>Pirani</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_sputterchamber where type = 489 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+
+    <!-- Chiller flow -->
+    <dateplot4>
       <title>Chiller flow</title>
       <legend>Flow</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 480 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / L/min</ylabel>
-      <color>1</color>
-    </dateplot1>
+      <color>4</color>
+    </dateplot4>
 
     <!-- Chiller pressure -->
-    <dateplot2>
+    <dateplot5>
       <title>Chiller Pressure</title>
       <legend>Pressure</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 481 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / Bar</ylabel>
-      <color>2</color>
-    </dateplot2>
+      <color>5</color>
+    </dateplot5>
 
     <!-- Chiller temperature -->
-    <dateplot3>
+    <dateplot5>
       <title>Chiller Temperature</title>
       <legend>Temperature</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 482 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
-      <color>3</color>
-    </dateplot3>
-
-    <!-- Chiller setpoint -->
-    <dateplot4>
-      <title>Chiller Setpoint</title>
-      <legend>Setpoint</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 483 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Setpoint / C</ylabel>
-      <color>4</color>
-    </dateplot4>
-
-    <!-- Chiller temperature -->
-    <dateplot5>
-      <title>Chiller Ambient Temperature</title>
-      <legend>Ambient Temperature</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_uhv_sputterchamber where type = 484 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Ambient / C</ylabel>
       <color>5</color>
     </dateplot5>
+
 
     <!-- data treatment -->
     <as_function_of>

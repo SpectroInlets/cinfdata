@@ -29,6 +29,30 @@
       <ylabel>Temperature / C</ylabel>
       <color>2</color>
     </dateplot2>
+
+    <dateplot3>
+      <title>QCM Frequency</title>
+      <legend>Frequency</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_volvo where type=32 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Frequency / Hz</ylabel>
+      <color>3</color>
+    </dateplot3>
+
+    <dateplot4>
+      <title>QCM Thickness</title>
+      <legend>Thickness</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_volvo where type=34 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Thickness / nm</ylabel>
+      <color>4</color>
+    </dateplot4>
+
+    <dateplot5>
+      <title>QCM Life</title>
+      <legend>Thickness</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_volvo where type=33 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Crystal Life</ylabel>
+      <color>5</color>
+    </dateplot5>
   </graph>
 
 
@@ -38,7 +62,7 @@
     <containers> 
       <container0>
 	<type>date_figure</type>
-	<x_window>7200</x_window> <!-- x axis interval, seconds -->
+	<x_window>900</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
 	<!-- General plot options -->
@@ -68,10 +92,10 @@
       
       <container1>
 	<type>date_figure</type>
-	<x_window>7200</x_window> <!-- x axis interval, seconds -->
+	<x_window>900</x_window> <!-- x axis interval, seconds -->
 	<width>550</width>
 	<height>400</height>
-	<axislabelwidth>150</axislabelwidth>
+	<axislabelwidth>50</axislabelwidth>
 	<!-- General plot options -->
 	<bgcolor>#DDDDDD</bgcolor> <!-- optional color, default #FFFFFF -->
 	<!-- optional html padding string, remember to subtract the padding
@@ -98,6 +122,68 @@
       </container1>
 
       <container2>
+	<type>date_figure</type>
+	<x_window>900</x_window> <!-- x axis interval, seconds -->
+	<width>550</width>
+	<height>400</height>
+	<axislabelwidth>100</axislabelwidth>
+	<!-- General plot options -->
+	<bgcolor>#DDDDDD</bgcolor> <!-- optional color, default #FFFFFF -->
+	<!-- optional html padding string, remember to subtract the padding
+	     in the size -->
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>QCM Frequency [Hz]</title> <!-- optional (escaped) html-->
+	<xlabel>Time</xlabel> <!-- optional (escaped) html -->
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<logscale>false</logscale> <!-- optional bool, default false -->
+	<format>.2f</format>
+	<figure>
+	  <plot0>
+            <color>#0000FF</color>
+            <data_channel>rasppi91:volvo_qcm_frequency</data_channel>
+            <label>Temperature</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_volvo where value > -10 and type=(SELECT id FROM dateplots_descriptions where codename="volvo_qcm_frequency") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	</figure>
+      </container2>
+
+      <container3>
+	<type>date_figure</type>
+	<x_window>900</x_window> <!-- x axis interval, seconds -->
+	<width>550</width>
+	<height>400</height>
+	<axislabelwidth>50</axislabelwidth>
+	<!-- General plot options -->
+	<bgcolor>#DDDDDD</bgcolor> <!-- optional color, default #FFFFFF -->
+	<!-- optional html padding string, remember to subtract the padding
+	     in the size -->
+	<padding>0px 0px 0px 0px</padding>
+	<!-- title and labels -->
+	<title>QCM Thickness [nm]</title> <!-- optional (escaped) html-->
+	<xlabel>Time</xlabel> <!-- optional (escaped) html -->
+	<!--<ylabel>Temperature [&amp;deg;C]</ylabel>--> <!-- optional (escaped) html -->
+	<!-- Plot drawing fine tuning -->
+	<draw_points>true</draw_points> <!-- optional bool, default true -->
+	<point_size>2</point_size> <!-- optional int, default 2 -->
+	<linewidth>1.5</linewidth> <!-- optional float, default 1.5 -->
+	<logscale>false</logscale> <!-- optional bool, default false -->
+	<format>.2f</format>
+	<figure>
+	  <plot0>
+            <color>#0000FF</color>
+            <data_channel>rasppi91:volvo_qcm_thickness</data_channel>
+            <label>Temperature</label>
+	    <old_data_query>select unix_timestamp(time), value from dateplots_volvo where value > -10 and type=(SELECT id FROM dateplots_descriptions where codename="volvo_qcm_thickness") and unix_timestamp(time) > {from}</old_data_query>
+	  </plot0>
+	</figure>
+      </container3>
+
+      <container4>
 	<type>table</type>
 	<!--<bgcolor>#FF0000</bgcolor>-->
 	<width>1100</width>
@@ -110,19 +196,33 @@
 	  <item0>
 	    <data_channel>rasppi04:volvo_pressure</data_channel>
 	    <label>Main chamber</label>
-	    <color>#990099</color>
+	    <color>#0000FF</color>
 	    <format>.2e</format>
 	    <unit>mbar</unit>
 	  </item0>
 	  <item1>
 	    <data_channel>rasppi04:volvo_temperature</data_channel>
 	    <label>Temperature</label>
-	    <color>#009900</color>
+	    <color>#0000FF</color>
 	    <format>.2f</format>
 	    <unit>C</unit>
 	  </item1>
+	  <item2>
+	    <data_channel>rasppi91:volvo_qcm_frequency</data_channel>
+	    <label>QCM Frequency</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>Hz</unit>
+	  </item2>
+	  <item3>
+	    <data_channel>rasppi91:volvo_qcm_thickness</data_channel>
+	    <label>QCM Thickness</label>
+	    <color>#0000FF</color>
+	    <format>.2f</format>
+	    <unit>nm</unit>
+	  </item3>
 	</data>
-      </container2>
+      </container4>
     </containers>
   </graph>
 

@@ -194,7 +194,7 @@ class Intensitymap_wide(object):
                 start_index = 100 # Cut off the very first part of the spectrum
                 end_index = dat['data'].shape[0]
             old_size = end_index - start_index
-            new_size = 1900
+            new_size = 2500
             ratio = (old_size / new_size)+1
             print 'Ratio: ' + str(ratio)
 

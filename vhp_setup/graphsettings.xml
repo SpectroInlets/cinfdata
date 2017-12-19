@@ -17,99 +17,115 @@
     <dateplot1>
       <title>Massspec pressure</title>
       <legend>Pressure</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=80 and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=80 and value between 0 and 0.5 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>1</color>
     </dateplot1>
 
     <dateplot2>
-      <title>T, Reactor Inlet</title>
-      <legend>T, Reactor Inlet</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=81 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Temperature / C</ylabel>
+      <title>Pressure controller, backside</title>
+      <legend>PC, backside</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=88 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
       <color>2</color>
     </dateplot2>
 
     <dateplot3>
-      <title>T, Reactor Outlet</title>
-      <legend>T, Reactor Outlet</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=82 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Reactor Inlet</title>
+      <legend>T, Reactor Inlet</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=81 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>3</color>
     </dateplot3>
 
     <dateplot4>
-      <title>T, Reactor Top</title>
-      <legend>T, Reactor Top</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=83 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Reactor Outlet</title>
+      <legend>T, Reactor Outlet</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=82 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>4</color>
     </dateplot4>
 
     <dateplot5>
-      <title>T, Mass-spec</title>
-      <legend>T, Mass-spec</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=84 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Reactor Top</title>
+      <legend>T, Reactor Top</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=83 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>5</color>
     </dateplot5>
 
     <dateplot6>
-      <title>T, Gas-lines</title>
-      <legend>T, Gas-lines</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=85 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Mass-spec</title>
+      <legend>T, Mass-spec</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=84 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>6</color>
     </dateplot6>
 
     <dateplot7>
-      <title>T, Purifying reactor</title>
-      <legend>T, Purifying reactor</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=86 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Gas-lines</title>
+      <legend>T, Gas-lines</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=85 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>7</color>
     </dateplot7>
 
     <dateplot8>
-      <title>T, Furnace</title>
-      <legend>T, Furnace</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=87 and time between "{from}" and "{to}" order by time</query>
+      <title>T, Purifying reactor</title>
+      <legend>T, Purifying reactor</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=86 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Temperature / C</ylabel>
       <color>8</color>
     </dateplot8>
 
     <dateplot9>
-      <title>Low Pressure</title>
-      <legend>Low Pressure</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=420 and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Pressure / mbar</ylabel>
+      <title>T, Furnace</title>
+      <legend>T, Furnace</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=87 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
       <color>9</color>
     </dateplot9>
 
     <dateplot10>
-      <title>Medium Pressure</title>
-      <legend>Medium Pressure</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=421 and time between "{from}" and "{to}" order by time</query>
+      <title>Low Pressure</title>
+      <legend>Low Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=420 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>10</color>
     </dateplot10>
 
-
     <dateplot11>
-      <title>High Pressure</title>
-      <legend>High Pressure</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=422 and time between "{from}" and "{to}" order by time</query>
+      <title>Medium Pressure</title>
+      <legend>Medium Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=421 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>11</color>
     </dateplot11>
 
+
     <dateplot12>
+      <title>High Pressure</title>
+      <legend>High Pressure</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=422 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>12</color>
+    </dateplot12>
+
+    <dateplot13>
       <title>BPR, Backside Pressure</title>
       <legend>BPR, Backside Pressure</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=423 and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
-      <color>12</color>
-    </dateplot12>
+      <color>13</color>
+    </dateplot13>
+
+    <dateplot14>
+      <title>Pressure Controller</title>
+      <legend>Pressure Controller</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_vhp_setup where type=424 and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>14</color>
+    </dateplot14>
 
 
   </graph>

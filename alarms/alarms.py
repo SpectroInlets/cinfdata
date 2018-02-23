@@ -14,7 +14,8 @@ Less than: s0 < s1
 
 Where s are the substitution markers. They can either be:
  * q0, q1, ... which are query numbers
- * p0, p1, ... which are parameter numbers
+ * v0, v1, ... which are parameter numbers (values), they can also be written
+   as q#
  * dqdt0 which is the slope of the points in query 0
 
 The syntax allows for 0 or 1 spaces between the parts, which means
@@ -26,8 +27,8 @@ s0 < s1 and s2 > s3
 
 Examples of complete check could be:
 
-q0 < p0
-q0 < p0 and q1 > p1
+q0 < v0
+q0 < v0 and q1 > v1
 
 """
 
@@ -49,8 +50,13 @@ import MySQLdb
 
 # Regular expression used to match the check, which are in the form:
 # "q0 < p0" or "dqdt0 < p0"
-CHECK_RE = re.compile('^ ?([pq][0-9]*|dqdt[0-9]+) ?([<>]) ?([pq][0-9]*|dqdt[0-9]+) ?$')
-CHECK_AND_OR = re.compile('(and|or)')
+CHUNKS = re.compile(r'>=|<=|==|!=|<|>|istrue|isfalse|and|or|'
+                    r'dqdt[0-9]{1,3}|[vpq][0-9]{1,3}| *')
+REPLACEMENTS = [
+    (re.compile(r'(dqdt[0-9]{1,3}|[vpq][0-9]{1,3})'), r'{\1}'),
+    (re.compile(r'(istrue)'), r'== 1'),
+    (re.compile(r'(isfalse)'), r'== 0'),
+]
 
 
 # pylint: disable=too-many-arguments, too-many-locals
@@ -114,57 +120,6 @@ class CheckAlarms(object):
         self._reader_cursor = _db.cursor()
         self._smtp_server_address = '127.0.0.1'
 
-    def check_alarms(self):
-        """Checks the alarms and sends out emails if necessary"""
-        _LOG.debug("check_alarms()")
-        alarms = self._get_alarms()
-        for alarm in alarms:
-            _LOG.debug('Check alarm: {0}, {1}'.format(alarm['id'], dict(alarm)))
-            if 'error' in alarm:
-                # Send email about error parsing the json
-                body = (
-                    'At least one error occurred while trying to parse the '\
-                    'alarm. The error message(s) was:{0}\n\n'
-                    'The entire (half parsed) alarm definition was:\n\n{1}'
-                ).format(alarm['error'], dict(alarm))
-
-                # When the recipients JSON is broken, we cannot send them an
-                # email about it! Send it to Robert and Kenneth instead.
-                if 'recipients' not in alarm:
-                    alarm['recipients'] = ['pyexplabsys-error@fysik.dtu.dk']
-                    subject = 'Error in parsing recipients alarm JSON'
-                    body += '\n\nTHIS EMAIL WAS ONLY SENT TO YOU'
-                else:
-                    subject = 'Error in parsing alarm'
-
-                _LOG.info('Error in alarm parsing. Alarm: {0}'.format(alarm))
-                self._send_email(subject, body, alarm['recipients'])
-
-                continue
-
-            # Try and check a single alarm
-            try:
-                status, check_string = self._check_single_alarm(
-                    alarm['quiries'],
-                    alarm['parameters'],
-                    alarm['check']
-                )
-            except ErrorDuringCheck as exp:
-                subject = 'Error during check of alarm'
-                body = 'An error was encountered during check of an alarm. '\
-                       'The complete alarm definition is:\n{0}\n\nThe error '\
-                       'was:\n{1}'.format(dict(alarm), exp.message)
-                _LOG.debug('Error during check: {0}'.format(exp.message))
-                self._send_email(subject, body, alarm['recipients'])
-                continue
-
-            # Warn if necessary
-            if status:
-                _LOG.debug("Raise alarm for check string {0}".format(check_string))
-                self._raise_alarm(alarm, check_string)
-            else:
-                _LOG.debug("No alarm for chech string {0}".format(check_string))
-
     def _get_alarms(self):
         """Get the list of alarms to check"""
         _LOG.debug('_get_alarms()')
@@ -200,22 +155,122 @@ class CheckAlarms(object):
 
                 if name == 'parameters_json':
                     for parameter in alarm['parameters']:
-                        if not isinstance(parameter, float):
+                        if not isinstance(parameter, (float, int)):
                             alarm['error'] += \
-                                '\n\nParameters must be floats not {0}'.\
+                                '\n\nParameters must be floats or ints not {0}'.\
                                 format(type(parameter).__name__)
 
             alarms.append(alarm)
 
         return alarms
 
-    def _raise_alarm(self, alarm, check_string):
+    def check_alarms(self):
+        """Checks the alarms and sends out emails if necessary"""
+        _LOG.debug("check_alarms()")
+        alarms = self._get_alarms()
+        for alarm in alarms:
+            _LOG.debug('Check alarm: {0}, {1}'.format(alarm['id'], dict(alarm)))
+            if 'error' in alarm:
+                # Send email about error parsing the json
+                body = (
+                    'At least one error occurred while trying to parse the '\
+                    'alarm. The error message(s) was:{0}\n\n'
+                    'The entire (half parsed) alarm definition was:\n\n{1}'
+                ).format(alarm['error'], dict(alarm))
+
+                # When the recipients JSON is broken, we cannot send them an
+                # email about it! Send it to Robert and Kenneth instead.
+                if 'recipients' not in alarm:
+                    alarm['recipients'] = ['pyexplabsys-error@fysik.dtu.dk']
+                    subject = 'Error in parsing recipients alarm JSON'
+                    body += '\n\nTHIS EMAIL WAS ONLY SENT TO YOU'
+                else:
+                    subject = 'Error in parsing alarm'
+
+                _LOG.info('Error in alarm parsing. Alarm: {0}'.format(alarm))
+                self._send_email(subject, body, alarm['recipients'])
+
+                continue
+
+            # We need the check broken down into tokens to form all the arguments
+            alarm['check_tokens'] = CHUNKS.findall(alarm['check'])
+
+            # Try and check a single alarm
+            try:
+                # Get all the arguments that should be formatted into the check
+                arguments = self._collect_arguments(alarm)
+
+                # Perform the actual check
+                status, check_string = self._check_single_alarm(
+                    alarm,
+                    arguments,
+                )
+            except ErrorDuringCheck as exp:
+                subject = 'Error during check of alarm'
+                body = 'An error was encountered during check of an alarm. '\
+                       'The complete alarm definition is:\n{0}\n\nThe error '\
+                       'was:\n{1}'.format(dict(alarm), repr(exp))
+                _LOG.debug('Error during check: {0}'.format(repr(exp)))
+                self._send_email(subject, body, alarm['recipients'])
+                continue
+
+            # Warn if necessary
+            if status:
+                _LOG.debug("Raise alarm for check string {0}".format(check_string))
+                self._raise_alarm(alarm, check_string, arguments)
+            else:
+                _LOG.debug("No alarm for chech string {0}".format(check_string))
+
+    def _check_single_alarm(self, alarm, arguments):
+        _LOG.debug('_check_single_alarm(alarm={0}, arguments={1}")'\
+                       .format(alarm, arguments))
+
+        # Check whether all parts of the check was understood
+        check_tokens = alarm['check_tokens']
+        check = alarm['check']
+        if ''.join(check_tokens) != check:
+            message = ('Not all parts of the check string was fully understood. '
+                       'The following tokens are allowed in the check: '
+                       '>=, <=, ==, !=, <, >, istrue, isfalse, and, or, '
+                       'dqdt#, v#, p#, q# and whitespace, where # is an integer'
+                       '\n\n'
+                       'Approved tokens: {0}\n'
+                       'Full check string: {1}'
+                       ).format(check_tokens, check)
+            raise ErrorDuringCheck(message)
+
+        # Perform check replacements, like q0 -> {q0}, istrue -> == 1
+        for regular_expression, replacement in REPLACEMENTS:
+            check = regular_expression.sub(replacement, check)
+
+        # Format in all the arguments
+        try:
+            check = check.format(**arguments)
+        except KeyError as exception:
+            message = ('Not all placeholders in check was replaced by values. '
+                       'The following placeholders was missing '
+                       'arguments: {0}').format(repr(exception))
+            raise ErrorDuringCheck(message)
+
+        # Evaluate the check. This should be safe, since all parts of the check
+        # string is curated or controlled by this program
+        try:
+            result = eval(check)
+        except Exception as exception:
+            message = ('An error accoured during evaluation of check. '
+                       'The check was: {0}\nThe error was: {1}').\
+                       format(check, repr(exception))
+            raise ErrorDuringCheck(message)
+
+        return result, check
+
+    def _raise_alarm(self, alarm, check_string, arguments):
         """Raises an alarm, if not inhibited by no_repeat_interval"""
-        _LOG.debug('_raise_alarm()')
+        _LOG.debug('_raise_alarm(%s, %s, %s)', alarm, check_string, arguments)
         last_alarm_time = self._get_time_of_last_alarm(alarm['id'])
+
         # Alarm is not inhibited by no_repeat_interval
-        if last_alarm_time is None or\
-           time.time() - last_alarm_time > alarm['no_repeat_interval']:
+        if last_alarm_time is None or time.time() - last_alarm_time > alarm['no_repeat_interval']:
             if last_alarm_time is None:
                 _LOG.debug('No previous alarm within no_repeat_interval. '
                            'No previous alarm.')
@@ -230,10 +285,11 @@ class CheckAlarms(object):
             subject = alarm['subject']
             if subject == '':
                 subject = 'Surveillance alarm'
-            body = '{message}\n\nAUTO-GENERATED:\nThe check was: {check}\n'\
-                   'and the check string was: {0}'.format(check_string, **alarm)
+            body = '{message}\n\n'\
+                '############### AUTO-GENERATED:\nThe check was: {check}\n'\
+                'and the check string was: {0}'.format(check_string, **alarm)
 
-            self._send_email(subject, body, alarm['recipients'])
+            self._send_email(subject, body, alarm['recipients'], arguments)
         else:
             _LOG.debug('Previous alarm {0:.1f} seconds ago. Do not send an '
                        'email this time'.format(time.time() - last_alarm_time))
@@ -251,147 +307,68 @@ class CheckAlarms(object):
             # First column of first (and only) result
             return result[0][0]
 
-    def _check_single_alarm(self, quiries, parameters, check):
-        """Checks a single alarm
+    def _collect_arguments(self, alarm):
+        """Collect all arguments for the check"""
+        arguments = {}
 
-        Args:
-            quiries (list): List of queries
-            parameters (list): List of parameters
-            check (str): The check to perform
-        Returns:
-            tuple: (alarm_boolean, value) where alarm_boolean is True if the
-                alarm is triggered
-        """
-        _LOG.debug('_check_single_alarm(quiries={0}, parameters={1}, '
-                   'check="{2}")'.format(quiries, parameters, check))
+        # Parameters
+        for number, parameter in enumerate(alarm['parameters']):
+            arguments['p{0}'.format(number)] = parameter
+            arguments['v{0}'.format(number)] = parameter
 
-        # Parse check, first split over "and" and "or"
-        and_or_tokens = CHECK_AND_OR.split(check)
-        tokens = []
-        for token in and_or_tokens:
-            if token in ['and', 'or']:
-                tokens.append(token)
+        # Quiries
+        quiries = alarm['quiries']
+        for number, query in enumerate(quiries):
+            query_token_name = 'q{0}'.format(number)
+            try:
+                value = self._query(query)
+            except ErrorDuringCheck:
+                if 'dqdt{0}'.format(number) in alarm['check_tokens']:
+                    continue  # Ok, a query for dqdt
+                else:
+                    raise
+            arguments[query_token_name] = value[1]  # query returns unix_time, value
+
+        # From dqdt
+        for token in alarm['check_tokens']:
+            if not token.startswith('dqdt'):
                 continue
-            _LOG.debug("### {0}".format(token))
-            match = CHECK_RE.match(token)
-            if match:
-                # Append dict for the matches
-                check_part = dict(zip(
-                        ("sub0", "comp", "sub1"),
-                        match.groups()
-                        ))
-                tokens.append(self._replace_substitutions(check_part, quiries,
-                                                          parameters))
-            else:
-                message = 'Bad format for the check: "{0}"'.format(check)
+            query_number = int(token[4:])
+            try:
+                query = quiries[query_number]
+            except IndexError:
+                message = 'Bad query index {0}, expected number below {1}'\
+                          .format(query_number, len(quiries))
+                raise ErrorDuringCheck(message)
+            rows = self._query(query, single=False)
+            if len(rows) < 2:
+                message = 'The slope query returned less than 2 results'
+                raise ErrorDuringCheck(message)
+            x, y = zip(*rows)
+            try:
+                # polyfit returns coeffs. from order of decreasing power
+                # so first item in 1st degree fit is the slope
+                arguments[token] = np.polyfit(x, y, 1)[0]
+            except Exception as exp:
+                message = 'An error happened during the linear regression.'\
+                    ' The error message was: {0}'.format(repr(exp))
                 raise ErrorDuringCheck(message)
 
-
-        res = self._eval_check(tokens[0])
-        _LOG.debug('=Eval set: {0}'.format(res))
-        CHECK = '{sub0} {comp} {sub1}'
-        check_string = CHECK.format(**tokens[0])
-        next = None
-        for token in tokens[1:]:
-            if token in ['and', 'or']:
-                next = token
-                check_string += ' {0} '.format(token)
-                continue
-
-            if not isinstance(token, dict):
-                message = 'Bad token. Expected check part dict'
-                raise ErrorDuringCheck(message)
-
-            check_string += CHECK.format(**token)
-            current = self._eval_check(token)
-            if next == 'and':
-                res = res and current
-                _LOG.debug('=Eval added: and {0}'.format(current))
-            elif next == 'or':
-                res = res or current
-                _LOG.debug('=Eval added: or {0}'.format(current))
-            else:
-                message = 'Bad format. Expected and/or'
-                raise ErrorDuringCheck(message)
-
-        return res, check_string
-
-    def _eval_check(self, check_part):
-        """Check a sigle part of the expression"""
-        _LOG.debug('_eval_check(check_part={0}'.format(check_part))
-        if check_part['comp'] == '<':
-            if check_part['sub0'] < check_part['sub1']:
-                return True
-        elif check_part['comp'] == '>':
-            if check_part['sub0'] > check_part['sub1']:
-                return True
-        return False
-
-    def _replace_substitutions(self, check_part, quiries, parameters):
-        """Replace substitutions in a check part
-
-        Args:
-            check_part (dict): Check part dict
-            quiries (list): List of quiries
-            parameters (list): List of parameters
-        """
-        _LOG.debug('_replace_substitutions(check_part={0}, quiries={1}, '
-                   'parameters={2})'.format(check_part, quiries, parameters))
-        for key in ['sub0', 'sub1']:
-            sub = check_part[key]
-            if sub.startswith('q'):  # Query, e.g: q0
-                query_number = int(sub[1:])
-                try:
-                    query = quiries[query_number]
-                except IndexError:
-                    message = 'Bad query index {0}, expected number below {1}'\
-                              .format(query_number, len(quiries))
-                    raise ErrorDuringCheck(message)
-                # Value is second item
-                check_part[key] = self._query(query)[1]
-            elif sub.startswith('p'):  # Parameter, e.g: p1
-                parameter_number = int(sub[1:])
-                try:
-                    check_part[key] = parameters[parameter_number]
-                except IndexError:
-                    message = 'Bad parameter index {0}, expected number below '\
-                              '{1}'.format(parameter_number, len(quiries))
-                    raise ErrorDuringCheck(message)
-            elif sub.startswith('dqdt'):
-                query_number = int(sub[4:])
-                try:
-                    query = quiries[query_number]
-                except IndexError:
-                    message = 'Bad query index {0}, expected number below {1}'\
-                              .format(query_number, len(quiries))
-                    raise ErrorDuringCheck(message)
-                rows = self._query(query, single=False)
-                if len(rows) < 2:
-                    message = 'The slope query returned less than 2 results'
-                    raise ErrorDuringCheck(message)
-                x, y = zip(*rows)
-                try:
-                    # polyfit returns coeffs. from order of decreasing power
-                    # so first item in 1st degree fit is the slope
-                    check_part[key] = np.polyfit(x, y, 1)[0]
-                except Exception as exp:
-                    message = 'An error happened during the linear regression.'\
-                        ' The error message was: {0}'.format(exp.message)
-                    raise ErrorDuringCheck(message)
-            else:
-                message = 'Unknown substitution description: "{0}"'.format(sub)
-                raise ErrorDuringCheck(message)
-            _LOG.debug('Substitute "{0}" with "{1}"'
-                       ''.format(sub, check_part[key]))
-
-
-        return check_part
+        return arguments
 
     def _query(self, query, single=True):
         """Fetches values for a query"""
         _LOG.debug('_query("{0}", single={1})'.format(query, single))
-        self._reader_cursor.execute(query)
-        rows = self._reader_cursor.fetchall()
+        try:
+            self._reader_cursor.execute(query)
+            rows = self._reader_cursor.fetchall()
+        except MySQLdb.Error as exp:
+            message = (
+                "An error occured during execution of the SQL query '{0}'. "
+                "The error was: {1}".format(query, repr(exp))
+                )
+            raise ErrorDuringCheck(message)
+
         # Check that there are rows in the result
         if len(rows) == 0:
             message = 'The query "{0}" produced 0 rows of results'.format(query)
@@ -415,10 +392,23 @@ class CheckAlarms(object):
         else:
             return rows
 
-    def _send_email(self, subject, body, recipients):
+    def _send_email(self, subject, body, recipients, arguments=None):
         """Sends an email with the specified content"""
         _LOG.debug('_send_email(subject="{0}", body="{1}...", recipients={2})'
                    ''.format(subject, body.split('\n')[0], recipients))
+
+        if arguments:
+            try:
+                body = body.format(**arguments)
+            except Exception as exp:  # We don't want to risk this not being sent
+                message = (
+                    "An error occured while trying to format arguments into "
+                    "the email body. The original body is preserved below. \n"
+                    "The error was: {0}\n"
+                    "The arguments were: {1}\n"
+                    "---------------------------------------------------------\n"
+                    ).format(repr(exp), arguments)
+                body = message + body
 
         msg = MIMEText(body)
         # Header info
@@ -456,6 +446,7 @@ def main():
     # Check whether the last instance has finished
     if psutil.pid_exists(old_pid):
         _LOG.info('Old instance with pid {0} still running, abort!'.format(old_pid))
+        print('Old instance with pid {0} still running, abort!'.format(old_pid))
         return
 
     # Write the lock file

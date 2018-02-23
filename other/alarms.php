@@ -9,6 +9,9 @@ $dbi = std_dbi("alarm");
 $alarm_data = Array();
 $message_out = "";
 
+# Settings as constants
+define("NUM_INPUTS", 26);
+
 /* --- Functions --- */
 
 
@@ -160,7 +163,7 @@ function view_alarm($action){
 */
 function from_json_to_array($json){
   $array = JSON_decode($json);
-  for ($n = 0; $n <= 10; $n++) {
+  for ($n = 0; $n <= NUM_INPUTS; $n++) {
     if (isset($array[$n])){
       $array[$n] = htmlentities($array[$n]);
     } else {
@@ -189,9 +192,9 @@ function edit_table($row){
     $alarm_id = isset($_GET["alarm_id"]) ? $_GET["alarm_id"] : null;
     $check = isset($_GET["check"]) ? $_GET["check"] : "";
     $no_repeat_interval = isset($_GET["no_repeat_interval"]) ? $_GET["no_repeat_interval"] : 3600;
-    $quiries = isset($_GET["quiries"]) ? $_GET["quiries"] : array_fill(0, 10, "");
-    $recipients = isset($_GET["recipients"]) ? $_GET["recipients"] : array_fill(0, 10, "");
-    $parameters = isset($_GET["parameters"]) ? $_GET["parameters"] : array_fill(0, 10, "");
+    $quiries = isset($_GET["quiries"]) ? $_GET["quiries"] : array_fill(0, NUM_INPUTS, "");
+    $recipients = isset($_GET["recipients"]) ? $_GET["recipients"] : array_fill(0, NUM_INPUTS, "");
+    $parameters = isset($_GET["parameters"]) ? $_GET["parameters"] : array_fill(0, NUM_INPUTS, "");
     $message = isset($_GET["message"]) ? $_GET["message"] : "";
     $description = isset($_GET["description"]) ? $_GET["description"] : "";
     $subject = isset($_GET["subject"]) ? $_GET["subject"] : "";
@@ -200,9 +203,9 @@ function edit_table($row){
     $alarm_id = null;
     $check = "";
     $no_repeat_interval = 3600;
-    $quiries = array_fill(0, 10, "");
-    $recipients = array_fill(0, 10, "");
-    $parameters = array_fill(0, 10, "");
+    $quiries = array_fill(0, NUM_INPUTS, "");
+    $recipients = array_fill(0, NUM_INPUTS, "");
+    $parameters = array_fill(0, NUM_INPUTS, "");
     $message = "";
     $description = "";
     $subject = "";
@@ -236,12 +239,18 @@ function edit_table($row){
        "</tr>\n");
   $help = "This is the expression that is evaluated to determine when " .
     "an alarm should be sent. In the check the follow entities can be used: " .
-    "\"<\", \">\", \"and\", \"or\", \"q#\", \"p#\" and \"dqdt#\", where the ".
+    "\"<\", \">\", \">=\", \"<=\", \"==\", \"!=\", \"istrue\", \"isfalse\", " .
+    "\"and\", \"or\", " .
+    "\"q#\", \"p#\" and \"dqdt#\", where the ".
     "# is used to number placeholders for the query, parameter or slope of " .
     "a query respectively. Spaces are ignored.\n\n" .
     "Examples:\n" .
     "q0 > p0 and q1 < p1\n" .
-    "dqdt0 > p0";
+    "dqdt0 > p0\n" .
+    "q0 istrue\n" .
+    "q0 istrue or q1 istrue\n" .
+    "\nNOTE: istrue and isfalse expects MySQL booleans and therefore are " .
+    "converted to == 1 and == 0 respectively";
   $help = htmlentities($help);
   echo("<tr>" .
        "<td>Check</td>" .
@@ -275,8 +284,8 @@ function edit_table($row){
   echo("</table>\n");
 
   # Output parameters, quiries and recipients table
-  $parameter_help = "A numeric parameter used in the check. Exponential " .
-    "notation can be used.";
+  $parameter_help = "A numeric parameter used in the check. Can be int or float. " .
+    "Exponential notation can be used.";
   $parameter_help = htmlentities($parameter_help);
   $recipient_help = htmlentities("An email adress for a recipient");
   $query_help = "A query to use in the check. The queries must return rows on " .
@@ -286,13 +295,13 @@ function edit_table($row){
   echo("<br>\n");
   echo("<table class=\"nicetable\">\n");
   echo("<col width=\"3%\">" .
-       "<col width=\"7%\">" .
+       "<col width=\"10%\">" .
        "<col width=\"20%\">" .
-       "<col width=\"70%\">\n");
+       "<col width=\"65%\">\n");
   echo("<tr><th>#</th><th>Parameter</th><th>Recipient</th><th>Query</th></tr>\n");
-  for ($n = 0; $n <= 10; $n++) {
+  for ($n = 0; $n <= NUM_INPUTS; $n++) {
     echo("<tr><td>$n</td>" .
-	 "<td><input title=\"$parameter_help\" style=\"width:100%\" type=\"number\" name=\"parameters[]\" step=\"any\" value=\"{$parameters[$n]}\"></td>" .
+	 "<td><input title=\"$parameter_help\" style=\"width:90%\" type=\"number\" name=\"parameters[]\" step=\"any\" value=\"{$parameters[$n]}\"></td>" .
 	 "<td><input title=\"$recipient_help\" style=\"width:100%\" type=\"email\" name=\"recipients[]\" value=\"{$recipients[$n]}\"></td>" .
 	 "<td><input title=\"$query_help\" style=\"width:100%\" type=\"text\" name=\"quiries[]\" value=\"{$quiries[$n]}\"></td>" .
 	 "</tr>\n");
@@ -333,14 +342,18 @@ function prepare_db_data(){
   foreach(Array("parameters", "recipients", "quiries") as $key){
     $array = Array();
     foreach($_GET[$key] as $value){
-      if ($value != ""){
+      if ($value == ""){break;}  // Stop when we reach an empty field
 	if ($key == "parameters"){
-	  $value = (float) $value;
+	  // For parameters, convert to integer of float and check the type
+	  $converted_value = $value  + 0;  // "Official" way to convert to either int or float
+	  if (is_int($converted_value) or is_float($converted_value)){
+	    $array[] = $converted_value;
+	  } else {
+	    break;
+	  }
+	} else {
+	  $array[] = $value;
 	}
-	$array[] = $value;
-      } else {
-	break;
-      }
     }
     $output[$key . "_json"] = JSON_encode($array);
   }

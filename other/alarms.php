@@ -67,7 +67,7 @@ function existing_alarms(){
   global $alarm_data;
 
   # Get the alarms
-  $query = "SELECT * FROM alarm WHERE visible=1";
+  $query = "SELECT * FROM alarm WHERE visible=1 order by id";
   $result = $dbi->query($query);
 
   # Start the table

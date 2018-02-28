@@ -20,7 +20,8 @@ foreach($headers as $header){
 echo("<tr>\n");
 
 # Rows
-$query = "select * from fridays_transactions order by time desc limit 100";
+$count = isset($_GET["count"]) ? $_GET["count"] : 100;
+$query = "select * from fridays_transactions order by time desc limit $count";
 $result = $dbi->query($query);
 while($row = $result->fetch_row()){
   echo("<tr>\n");

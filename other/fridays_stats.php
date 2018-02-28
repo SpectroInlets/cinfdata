@@ -74,7 +74,7 @@ echo('<img alt="Vertical bar chart" class="centered" width="800" height="500" sr
 function checkMods(event){
   if (event.shiftKey && event.ctrlKey) {
     event.preventDefault();
-    window.location = "fridays_transactions.php";
+    window.location = "fridays_transactions.php?count=100";
     return true;
   } else {
     return false;

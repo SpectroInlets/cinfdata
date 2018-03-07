@@ -291,6 +291,10 @@
     <queries>
       <default>SELECT x, y  FROM xy_values_large_CO2_MEA where measurement = {id} order by id</default>
       <column>label</column>
+      <extra0>
+	<match>current</match>
+	<query>SELECT x, y/1000  FROM xy_values_large_CO2_MEA where measurement = {id} order by id</query>
+      </extra0>
     </queries>
     <!-- ylabel -->
     <ylabel>
@@ -347,6 +351,12 @@
       <a>0.0002777777777777778</a>
       <b>0</b>
     </linscale_x0>
+    <plugins>
+      <AreaNormalizer>
+	<title>Normalize current to catalyst area</title>
+	<output>raw</output>
+      </AreaNormalizer>
+    </plugins>
     <!--
     <matplotlib_settings>
       <width>900</width>

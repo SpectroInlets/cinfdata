@@ -49,30 +49,3 @@ else
     echo "Something went wrong with the links. Exiting!"
     exit 12
 fi
-
-echo "Linking dygraph"
-ln -s ../sym-files2/dygraph .
-if [ $? -eq 0 ]; then
-    echo -e "...OK\n\n"
-else
-    echo "Something went wrong with the links. Exiting!"
-    exit 12
-fi
-
-echo "Linking dygraphs"
-ln -s ../sym-files2/dygraphs
-if [ $? -eq 0 ]; then
-    echo -e "...OK\n\n"
-else
-    echo "Something went wrong with the links. Exiting!"
-    exit 12
-fi
-
-echo "Linking dygraph-combined.js"
-ln -s ../sym-files2/dygraph-combined.js
-if [ $? -eq 0 ]; then
-    echo -e "...OK\n\n"
-else
-    echo "Something went wrong with the links. Exiting!"
-    exit 12
-fi

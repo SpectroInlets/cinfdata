@@ -1,26 +1,29 @@
 <?php
+include_once("site_settings.php");
 
 date_default_timezone_set("Europe/Copenhagen");
 
 /** Returns a handle to the standard database
     @return object 
   */
-function std_db($user = "cinf_reader"){
-    //$db = mysql_connect("localhost", "root", "CINF123");  
-    //$db = mysql_connect("localhost", "cinf_reader", "cinf_reader");
-    $db = mysql_connect("servcinf-sql", $user, $user);
-    mysql_select_db("cinfdata",$db);
-    return($db);
-}
-
-function std_dbi($user = "cinf_reader"){
-  $mysqli = new mysqli("servcinf-sql", $user, $user, "cinfdata");
-  return $mysqli;
+function std_dbi(){
+  #$xml=simplexml_load_file("../site_settings.xml");
+  #print($xml->db_host);
+  #$mysqli = mysqli_connect($xml->db_host, DB_USER, DB_PASSWORD, DB_DATABASE);	
+  $sql = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+  #$sqlconf='../sql_defaults.cnf';
+  #echo($sqlconf);
+  #$sql = new mysqli;
+  #$sql->init();
+  #$sql->options(MYSQLI_READ_DEFAULT_FILE, $sqlconf);
+  #echo($sql);
+  #$sql->real_connect();
+  return $sql;
 }
 
 function single_sql_value($db,$query,$column){
-    $result  = mysql_query($query,$db);
-    $row = mysql_fetch_array($result);
+    $result  = mysqli_query($db, $query);
+    $row = mysqli_fetch_array($result);
     $value = $row[$column];
     return($value);
 }

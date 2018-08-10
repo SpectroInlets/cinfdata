@@ -22,7 +22,7 @@
 include("graphsettings.php");
 include("../common_functions_v2.php");
 
-$db = std_db();
+$db = std_dbi();
 $mysqli = std_dbi();
 $type = $_GET["type"];
 $settings = plot_settings($type);
@@ -105,9 +105,9 @@ function microtime_float()
 }
 
 // Get all available measurements to populate selection boxes
-$query = "SELECT distinct " . $settings["grouping_column"] . ", comment FROM " .  $settings["measurements_table"] . " where type = " . $settings["type"] . " order by time desc, id limit 25000";
-$result  = mysql_query($query,$db);
-  while ($row = mysql_fetch_array($result)){
+$query = "SELECT distinct " . $settings["grouping_column"] . ", comment FROM " .  $settings["measurements_table"] . " where type = " . $settings["type"] . " order by time desc limit 25000";
+$result  = mysqli_query($db, $query);
+  while ($row = mysqli_fetch_array($result)){
     $datelist[] = $row[0];
     $commentlist[] = $row[1];
   }
@@ -123,10 +123,10 @@ $sql_times  = substr($sql_times, 0, -1);  // Remove the trailing comma
 $query = "SELECT id, time, " . $settings["label_column"] . " FROM " .  $settings["measurements_table"] . " where " . $settings["grouping_column"] . " in (" . $sql_times . ") and type = " . $settings["type"] . " order by " . $settings["sort_dataset_by_column"] . " desc, id limit 20000";
 
 // replace \ with \\ in comments (Some setups have bad habits...)
-$query = str_replace("\\","\\\\",$query);
+$query = str_replace("\\","\\\\", $query);
 
-$result  = mysql_query($query,$db);
-while ($row = mysql_fetch_array($result)){
+$result  = mysqli_query($db, $query);
+while ($row = mysqli_fetch_array($result)){
     $individ_idlist[] = $row[0];
     $individ_datelist[] = $row[1];
     $individ_labellist[] = $row[2];
@@ -419,8 +419,8 @@ if (array_key_exists("plugins", $settings))
 	      foreach($plotlist as $id){
 	        echo("<div class=\"infobox\">");
 		$query = "SELECT * from {$settings['measurements_table']} WHERE id=$id";
-		$result = mysql_query($query);
-		$meta = mysql_fetch_array($result);
+		$result = mysqli_query($db, $query);
+		$meta = mysqli_fetch_array($result);
 		if (in_array("mandatory_export_fields", array_keys($settings)) == "1"){
 		  $keys = array_keys($settings["mandatory_export_fields"]);
 		  natsort($keys);

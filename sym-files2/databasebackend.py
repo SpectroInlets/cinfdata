@@ -34,7 +34,7 @@ import json
 from StringIO import StringIO
 import traceback
 import cgi
-
+import xmltodict
 
 class dataBaseBackend():
     ''' This class will fetch measurement data and measurement information from the
@@ -57,11 +57,16 @@ class dataBaseBackend():
                              'to': self.o['from_to'][1]}
         self.plotlist = self.o['left_plotlist'] + self.o['right_plotlist']
 
+        
+        with open('../site_settings.xml') as fd:
+            settings = xmltodict.parse(fd.read())
+        settings = settings['db_settings']
+
         # Create MySQL session and cursor
-        self.conn = MySQLdb.connect(host='servcinf-sql',
-                                    user="cinf_reader",
-                                    passwd="cinf_reader",
-                                    db="cinfdata")
+        self.conn = MySQLdb.connect(host=settings['db_host'],
+                                    user=settings['db_user'],
+                                    passwd=settings['db_password'],
+                                    db=settings['db_database'])
         self.cursor = self.conn.cursor()
         self.data = None
 

@@ -21,7 +21,6 @@
 
 include("graphsettings.php");
 include("../common_functions_v2.php");
-
 $db = std_dbi();
 $mysqli = std_dbi();
 $type = $_GET["type"];
@@ -106,11 +105,11 @@ function microtime_float()
 
 // Get all available measurements to populate selection boxes
 $query = "SELECT distinct " . $settings["grouping_column"] . ", comment FROM " .  $settings["measurements_table"] . " where type = " . $settings["type"] . " order by time desc limit 25000";
-$result  = mysqli_query($db, $query);
-  while ($row = mysqli_fetch_array($result)){
+
+foreach ($db->query($query) as $row){
     $datelist[] = $row[0];
     $commentlist[] = $row[1];
-  }
+}
 
 // $chosen_group is the list of timestamps that is currently active. This is either the timestamplist from the url or the latest measurement
 $sql_times = "";
@@ -125,8 +124,7 @@ $query = "SELECT id, time, " . $settings["label_column"] . " FROM " .  $settings
 // replace \ with \\ in comments (Some setups have bad habits...)
 $query = str_replace("\\","\\\\", $query);
 
-$result  = mysqli_query($db, $query);
-while ($row = mysqli_fetch_array($result)){
+foreach ($db->query($query) as $row){
     $individ_idlist[] = $row[0];
     $individ_datelist[] = $row[1];
     $individ_labellist[] = $row[2];

@@ -7,10 +7,10 @@ date_default_timezone_set("Europe/Copenhagen");
     @return object 
   */
 function std_dbi(){
-  #$xml=simplexml_load_file("../site_settings.xml");
-  #print($xml->db_host);
+  $xml=simplexml_load_file("../site_settings.xml");
+  #echo($xml->db_host);
   #$mysqli = mysqli_connect($xml->db_host, DB_USER, DB_PASSWORD, DB_DATABASE);	
-  $sql = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+  #$sql = mysqli_connect(, DB_USER, DB_PASSWORD, DB_DATABASE);
   #$sqlconf='../sql_defaults.cnf';
   #echo($sqlconf);
   #$sql = new mysqli;
@@ -18,12 +18,14 @@ function std_dbi(){
   #$sql->options(MYSQLI_READ_DEFAULT_FILE, $sqlconf);
   #echo($sql);
   #$sql->real_connect();
-  return $sql;
+  $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE . ';charset=utf8', DB_USER, DB_PASSWORD);
+  #return $sql;
+  return $pdo;
 }
 
-function single_sql_value($db,$query,$column){
-    $result  = mysqli_query($db, $query);
-    $row = mysqli_fetch_array($result);
+function single_sql_value($db, $query, $column){
+    $stmt = $db->prepare($query);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $value = $row[$column];
     return($value);
 }

@@ -22,7 +22,7 @@
 include("../common_functions_v2.php");
 date_default_timezone_set("Europe/Copenhagen");
 include("graphsettings.php");
-$dbi = std_dbi();
+$db = std_dbi();
 
 // Get settings
 $type = $_GET["type"];
@@ -30,7 +30,8 @@ $settings = plot_settings($type);
 
 // Get the id-number and timestamp of the newest measurement
 $query = "SELECT id, " . $settings["grouping_column"] . " FROM " . $settings["measurements_table"] . " where type = " . $settings["type"] . " order by time desc limit 1";
-$row = $dbi->query($query)->fetch_array();
+$stmt = $db->prepare($query);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 list($latest_id, $latest_group) = $row;
 
 // Remember settings after submitting and initialize values
@@ -49,10 +50,7 @@ $sql_groups = trim($sql_groups, ",");  // Remove the trailing comma
 
 $query = "SELECT id, time," . $settings["label_column"] .  " FROM " .  $settings["measurements_table"] . " where " . $settings["grouping_column"] . " in (" . $sql_groups . ") and type = " . $settings["type"] . " order by " . $settings["sort_dataset_by_column"] . " desc, id limit 8000";
 
-$dbi->set_charset("utf8");
-
-$result  = $dbi->query($query);
-while ($row = $result->fetch_array()) {
+foreach ($db->query($query) as $row){
   # Unpack $row and append its elements to the id, date and label lists
   list($individ_idlist[], $individ_datelist[], $individ_labellist[]) = $row;
 }

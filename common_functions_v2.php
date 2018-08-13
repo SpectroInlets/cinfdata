@@ -1,6 +1,4 @@
 <?php
-include_once("site_settings.php");
-
 date_default_timezone_set("Europe/Copenhagen");
 
 /** Returns a handle to the standard database
@@ -8,18 +6,8 @@ date_default_timezone_set("Europe/Copenhagen");
   */
 function std_dbi(){
   $xml=simplexml_load_file("../site_settings.xml");
-  #echo($xml->db_host);
-  #$mysqli = mysqli_connect($xml->db_host, DB_USER, DB_PASSWORD, DB_DATABASE);	
-  #$sql = mysqli_connect(, DB_USER, DB_PASSWORD, DB_DATABASE);
-  #$sqlconf='../sql_defaults.cnf';
-  #echo($sqlconf);
-  #$sql = new mysqli;
-  #$sql->init();
-  #$sql->options(MYSQLI_READ_DEFAULT_FILE, $sqlconf);
-  #echo($sql);
-  #$sql->real_connect();
-  $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE . ';charset=utf8', DB_USER, DB_PASSWORD);
-  #return $sql;
+  $conn_str = 'mysql:host=' . $xml->db_host . ';dbname=' . $xml->db_database . ';charset=utf8';
+  $pdo = new PDO($conn_str, $xml->db_user, $xml->db_password);
   return $pdo;
 }
 

@@ -88,7 +88,7 @@ if (array_key_exists("plugins", $settings)){
 if ($produce_output){
   $query = "INSERT INTO plot_com_out (output) values ('')";
   $db->query($query);
-  $plugin_settings['output_id'] = $db->insert_id;
+  $plugin_settings['output_id'] = $db->lastInsertId();
 } else {
   $plugin_settings['output_id'] = -1;
 }

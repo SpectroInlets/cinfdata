@@ -242,10 +242,13 @@ class dataBaseBackend():
         # Send the output, if any, to the db
         if output_id > -1:
             output_string = json.dumps(output)
-            query = "UPDATE plot_com_out SET output=%s WHERE id={0}".format(output_id)
-            self.cursor.execute(query, (output_string))
-            self.conn.commit()
-
+            query = "UPDATE plot_com_out SET output='{0}' WHERE id={1}".format(output_string, output_id)
+            try:
+                #self.cursor.execute(query, (output_string))
+                self.cursor.execute(query)
+                self.conn.commit()
+            except:
+                raise Exception(query)
         # Restore stdout
         sys.stdout = oldout
 

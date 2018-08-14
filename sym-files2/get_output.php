@@ -22,13 +22,16 @@
 include("../common_functions_v2.php");
 date_default_timezone_set("Europe/Copenhagen");
 include("graphsettings.php");
-$mysqli = std_dbi();
+$db = std_db();
 $output_id = $_GET["output_id"];
 usleep(100000);
 $query = "select CONVERT(output USING ascii) from plot_com_out where id=$output_id";
-$result = $mysqli->query($query);
-if ($result->num_rows == 1){
-  $line = $result->fetch_row();
+
+$stmt = $db->prepare($query);
+$stmt->execute();
+
+if ($stmt->rowCount() == 1){
+  $line = $stmt->fetch(PDO::FETCH_BOTH);;
   print_r($line[0]);
 } else {
   echo("no output");

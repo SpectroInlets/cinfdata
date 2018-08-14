@@ -21,8 +21,7 @@
 
 include("graphsettings.php");
 include("../common_functions_v2.php");
-$db = std_dbi();
-$mysqli = std_dbi();
+$db = std_db();
 $type = $_GET["type"];
 $settings = plot_settings($type);
 if (empty($settings)){
@@ -32,8 +31,8 @@ if (empty($settings)){
 
 // Get the id-number and timestamp of the newest measurement
 $query = "SELECT id, " . $settings["grouping_column"] . " FROM " . $settings["measurements_table"] . " where type = " . $settings["type"] . " order by time desc limit 1";
-$latest_id = single_sql_value($db,$query,0);
-$latest_time = single_sql_value($db,$query,1);
+$latest_id = single_sql_value($db, $query, 0);
+$latest_time = single_sql_value($db, $query, 1);
 
 // If graphsettings.xml do not have a specific grouping column setting we will default to "time"
 if(in_array("grouping_column",array_keys($settings)) != "1"){
@@ -88,8 +87,8 @@ if (array_key_exists("plugins", $settings)){
 // Make an entry in the plot_com_out table for the output from the plugins
 if ($produce_output){
   $query = "INSERT INTO plot_com_out (output) values ('')";
-  $mysqli->query($query);
-  $plugin_settings['output_id'] = $mysqli->insert_id;
+  $db->query($query);
+  $plugin_settings['output_id'] = $db->insert_id;
 } else {
   $plugin_settings['output_id'] = -1;
 }
@@ -417,8 +416,10 @@ if (array_key_exists("plugins", $settings))
 	      foreach($plotlist as $id){
 	        echo("<div class=\"infobox\">");
 		$query = "SELECT * from {$settings['measurements_table']} WHERE id=$id";
-		$result = mysqli_query($db, $query);
-		$meta = mysqli_fetch_array($result);
+		$stmt = $db->prepare($query);
+		$stmt->execute();
+		$meta = $stmt->fetch(PDO::FETCH_ASSOC);
+
 		if (in_array("mandatory_export_fields", array_keys($settings)) == "1"){
 		  $keys = array_keys($settings["mandatory_export_fields"]);
 		  natsort($keys);

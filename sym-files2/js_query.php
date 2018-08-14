@@ -25,14 +25,10 @@ date_default_timezone_set("Europe/Copenhagen");
 
 # Get database object
 include("../common_functions_v2.php");
-$dbi = std_dbi();
+$db = std_db();
 
 $query = $_GET["query"];
-
-
-$result = $dbi->query($query);
-
-
+$result = $db->query($query);
 
 $out = Array();
 while($row = $result->fetch_row()) {

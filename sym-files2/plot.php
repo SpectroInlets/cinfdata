@@ -42,16 +42,13 @@ foreach (array('left_plotlist', 'right_plotlist') as $list){
 $from_to  = $_GET['from'] . ',' . $_GET['to'];
 
 ### Plugin settings
-$db = std_dbi();
+$db = std_db();
 $plugin_settings_json = html_entity_decode($_GET['plugin_settings']);
-#$plugin_settings_json = $mysqli->real_escape_string($plugin_settings_json);
 # Form intry in input table and get ID
 
-$query = "INSERT INTO plot_com_in (input) values ('$plugin_settings_json')";
-#$query = "INSERT INTO plot_com_in (input) values ('')";
-
+$query = "INSERT INTO plot_com_in (input) values (:plugin_settings)";
 $stmt = $db->prepare($query);
-#$stmt->bind_param('s', $order_name);
+$stmt->bindParam (":plugin_settings", $plugin_settings_json, PDO::PARAM_STR);
 $stmt->execute();
 
 $stmt = $db->query("SELECT LAST_INSERT_ID()");

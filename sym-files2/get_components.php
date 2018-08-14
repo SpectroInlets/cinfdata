@@ -22,7 +22,7 @@
 include("../common_functions_v2.php");
 date_default_timezone_set("Europe/Copenhagen");
 include("graphsettings.php");
-$db = std_dbi();
+$db = std_db();
 
 // Get settings
 $type = $_GET["type"];

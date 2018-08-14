@@ -4,7 +4,7 @@ date_default_timezone_set("Europe/Copenhagen");
 /** Returns a handle to the standard database
     @return object 
   */
-function std_dbi(){
+function std_db(){
   $xml=simplexml_load_file("../site_settings.xml");
   $conn_str = 'mysql:host=' . $xml->db_host . ';dbname=' . $xml->db_database . ';charset=utf8';
   $pdo = new PDO($conn_str, $xml->db_user, $xml->db_password);

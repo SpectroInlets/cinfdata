@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 This file is part of the CINF Data Presentation Website
@@ -31,7 +31,10 @@ from datetime import datetime
 from graphsettings import graphSettings
 import re
 import json
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import traceback
 import cgi
 import xmltodict
@@ -66,7 +69,8 @@ class dataBaseBackend():
         self.conn = MySQLdb.connect(host=settings['db_host'],
                                     user=settings['db_user'],
                                     passwd=settings['db_password'],
-                                    db=settings['db_database'])
+                                    db=settings['db_database'],
+                                    charset = 'utf8')
         self.cursor = self.conn.cursor()
         self.data = None
 
@@ -205,9 +209,9 @@ class dataBaseBackend():
         query = 'SELECT input FROM plot_com_in WHERE id={0}'.\
             format(self.o['input_id'])
         self.cursor.execute(query)
-        input_settings = json.loads(self.cursor.fetchall()[0][0])
+        input_settings = json.loads(self.cursor.fetchall()[0][0].decode())
         # Get the output_id
-        output_id = input_settings.pop('output_id')
+        output_id = int(input_settings.pop('output_id'))
 
         # Check if there are any plugins to be run
         run_plugins = False

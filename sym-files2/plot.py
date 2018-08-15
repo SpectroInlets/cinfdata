@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 This file is part of the CINF Data Presentation Website
@@ -28,9 +28,11 @@ import re
 
 # set HOME environment variable to a directory the httpd server can write to
 import os
-os.environ[ 'HOME' ] = '/var/www/cinfdata/figures'
+from pathlib import Path
+p = Path.cwd()
+os.environ[ 'HOME' ] = str(p.parents[0] / 'figures')
 # System-wide ctypes cannot be run by apache... strange...
-sys.path.insert(1, '/var/www/cinfdata')
+sys.path.insert(1, p.parents[0])
 
 # Matplotlib must be imported before MySQLdb (in dataBaseBackend), otherwise we
 # get an ugly error
@@ -62,16 +64,16 @@ class Plot():
         # Option help at https://cinfwiki.fysik.dtu.dk/cinfwiki/Software/
         # DataWebPageDeveloperDocumentation#plot.py
         parser.add_option('--type')                  # String option
-	parser.add_option('--boolean_options')       # Boolean options
-	parser.add_option('--left_plotlist')         # int list
-	parser.add_option('--right_plotlist')        # int list
-	parser.add_option('--xscale_bounding')       # Float pair
-	parser.add_option('--left_yscale_bounding')  # Float pair
-	parser.add_option('--right_yscale_bounding') # Float pair
-	parser.add_option('--from_to')               # Time stamp pair NOT HANDLED
-	parser.add_option('--image_format')          # String options
-	parser.add_option('--manual_labels_n_titel') # Manual labels and title for mpl
-	parser.add_option('--input_id')              # Database id for plugin input
+        parser.add_option('--boolean_options')       # Boolean options
+        parser.add_option('--left_plotlist')         # int list
+        parser.add_option('--right_plotlist')        # int list
+        parser.add_option('--xscale_bounding')       # Float pair
+        parser.add_option('--left_yscale_bounding')  # Float pair
+        parser.add_option('--right_yscale_bounding') # Float pair
+        parser.add_option('--from_to')               # Time stamp pair NOT HANDLED
+        parser.add_option('--image_format')          # String options
+        parser.add_option('--manual_labels_n_titel') # Manual labels and title for mpl
+        parser.add_option('--input_id')              # Database id for plugin input
 
         # Parse the options
         (options, args) = parser.parse_args()
@@ -122,7 +124,7 @@ class Plot():
             strptime(self.o['from_to'][1], '%Y-%m-%d  %H:%M')
         except ValueError:
             start = time()-24*3600
-            if self.ggs.has_key('default_time'):
+            if 'default_time' in self.ggs:
                 default_time = int(self.ggs['default_time'])
                 start = time()-default_time*3600
                 
@@ -179,7 +181,7 @@ class Plot():
         # Title
         # Pull out a title candidate for each of the data graphs
         if self.ggs.has_key('title'):
-            fall_back = self.ggs['title'] if self.ggs.has_key('title') else ''
+            fall_back = self.ggs['title'] if 'title' in self.ggs else ''
 
             title_cand = []
             for v in data['left'] + data['right']:
@@ -190,7 +192,7 @@ class Plot():
 
         # Same procedure for Y-labels
         if self.ggs.has_key('ylabel'):
-            fall_back = self.ggs['ylabel'] if self.ggs.has_key('ylabel') else ''
+            fall_back = self.ggs['ylabel'] if 'ylabel' in self.ggs else ''
             cand = {'left': [], 'right': []}
             for side in ['left', 'right']:
                 for v in data[side]:
@@ -205,10 +207,10 @@ class Plot():
     def _titles_and_labels_xyplot(self, data, titles_n_labels={}):
         """ Determine title and labels for a xyplot """
         for name in ['title', 'xlabel']:
-            if self.ggs.has_key(name):
+            if name in self.ggs:
                 titles_n_labels[name] = self.ggs[name] 
 
-        if self.ggs.has_key('ylabel'):
+        if 'ylabel' in self.ggs:
             # Find y-label reg exps
             reg_exp_tags = [k for k in self.ggs['ylabel'].keys()
                             if k.find('pattern') == 0]

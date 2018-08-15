@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 This file is part of the CINF Data Presentation Website
@@ -163,7 +163,7 @@ class Plot():
         # Left axis
         for dat in data['left']:
             # Form legend
-            if dat['lgs'].has_key('legend'):
+            if 'legend' in dat['lgs']:
                 legend = dat['lgs']['legend']
             else:
                 legend = None
@@ -180,7 +180,7 @@ class Plot():
         if self.right_yaxis:
             for dat in data['right']:
                 # Form legend
-                if dat['lgs'].has_key('legend'):
+                if 'legend' in dat['lgs']:
                     legend = dat['lgs']['legend']
                 else:
                     legend = None
@@ -220,7 +220,7 @@ class Plot():
         # Left axis
         for dat in data['left']:
             # Form legend
-            if dat['lgs'].has_key('legend'):
+            if 'legend' in dat['lgs']:
                 legend = dat['lgs']['legend']
             else:
                 legend = None
@@ -235,7 +235,7 @@ class Plot():
         # Right axis
         for dat in data['right']:
             # Form legend
-            if dat['lgs'].has_key('legend'):
+            if 'legend' in dat['lgs']:
                 legend = dat['lgs']['legend']
             else:
                 legend = None
@@ -313,7 +313,7 @@ class Plot():
     def _title_and_labels(self, plot_info):
         """ Put title and labels on the plot """
         # xlabel
-        if plot_info.has_key('xlabel'):
+        if 'xlabel' in plot_info:
             label = plot_info['xlabel']
             if plot_info['xlabel_addition'] != '':
                 label += '\n' + plot_info['xlabel_addition']
@@ -321,7 +321,7 @@ class Plot():
         if self.o['xlabel'] != '':  # Manual override
             self.ax1.set_xlabel(r'{0}'.format(self.o['xlabel']))
         # Left ylabel
-        if plot_info.has_key('left_ylabel'):
+        if 'left_ylabel' in plot_info:
             label = plot_info['left_ylabel']
             if plot_info['y_left_label_addition'] != '':
                 label += '\n' + plot_info['y_left_label_addition']
@@ -329,7 +329,7 @@ class Plot():
         if self.o['left_ylabel'] != '':  # Manual override
             self.ax1.set_ylabel(self.o['left_ylabel'], multialignment='center')
         # Right ylabel
-        if self.right_yaxis and plot_info.has_key('right_ylabel'):
+        if self.right_yaxis and 'right_ylabel' in plot_info:
             label = plot_info['right_ylabel']
             if plot_info['y_right_label_addition'] != '':
                 label += '\n' + plot_info['y_right_label_addition']
@@ -338,7 +338,7 @@ class Plot():
                 self.ax2.set_ylabel(self.o['right_ylabel'],
                                     multialignment='center', rotation=270)
         # Title
-        if plot_info.has_key('title'):
+        if 'title' in plot_info:
             self.ax1.set_title(plot_info['title'], y=1.03)
         if self.o['title'] != '':
             # experiment with 'r{0}'.form .. at some time
@@ -367,7 +367,7 @@ class Plot():
         # the axis numbers, therefore this hack, this may also become a problem
         # for the other edges of the figure if there are no labels)
         tight = ''
-        if plot_info.has_key('title'):
+        if 'title' in plot_info:
             tight = 'tight'
         # For some wierd reason we cannot write directly to sys.stdout when it
         # is a pdf file, so therefore we use a the StringIO object workaround

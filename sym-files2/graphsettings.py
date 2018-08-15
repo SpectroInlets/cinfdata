@@ -39,7 +39,7 @@ class graphSettings(dict):
         self.params = params
         # Create settings dictionary and input type and maybe id
         self['typed'] = typed
-        if params.has_key('id') and params['id'] != '':
+        if 'id' in params and params['id'] != '':
             self['id'] = str(params['id'])
 
 
@@ -93,4 +93,4 @@ class graphSettings(dict):
 if __name__ == '__main__':
     import json
     gs = graphSettings('multidateplot')
-    print json.dumps(gs.settings, indent=4)
+    print(json.dumps(gs.settings, indent=4))

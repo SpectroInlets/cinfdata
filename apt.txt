@@ -1,0 +1,1 @@
+sudo apt-get install libapache2-mod-php php-mysql python3-matplotlib python3-scipy python3-mysqldb python3-xmltodict

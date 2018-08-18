@@ -378,5 +378,5 @@ class Plot():
                              format=self.o['image_format'])
             sys.stdout.write(out.getvalue())
         else:
-            self.fig.savefig(sys.stdout, bbox_inches=tight, pad_inches=0.03,
+            self.fig.savefig(sys.stdout.buffer, pad_inches=0.03,
                              format=self.o['image_format'])

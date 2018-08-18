@@ -180,23 +180,23 @@ class Plot():
 
         # Title
         # Pull out a title candidate for each of the data graphs
-        if self.ggs.has_key('title'):
+        if 'title' in self.ggs:
             fall_back = self.ggs['title'] if 'title' in self.ggs else ''
 
             title_cand = []
             for v in data['left'] + data['right']:
-                if v['lgs'].has_key('title'):
+                if 'title' in v['lgs']:
                     title_cand.append(v['lgs']['title'])
             titles_n_labels['title'] =\
                 self._reduce_candidates(title_cand, fall_back)
 
         # Same procedure for Y-labels
-        if self.ggs.has_key('ylabel'):
+        if 'ylabel' in self.ggs:
             fall_back = self.ggs['ylabel'] if 'ylabel' in self.ggs else ''
             cand = {'left': [], 'right': []}
             for side in ['left', 'right']:
                 for v in data[side]:
-                    if v['lgs'].has_key('ylabel'):
+                    if 'ylabel' in v['lgs']:
                         cand[side].append(v['lgs']['ylabel'])
 
                 titles_n_labels[side + '_ylabel'] = \

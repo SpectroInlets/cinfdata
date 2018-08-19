@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 This file is part of the CINF Data Presentation Website
@@ -40,14 +40,14 @@ class ExportData:
         # Option help at https://cinfwiki.fysik.dtu.dk/cinfwiki/Software/
         # DataWebPageDeveloperDocumentation#plot.py
         parser.add_option('--type')                  # String option
-	parser.add_option('--boolean_options')       # Boolean options
-	parser.add_option('--left_plotlist')         # int list
-	parser.add_option('--right_plotlist')        # int list
-	parser.add_option('--xscale_bounding')       # Float pair
-	parser.add_option('--left_yscale_bounding')  # Float pair
-	parser.add_option('--right_yscale_bounding') # Float pair
-	parser.add_option('--from_to')               # Time stamp pair NOT HANDLED
-	parser.add_option('--input_id')              # Database id for plugin input
+        parser.add_option('--boolean_options')       # Boolean options
+        parser.add_option('--left_plotlist')         # int list
+        parser.add_option('--right_plotlist')        # int list
+        parser.add_option('--xscale_bounding')       # Float pair
+        parser.add_option('--left_yscale_bounding')  # Float pair
+        parser.add_option('--right_yscale_bounding') # Float pair
+        parser.add_option('--from_to')               # Time stamp pair NOT HANDLED
+        parser.add_option('--input_id')              # Database id for plugin input
 
         # Parse the options
         (options, args) = parser.parse_args()
@@ -114,7 +114,7 @@ class ExportData:
         self.data = self.db.get_data()
         # No data -> we are done
         if len(self.data['left'] + self.data['right']) == 0:
-            print "No data"
+            print("No data")
             return
         if self.ggs['default_xscale'] == 'dat':
             self._print_out_header_date_data(self.data)

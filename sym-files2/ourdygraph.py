@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # pylint: disable=I0011,R0902,C0103,R0903
 
 """
@@ -82,7 +82,8 @@ class Plot():
             if self.ggs['dygraph_settings'].get('max_points') is not None:
                 max_points = int(self.ggs['dygraph_settings']['max_points'])
         # Calculate the data point reduction factor
-        self.reduction = (self.measurement_count / max_points) + 1
+        
+        self.reduction = int(self.measurement_count / max_points) + 1
 
         if self.reduction > 1:
             mouse_over = "This plot, which was supposed to contain {0} data "\
@@ -157,7 +158,7 @@ class Plot():
     def _options(self, data, plot_info):
         """Form all the options and output as JSON"""
         # Form labels string
-        labels = [self.ggs['xlabel'] if self.ggs.has_key('xlabel') else '']
+        labels = [self.ggs['xlabel'] if 'xlabel' in self.ggs else '']
         for dat in data['left'] + data['right']:
             labels.append(dat['lgs']['legend'])
         # Overwrite labels if there is no data
@@ -242,7 +243,7 @@ class Plot():
                 axes['y2']['valueRange'] = self.o['right_yscale_bounding']
 
             # Add the right y label
-            if plot_info.has_key('right_ylabel'):
+            if 'right_ylabel' in plot_info:
                 if plot_info['y_right_label_addition'] == '':
                     axes['y2']['axisLabelWidth'] = 80
                     y2label = plot_info['right_ylabel']
@@ -259,7 +260,7 @@ class Plot():
     def _options_title_axes_labels(self, options, plot_info):
         """Add title and axis labels"""
         # Add title
-        if plot_info.has_key('title'):
+        if 'title' in plot_info:
             if self.measurement_count == 0:
                 options['title'] = 'NO DATA'
             else:
@@ -267,7 +268,7 @@ class Plot():
 
         axes = options['axes']
         # Add the left y label
-        if plot_info.has_key('left_ylabel'):
+        if 'left_ylabel' in plot_info:
             if plot_info['y_left_label_addition'] == '':
                 axes['y']['axisLabelWidth'] = 80
                 ylabel = plot_info['left_ylabel']
@@ -280,7 +281,7 @@ class Plot():
             options['ylabel'] = ylabel
 
         # Determine the labels and add them
-        if plot_info.has_key('xlabel'):
+        if 'xlabel' in plot_info:
             if self.ggs['default_xscale'] != 'dat':
                 if plot_info['xlabel_addition'] == '':
                     options['xlabel'] = plot_info['xlabel']
@@ -296,9 +297,9 @@ class Plot():
         """Add options from graphsettings"""
         replacements = {}
         # Add modifications from settings file
-        if self.ggs.has_key('dygraph_settings'):
+        if 'dygraph_settings' in self.ggs:
             # roller
-            if self.ggs['dygraph_settings'].has_key('roll_period'):
+            if 'roll_period' in self.ggs['dygraph_settings']:
                 period = int(self.ggs['dygraph_settings']['roll_period'])
                 options.update({'showRoller': 'true', 'rollPeriod': period})
 
@@ -311,7 +312,7 @@ class Plot():
                     options['axes'][axis_name]['drawGrid'] = grid_settings
 
             # high light series
-            if self.ggs['dygraph_settings'].has_key('series_highlight'):
+            if 'series_highlight' in self.ggs['dygraph_settings']:
                 if self.ggs['dygraph_settings']['series_highlight'] == 'true':
                     options['highlightSeriesOpts'] = {
                         'strokeWidth': 2,
@@ -321,7 +322,7 @@ class Plot():
 
             # Labels modifications
             labels_options = {}
-            if self.ggs['dygraph_settings'].has_key('labels_side'):
+            if 'labels_side' in self.ggs['dygraph_settings']:
                 if self.ggs['dygraph_settings']['labels_side'] == 'true':
                     labels_options.update({
                             'labelsSeparateLines': True,

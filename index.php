@@ -99,10 +99,13 @@ class IndexSpec
   }
 }
 
+echo("HELLO");
 
 $index_spec = new IndexSpec();
 $index_spec->generate_table();
 
+
+echo("HELLO");
 
 echo(html_footer("", true));
 ?>

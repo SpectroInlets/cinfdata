@@ -1,0 +1,17 @@
+Steps to install cinfdata
+
+* Install LAMP stack
+* (setup custom location of code if necessary)
+* Check dependencies with /other/server_status.php page
+
+If needed:
+
+* Install YAML support in php:
+
+(On Ubuntu 16.10)
+sudo apt-get install php-yaml
+
+* Install python modules
+
+(On Ubuntu 16.10)
+sudo apt-get install python-numpy python-scipy python-matplotlib python-mysqldb python-yaml

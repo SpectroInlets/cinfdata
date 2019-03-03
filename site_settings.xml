@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<db_settings>
- <db_host>localhost</db_host>
- <db_user>cinf_reader</db_user>
- <db_password>cinf_reader</db_password>
- <db_database>cinfdata</db_database>
-</db_settings>

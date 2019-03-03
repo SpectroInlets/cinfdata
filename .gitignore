@@ -3,3 +3,4 @@ sym-files2/error_log.txt
 *.pyc
 *.pyo
 *~
+site_settings.xml

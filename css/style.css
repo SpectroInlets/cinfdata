@@ -1,3 +1,7 @@
+
+/* #49bc39 #D02027 */
+/* #0C5DA5 #D02027 */
+
 .dydiv{
     border: 0px solid black;
     margin-left:auto;
@@ -61,17 +65,28 @@ img.matplotlib{
 
 .copyright{
         text-align:center;
-	background:#0C5DA5;
+	/* background:#0C5DA5; */
+	background: #D02027;
 	padding:5px;
 	color:#FFFFFF;
-	font-size:16px;
+	font-size:12px;
 	text-align:center;
 	font-weight:bold;
 	height:30px;
 }
 
+.copyrighttext{
+    margin: auto;
+    margin-top: 7px;
+    /*position: relative;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
+}
+
 .copyright_decorations{
-	background:#0C5DA5;
+	background:#D02027;
 	/* background-image: url(../images/christmas-balls-40.png); */
 	background-image: url(../images/christmas-balls-animation.gif);
 	background-repeat: repeat-x;
@@ -122,7 +137,7 @@ table.frontpage td {
 }
 
 table.frontpage h2 {
-	color:#0C5DA5;
+	/*color:#000000;*/
 	margin:5px;
 
 }
@@ -132,7 +147,8 @@ table.frontpage ul {
 }
 
 .caption{
-	background:#0C5DA5; 
+    /* background:#0C5DA5; */
+    background: #D02027;
 	padding: 10px; 
 	color:#FFFFFF;
 	font-weight:bold;
@@ -140,7 +156,7 @@ table.frontpage ul {
 }
 
 .caption_alt{
-	background:#0C5DA5;
+	background:#D02027;
 	background-image: url(../images/fir_branch_with_cones.png), url(../images/fir_branch_with_cones_right.png);
 	background-repeat: no-repeat, no-repeat;
 	background-position: left, right;
@@ -216,7 +232,7 @@ a:link,a:visited{
 }
 
 a:hover{
-	color:#0C5DA5;
+	color:#D02027;
 	text-decoration:underline;
 }
 
@@ -231,7 +247,7 @@ a:hover{
 }
 
 .stm_month_name{
-    background-color: #0C5DA5;
+    background-color: #D02027;
     color: white;
 }
 
@@ -321,7 +337,7 @@ a:hover{
 
 
 .right_float_menu td{
-    background-color: #0C5DA5; 
+    background-color: #D02027; 
     color: #FFFFFF;
     width: 120px;
     border-color: #000000;
@@ -353,7 +369,7 @@ a:hover{
 }
 
 .stm_table th{
-    background-color: #0C5DA5; 
+    background-color: #D02027; 
     color: #FFFFFF;
     text-align: left;
     padding: 0px 0px 0px 0px;

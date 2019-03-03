@@ -7,7 +7,18 @@ date_default_timezone_set("Europe/Copenhagen");
 function std_db(){
   $xml=simplexml_load_file("../site_settings.xml");
   $conn_str = 'mysql:host=' . $xml->db_host . ';dbname=' . $xml->db_database . ';charset=utf8';
-  $pdo = new PDO($conn_str, $xml->db_user, $xml->db_password);
+  try{
+      $pdo = new PDO(
+          $conn_str,
+          $xml->db_user,
+          $xml->db_password,
+          array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+      #die(json_encode(array('outcome' => true)));
+  }
+  catch(PDOException $ex){
+      die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+  }
+    
   return $pdo;
 }
 
@@ -111,7 +122,7 @@ function html_header($root="../", $title="Data viewer", $includehead="", $charse
     $width = " style=\"max-width:95%\" ";
   }
   if(is_it_christmas()){
-    $header = html_header_x($root, $title, $includehead, $charset, $width, $html5);
+    $header = html_header_normal($root, $title, $includehead, $charset, $width, $html5);
   } else {
     $header = html_header_normal($root, $title, $includehead, $charset, $width, $html5);
   }
@@ -120,7 +131,7 @@ function html_header($root="../", $title="Data viewer", $includehead="", $charse
 
 function html_footer($root="../", $valid_html5=false){
   if(is_it_christmas()){
-    $footer = html_footer_x($root, $valid_html5);
+    $footer = html_footer_normal($root, $valid_html5);
   } else {
     $footer = html_footer_normal($root, $valid_html5);
   }
@@ -155,10 +166,10 @@ function html_header_normal($root, $title, $includehead, $charset, $width, $html
   $header = $header . "    <div class=\"container\" $width>\n";
   $header = $header . "    <div class=\"caption\">\n";
   $header = $header . "      {$title}\n";
-  $header = $header . "      <a href=\"/\"><img class=\"logo\" src=\"{$root}images/cinf_logo_beta_greek.png\" alt=\"CINF data viewer\"></a>\n";
+  $header = $header . "      <a href=\"/\"><img class=\"logo\" height=\"61\" src=\"{$root}images/spectro_bio_logo.png\"></a>\n";
   $header = $header . "        <div class=\"header_utilities\">\n";
-  $header = $header . "          <a class=\"header_links\" href=\"https://cinfwiki.fysik.dtu.dk/cinfwiki/Software/DataWebPageUserDocumentation\">Help</a><br>\n";
-  $header = $header . "          <a class=\"header_links\" href=\"test_configuration_file.php\">Config</a>\n";
+ # $header = $header . "          <a class=\"header_links\" href=\"https://cinfwiki.fysik.dtu.dk/cinfwiki/Software/DataWebPageUserDocumentation\">Help</a><br>\n";
+#  $header = $header . "          <a class=\"header_links\" href=\"test_configuration_file.php\">Config</a>\n";
   $header = $header . "        </div>\n";
   $header = $header . "    </div>\n";
   $header = $header . "    <div class=\"plotcontainer\">\n";
@@ -193,9 +204,11 @@ function html_footer_normal($root, $valid_html5){
   $footer = $footer . "      </div>\n";
   if ($valid_html5){
     $footer = $footer . "      <div class=\"copyright\" style=\"clear:both\">\n";
-    $footer = $footer . "        <div style=\"float:left;width:100px\">&nbsp;</div>\n";
-    $footer = $footer . "        <div style=\"float:right;width:100px\"><img src=\"{$root}images/badge-w3c-valid-html5_h30.png\" height=\"20\" style=\"padding:5px\" alt=\"Valid HTML5\" title=\"Valid HTML5\"></div>\n";
-    $footer = $footer . "        <div style=\"margin:0 auto;width:100px\">...</div>\n";
+    #$footer = $footer . "        <div style=\"float:left;width:100px\">&nbsp;</div>\n";
+#    $footer = $footer . "        <div style=\"float:right;width:100px\"><img src=\"{$root}images/badge-w3c-valid-html5_h30.png\" height=\"20\" style=\"padding:5px\" alt=\"Valid HTML5\" title=\"Valid HTML5\"></div>\n";
+    #$footer = $footer . "        <div style=\"margin:0 auto;width:300px\">Spectro Biogas ApS</div>\n";
+    $footer = $footer . "        <p class=\"copyrighttext\">Spectro Biogas ApS, Ole Maaløes Vej 3, 2200 København, Denmark</p>\n";
+    #$footer = $footer . "        <p>Spectro Biogas ApS, Ole Maaløes Vej 3, 2200 København, Denmark</p>\n";
     $footer = $footer . "      </div>\n";
   } else {
     $footer = $footer . "      <div class=\"copyright\" style=\"clear:both\">...</div>\n";

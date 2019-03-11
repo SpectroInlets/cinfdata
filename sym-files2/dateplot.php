@@ -1,19 +1,19 @@
 <?php
   /*
     Copyright (C) 2012 Robert Jensen, Thomas Andersen and Kenneth Nielsen
-    
+
     The CINF Data Presentation Website is free software: you can
     redistribute it and/or modify it under the terms of the GNU
     General Public License as published by the Free Software
     Foundation, either version 3 of the License, or
     (at your option) any later version.
-    
+
     The CINF Data Presentation Website is distributed in the hope
     that it will be useful, but WITHOUT ANY WARRANTY; without even
     the implied warranty of MERCHANTABILITY or FITNESS FOR A
     PARTICULAR PURPOSE.  See the GNU General Public License for more
     details.
-    
+
     You should have received a copy of the GNU General Public License
     along with The CINF Data Presentation Website.  If not, see
     <http://www.gnu.org/licenses/>.
@@ -65,7 +65,7 @@ foreach($settings as $key => $value){
 $options_line = '';
 $options = array('from', 'to',
 		 'left_ymax', 'left_ymin',
-		 'right_ymax', 'right_ymin', 
+		 'right_ymax', 'right_ymin',
 		 'left_logscale', 'right_logscale',
 		 'matplotlib');
 # ... add values ...
@@ -84,7 +84,7 @@ $plot_php_line_graph =  'plot.php?type=' . $type . $options_line . '&image_forma
 $export_php_line = 'export_data.php?type=' . $type . $options_line . '&image_format=' . 'png';
 
 echo(html_header());
- 
+
 if ($matplotlib == 'checked'){
   echo('<a href="' . $plot_php_line_graph . '">');
   echo('<img src="' . $plot_php_line . '"/>');
@@ -186,9 +186,11 @@ if ($matplotlib == 'checked'){
 	  </tr>
 	</table>
       </form>
-      
+
+
       <hr>
       <div class="additionalinfo">
+	<!--
 	<h2><a href="javascript:toggle('sqlinfo')">SQL info</a></h2>
 	<div id="sqlinfo" style="display:none">
 	  <h3>Sql-statements for this graph, left side:</h3>
@@ -210,16 +212,22 @@ if ($matplotlib == 'checked'){
 	     }
 	     ?>
 	</div>
-	
+
 	<h2><a href="javascript:toggle('shortlinks')">Make shortlink</a></h2>
 	<div id="shortlinks" style="display:none">
 	  <form action="../links/link.php?url=checked" method="post">
 	    <b>Comment for shortlink:</b> <input type="text" name="comment"><br><input type="submit" value="Make short link">
 	  </form>
-	</div>
-	
-	<div id="matplotlib" style="display:none">
-	  <h2><a href="javascript:toggle('matplotlib')">Matplotlib options</a></h2>
+	</div>-->
+	<?php
+               if ($matplotlib == "checked"){
+                   echo("<div id=\"matplotlib\" style=\"display:block\">");
+               } else {
+                   echo("<div id=\"matplotlib\" style=\"display:none\">");
+               }
+?>
+	  <h2>Matplotlib options</h2>
+	  <!--<h2><a href="javascript:toggle('matplotlib')">Matplotlib options</a></h2>-->
 	  <table>
 	    <tr>
 	      <td>

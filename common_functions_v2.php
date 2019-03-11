@@ -37,8 +37,10 @@ function latest_sql_row($db, $query){
   if (strpos($query, " limit ") == false){
     $query .= " limit 1";
   }
-  $result  = mysql_query($query, $db);
-  $row = mysql_fetch_array($result);
+  $stmt = $db->prepare($query);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  #$result  = mysql_query($query, $db);
+  #$row = mysql_fetch_array($result);
   return($row);
 }
 

@@ -29,9 +29,14 @@ $manual_labels_n_titel = 'title=' . $_GET['title'] . ',xlabel=' . $_GET['xlabel'
   ',left_ylabel=' . $_GET['left_ylabel'] . ',right_ylabel=' . $_GET['right_ylabel'];
 # Plotlists
 $left_plotlist = ''; $right_plotlist = '';
+
 foreach (array('left_plotlist', 'right_plotlist') as $list){
   $$list = '';
-  if (count($_GET[$list]) > 0){
+  $plot_list = $_GET[$list];
+  if ($plot_list === null){
+      continue;
+  }
+  if (count($plot_list) > 0){
     foreach($_GET[$list] as $id){
       $$list .= ',' . $id;
     }

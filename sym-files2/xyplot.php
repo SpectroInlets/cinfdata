@@ -129,6 +129,10 @@ foreach ($db->query($query) as $row){
     $individ_labellist[] = $row[2];
 }
 
+if (!isset($individ_labellist)){
+    $individ_labellist[] = "";
+}
+
 // If $individ_labellist is empty we will assign "data" to populate the individual id list
 if ($individ_labellist[0] == ""){
    $individ_labellist[0] = "data";

@@ -152,7 +152,7 @@ function html_header_normal($root, $title, $includehead, $charset, $width, $html
   $header = $header . "<html>\n";
   $header = $header . "  <head>\n";
   $header = $header . "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset={$charset}\">\n";
-  $header = $header . "    <title>SurfCat data logging</title>\n";
+  $header = $header . "    <title>Spectro Biogas Data</title>\n";
   $header = $header . "    <link rel=\"StyleSheet\" href=\"{$root}css/style.css\" type=\"text/css\" media=\"screen\">\n";
   if ($root == "../"){
     # $header = $header . "    <script type=\"text/javascript\" src=\"dygraph/dygraph-dev.js\"></script>\n";

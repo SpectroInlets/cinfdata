@@ -20,7 +20,7 @@
   */
 
 include("common_functions_v2.php");
-echo(html_header($root="", $title="Spectro Biogas", $includehead="",
+echo(html_header($root="", $title="Spectro Data", $includehead="",
 		 $charset="UTF-8", $width=null, $html5=true));
 
 #$g = simplexml_load_file("index.xml");

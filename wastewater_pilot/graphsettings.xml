@@ -17,7 +17,7 @@
     <dateplot1>
       <title>Hydrogen</title>
       <legend>H2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_H2") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_H2") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>1</color>
     </dateplot1>
@@ -27,7 +27,7 @@
     <dateplot2>
       <title>Helium</title>
       <legend>He</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_He") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_He") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>2</color>
     </dateplot2>
@@ -37,7 +37,7 @@
     <dateplot3>
       <title>Methane</title>
       <legend>CH4</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_CH4") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_CH4") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>3</color>
     </dateplot3>
@@ -47,7 +47,7 @@
     <dateplot4>
       <title>Water</title>
       <legend>H2O</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_H2O") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_H2O") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>4</color>
     </dateplot4>
@@ -57,7 +57,7 @@
     <dateplot5>
       <title>Nitrogen</title>
       <legend>N2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_N2") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_N2") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>5</color>
     </dateplot5>
@@ -67,7 +67,7 @@
     <dateplot6>
       <title>Ethanol</title>
       <legend>C2H5OH</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_C2H5OH") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_C2H5OH") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>6</color>
     </dateplot6>
@@ -77,7 +77,7 @@
     <dateplot7>
       <title>Oxygen</title>
       <legend>O2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_O2") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_O2") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>7</color>
     </dateplot7>
@@ -87,7 +87,7 @@
     <dateplot8>
       <title>Hydrogen sulphide</title>
       <legend>H2S</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_H2S") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_H2S") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>8</color>
     </dateplot8>
@@ -97,7 +97,7 @@
     <dateplot9>
       <title>Argon</title>
       <legend>Ar</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_Ar") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_Ar") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>9</color>
     </dateplot9>
@@ -107,7 +107,7 @@
     <dateplot10>
       <title>Carbon dioxide</title>
       <legend>CO2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_CO2") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_CO2") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>10</color>
     </dateplot10>
@@ -117,7 +117,7 @@
     <dateplot11>
       <title>Formic acid</title>
       <legend>HCOOH</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_HCOOH") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_HCOOH") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>11</color>
     </dateplot11>
@@ -127,7 +127,7 @@
     <dateplot12>
       <title>Nitrous oxide</title>
       <legend>N2O</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_N2O") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_N2O") and time between "{from}" and "{to}" order by time</query>
       <ylabel>SEM current / A</ylabel>
       <color>12</color>
     </dateplot12>
@@ -136,7 +136,7 @@
     <dateplot13>
       <title>Pirani 1</title>
       <legend>pir1</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_pir1") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_pir1") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>13</color>
     </dateplot13>
@@ -146,7 +146,7 @@
     <dateplot14>
       <title>Pirani 2</title>
       <legend>pir2</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_pir2") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_pir2") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>14</color>
     </dateplot14>
@@ -156,7 +156,7 @@
     <dateplot15>
       <title>Ion gauge</title>
       <legend>Iongauge</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_iongauge") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_iongauge") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>15</color>
     </dateplot15>
@@ -166,7 +166,7 @@
     <dateplot16>
       <title>MFC1 flow</title>
       <legend>MFC1 flow</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_MFC1_flow") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_MFC1_flow") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / ml/min</ylabel>
       <color>16</color>
     </dateplot16>
@@ -176,7 +176,7 @@
     <dateplot17>
       <title>MFC1 setpoint</title>
       <legend>MFC1 setp.</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_MFC1_setpoint") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_MFC1_setpoint") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Flow / ml/min</ylabel>
       <color>17</color>
     </dateplot17>
@@ -186,7 +186,7 @@
     <dateplot18>
       <title>PC pressure</title>
       <legend>PC</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_PC_pressure") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_PC_pressure") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>18</color>
     </dateplot18>
@@ -196,7 +196,7 @@
     <dateplot19>
       <title>PC setpoint</title>
       <legend>PC</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_biogas_pilot where type=(select `id` from dateplots_descriptions where `codename`="biogas_pilot_PC_setpoint") and time between "{from}" and "{to}" order by time</query>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_PC_setpoint") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
       <color>19</color>
     </dateplot19>
@@ -225,7 +225,7 @@
       <labels_newline>true</labels_newline>
     </dygraph_settings>
     <queries>
-      <default>SELECT x,y  FROM xy_values_biogas_pilot where measurement = {id} order by id</default>
+      <default>SELECT x,y  FROM xy_values_wastewater_pilot where measurement = {id} order by id</default>
     </queries>
     <xlabel>Mass / amu</xlabel>
     <ylabel>
@@ -245,10 +245,10 @@
 
 
   <global_settings>
-    <measurements_table>measurements_biogas_pilot</measurements_table>
-    <xyvalues_table>xy_values_biogas_pilot</xyvalues_table>
-    <folder_name>biogas_pilot</folder_name>
-    <sql_username>biogas_pilot</sql_username>
+    <measurements_table>measurements_wastewater_pilot</measurements_table>
+    <xyvalues_table>xy_values_wastewater_pilot</xyvalues_table>
+    <folder_name>wastewater_pilot</folder_name>
+    <sql_username>wastewater_pilot</sql_username>
     <label_column>mass_label</label_column>
     <image_format>png</image_format>
     <mandatory_export_fields>

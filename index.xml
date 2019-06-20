@@ -37,4 +37,17 @@
     </link>
   </setup>
 
+  <setup codename="wastewater">
+    <setup_title>F.R.S.E (Fredericia Spildevand og Energi)</setup_title>
+    <link>
+      <title>Gas Traces</title>
+      <ref>wastewater_pilot/dateplot.php?type=traces&amp;left_plotlist[]=1&amp;left_plotlist[]=3&amp;left_plotlist[]=10</ref>
+    </link>
+    <link>
+      <title>Full Mass Spectra</title>
+      <ref>wastewater_pilot/xyplot.php?type=massspectra</ref>
+    </link>
+  </setup>
+
+
 </setups>

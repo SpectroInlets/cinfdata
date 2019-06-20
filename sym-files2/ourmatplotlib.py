@@ -143,7 +143,8 @@ class Plot():
     def _plot_dateplot(self, data):
         """ Make the date plot """
         # Rotate datemarks on xaxis
-        self.ax1.set_xticklabels([], rotation=25, horizontalalignment='right')
+        #self.ax1.set_xticklabels([], rotation=25, horizontalalignment='right')
+        self.fig.autofmt_xdate(bottom=0.2, rotation=25, ha='right')
 
         # Test for un-workable plot configurations
         error_msg = None

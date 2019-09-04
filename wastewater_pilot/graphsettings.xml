@@ -191,15 +191,59 @@
       <color>18</color>
     </dateplot18>
 
-
     <!-- PC setpoint -->
     <dateplot19>
-      <title>PC setpoint</title>
-      <legend>PC</legend>
-      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_PC_setpoint") and time between "{from}" and "{to}" order by time</query>
-      <ylabel>Pressure / mbar</ylabel>
+      <title>Tank Temperature</title>
+      <legend>Tank T.</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_tank_temperature") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Tamperature / C</ylabel>
       <color>19</color>
     </dateplot19>
+
+     <!-- PC setpoint -->
+    <dateplot20>
+      <title>Tank Humidity</title>
+      <legend>Tank. humid.</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_tank_humidity") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Pressure / mbar</ylabel>
+      <color>20</color>
+    </dateplot20>
+
+    <!-- PC setpoint -->
+    <dateplot21>
+      <title>FRSE nitrate</title>
+      <legend>FRSE nitrate</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_FRSE_nitrat") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Concentration / mg/l</ylabel>
+      <color>21</color>
+    </dateplot21>
+
+    <!-- PC setpoint -->
+    <dateplot22>
+      <title>FRSE oxygen</title>
+      <legend>FRSE oxygen</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_FRSE_ilt") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Concentration / mg/l</ylabel>
+      <color>22</color>
+    </dateplot22>
+
+    <!-- PC setpoint -->
+    <dateplot23>
+      <title>FRSE ammonium</title>
+      <legend>FRSE ammonium</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_FRSE_ammonium") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Concentration / mg/l</ylabel>
+      <color>23</color>
+    </dateplot23>
+
+    <!-- PC setpoint -->
+    <dateplot24>
+      <title>FRSE temperature</title>
+      <legend>FRSE T.</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_FRSE_temp") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Temperature / C</ylabel>
+      <color>24</color>
+    </dateplot24>
 
   </graph>
 

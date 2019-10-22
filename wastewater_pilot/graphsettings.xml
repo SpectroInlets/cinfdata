@@ -132,7 +132,7 @@
       <color>12</color>
     </dateplot12>
 
-        <!-- Pirani 1 -->
+    <!-- Pirani 1 -->
     <dateplot13>
       <title>Pirani 1</title>
       <legend>pir1</legend>
@@ -193,7 +193,7 @@
 
     <!-- PC setpoint -->
     <dateplot19>
-      <title>Tank Temperature</title>
+      <title>Tank temperature</title>
       <legend>Tank T.</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_tank_temperature") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Tamperature / C</ylabel>
@@ -202,7 +202,7 @@
 
      <!-- PC setpoint -->
     <dateplot20>
-      <title>Tank Humidity</title>
+      <title>Tank humidity</title>
       <legend>Tank. humid.</legend>
       <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_tank_humidity") and time between "{from}" and "{to}" order by time</query>
       <ylabel>Pressure / mbar</ylabel>
@@ -245,6 +245,24 @@
       <color>24</color>
     </dateplot24>
 
+    <!-- FRSE aeration flow -->
+    <dateplot25>
+      <title>FRSE aeration</title>
+      <legend>FRSE aeration</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_FRSE_one") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Flow / Nm³</ylabel>
+      <color>25</color>
+    </dateplot25>
+
+    <!-- FRSE Suspended Solids -->
+    <dateplot26>
+      <title>FRSE suspended solids</title>
+      <legend>FRSE SS</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_FRSE_two") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>Suspended Solids / (g/L) ???</ylabel>
+      <color>26</color>
+    </dateplot26>
+
   </graph>
 
   <!-- MASSSPECTRUM -->
@@ -282,8 +300,16 @@
     <parameters>
       <param0>
 	<field>points_per_amu</field>
-	<name>SEM Voltage / V</name>
+	<name>Points per amu</name>
       </param0>
+      <param1>
+	<field>dwell_time_ms</field>
+	<name>Dwell time [ms]</name>
+      </param1>
+      <param2>
+	<field>sem_voltage</field>
+	<name>Sem Voltage [V]</name>
+      </param2>
     </parameters>
   </graph>
 

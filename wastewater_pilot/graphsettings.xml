@@ -263,6 +263,79 @@
       <color>26</color>
     </dateplot26>
 
+    <!-- FRSE Suspended Solids -->
+    <dateplot27>
+      <title>Background</title>
+      <legend>Background</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_background") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>SEM current / A</ylabel>
+      <color>27</color>
+    </dateplot27>
+
+
+    <!-- Hydrogen at m/z=2 -->
+    <dateplot28>
+      <title>Hydrogen concentration</title>
+      <legend>H2 conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_H2_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>28</color>
+    </dateplot28>
+
+    <!-- Methane at m/z=15 -->
+    <dateplot29>
+      <title>Methane concentration</title>
+      <legend>CH4 conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_CH4_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>29</color>
+    </dateplot29>
+
+    <!-- Nitrogen at m/z=28 -->
+    <dateplot30>
+      <title>Nitrogen concentration</title>
+      <legend>N2 conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_N2_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>30</color>
+    </dateplot30>
+
+    <!-- Oxygen at m/z=32 -->
+    <dateplot31>
+      <title>Oxygen concentration</title>
+      <legend>O2 conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_O2_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>31</color>
+    </dateplot31>
+
+    <!-- Argon at m/z=40 -->
+    <dateplot32>
+      <title>Argon concentration</title>
+      <legend>Ar conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_Ar_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>32</color>
+    </dateplot32>
+
+    <!-- Carbon dioxide at m/z=44 -->
+    <dateplot33>
+      <title>Carbon dioxide concentration</title>
+      <legend>CO2 conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_CO2_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>33</color>
+    </dateplot33>
+
+    <!-- Nitrous oxide at m/z=44 or secondary peak at 30 -->
+    <dateplot34>
+      <title>Nitrous oxide concentration</title>
+      <legend>N2O conc</legend>
+      <query>SELECT unix_timestamp(time), value FROM dateplots_wastewater_pilot where type=(select `id` from dateplots_descriptions where `codename`="wastewater_pilot_N2O_conc") and time between "{from}" and "{to}" order by time</query>
+      <ylabel>concentration / mg/l</ylabel>
+      <color>34</color>
+    </dateplot34>
+
   </graph>
 
   <!-- MASSSPECTRUM -->
@@ -310,6 +383,10 @@
 	<field>sem_voltage</field>
 	<name>Sem Voltage [V]</name>
       </param2>
+      <param3>
+	<field>time</field>
+	<name>Datetime</name>
+      </param3>
     </parameters>
   </graph>
 
